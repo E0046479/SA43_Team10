@@ -18,7 +18,7 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<a href="StudentAdd.jsp"><fmt:message key="label.student.add" /></a>
+			<a href="views/Student_New.jsp"><fmt:message key="label.student.add" /></a>
 			<br /> <br />
 			<table class="table table-bordered">
 				<tr class="info">
