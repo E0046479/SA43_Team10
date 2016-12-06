@@ -11,7 +11,7 @@
 <title><fmt:message key="label.student.add" /></title>
 </head>
 <body>
-	<form action="/studentEdit" method=post>
+	<form action="/adminHome/studentInsert" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -25,8 +25,7 @@
 						<tr>
 							<td><fmt:message key="label.student.table.title.studentName" /></td>
 							<td><input type="text" name="studentName" size=15
-								maxlength=20> <input type="hidden" name="ins"
-								value="true" /></td>
+								maxlength=20></td>
 						</tr>
 						<tr>
 							<td><fmt:message

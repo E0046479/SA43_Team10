@@ -20,7 +20,7 @@
 <title><fmt:message key="label.studentEditJsp.title" /></title>
 </head>
 <body>
-	<form action="/studentEdit" method=post>
+	<form action="/adminHome/studentEdit" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -34,8 +34,8 @@
 						<tr>
 							<td><fmt:message key="label.student.table.title.studentName" /></td>
 							<td><input type="text" name="studentName" size=15 value="${param['studentName']}"
-								maxlength=20> <input type="hidden" name="ins"
-								value="true" /></td>
+								maxlength=20> <input type="hidden" name="studentId"
+								value="${param['studentId']}" /></td>
 						</tr>
 						<tr>
 							<td><fmt:message
