@@ -16,7 +16,7 @@ import edu.iss.team10.caps.service.StudentManager;
 /**
  * Servlet implementation class AdminHome
  */
-@WebServlet("/adminHome")
+@WebServlet({ "/adminHome", "/adminHome/studentInsert", "/adminHome/studentEdit", "/adminHome/studentDelete" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,6 +33,27 @@ public class AdminHome extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String path = request.getRequestURI().substring(request.getContextPath().length());
+		System.out.println("AdminHome Servlet: URL : " + path);
+
+		switch (path) {
+		case "/adminHome/studentInsert":
+			
+			break;
+		case "/adminHome/studentEdit":
+
+			break;
+		case "/adminHome/studentDelete":
+
+			break;
+
+		default:
+			doGetStudentLsit(request, response);
+			break;
+		}
+	}
+
+	private void doGetStudentLsit(HttpServletRequest request, HttpServletResponse response) {
 		StudentManager studentManager = new StudentManager();
 		ArrayList<StudentDTO> studentList = studentManager.findAllStudent();
 		request.setAttribute("studentList", studentList);
