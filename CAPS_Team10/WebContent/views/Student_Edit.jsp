@@ -7,20 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#enrollmentDate").datepicker();
-	});
-</script>
 <fmt:setBundle basename="messages" />
 <title><fmt:message key="label.studentEditJsp.title" /></title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/adminHome/studentEdit" method=post>
+	<form action="${pageContext.request.contextPath}/studentEdit" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -33,33 +24,33 @@
 
 						<tr>
 							<td><fmt:message key="label.student.table.title.studentName" /></td>
-							<td><input type="text" name="studentName" size=15 value="${param['studentName']}"
+							<td><input type="text" id="studentName" name="studentName" size=15 value="${param['studentName']}"
 								maxlength=20> <input type="hidden" name="studentId"
 								value="${param['studentId']}" /></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.studentEmail" /></td>
-							<td><input type="text" name="studentEmail" size=15 value="${param['studentEmail']}"
+							<td><input type="text" id="studentEmail" name="studentEmail" size=15 value="${param['studentEmail']}"
 								maxlength=20></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.studentPhoneNumber" /></td>
-							<td><input type="text" name="studentPhoneNumber" size=15 value="${param['studentPhoneNumber']}"
+							<td><input type="text" id=""studentPhoneNumber"" name="studentPhoneNumber" size=15 value="${param['studentPhoneNumber']}"
 								maxlength=20></td>
-						</tr>
+						</tr> 
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.studentAddress" /></td>
-							<td><input type="text" name="studentAddress" size=15 value="${param['studentAddress']}"
+							<td><input type="text" id="studentAddress" name="studentAddress" size=15 value="${param['studentAddress']}"
 								maxlength=20></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.enrollmentDate" /></td>
-							<td><input type="text" name="enrollmentDate" size=15 value="${param['enrollmentDate']}"
-								id="enrollmentDate" maxlength=20></td>
+							<td><input type="text" id="enrollmentDate" name="enrollmentDate" size=15 value="${param['enrollmentDate']}"
+								 maxlength=20></td>
 						</tr>
 					</table>
 					<input type="submit" value="Submit"> <input type="reset" value="Reset">

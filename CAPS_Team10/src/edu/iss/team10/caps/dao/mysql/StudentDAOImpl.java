@@ -32,7 +32,7 @@ public class StudentDAOImpl implements StudentDAO {
 			while (rs.next()) {
 				studentDTO = new StudentDTO(rs.getString("studentId"), rs.getString("studentName"),
 						rs.getString("studentEmail"), rs.getString("studentPhoneNumber"),
-						rs.getString("studentAddress"), rs.getDate("enrolmentDate"));
+						rs.getString("studentAddress"), rs.getDate("enrollmentDate"));
 			}
 			if (studentDTO == null) {
 				throw new MyDataException("There is no Student Info!");
@@ -58,7 +58,7 @@ public class StudentDAOImpl implements StudentDAO {
 			while (rs.next()) {
 				StudentDTO studentDTO = new StudentDTO(rs.getString("studentId"), rs.getString("studentName"),
 						rs.getString("studentEmail"), rs.getString("studentPhoneNumber"),
-						rs.getString("studentAddress"), rs.getDate("enrolmentDate"));
+						rs.getString("studentAddress"), rs.getDate("enrollmentDate"));
 				result.add(studentDTO);
 			}
 			if (result.size() == 0) {
@@ -99,7 +99,7 @@ public class StudentDAOImpl implements StudentDAO {
 			while (rs.next()) {
 				StudentDTO studentDTO = new StudentDTO(rs.getString("studentId"), rs.getString("studentName"),
 						rs.getString("studentEmail"), rs.getString("studentPhoneNumber"),
-						rs.getString("studentAddress"), rs.getDate("enrolmentDate"));
+						rs.getString("studentAddress"), rs.getDate("enrollmentDate"));
 				result.add(studentDTO);
 			}
 			if (result.size() == 0) {
@@ -118,9 +118,9 @@ public class StudentDAOImpl implements StudentDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-		java.sql.Date enrolmentDate = new java.sql.Date(student.getEnrolmentDate().getTime());
+		java.sql.Date enrollmentDate = new java.sql.Date(student.getEnrollmentDate().getTime());
 
-		String ins = "INSERT INTO caps.student(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress, enrolmentDate) "
+		String ins = "INSERT INTO caps.student(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress, enrollmentDate) "
 				+ "VALUES (?,?,?,?,?,?)";
 		try {
 			pstatement = connection.prepareStatement(ins);
@@ -129,7 +129,7 @@ public class StudentDAOImpl implements StudentDAO {
 			pstatement.setString(3, student.getStudentEmail());
 			pstatement.setString(4, student.getStudentPhoneNumber());
 			pstatement.setString(5, student.getStudentAddress());
-			pstatement.setDate(6, enrolmentDate);
+			pstatement.setDate(6, enrollmentDate);
 
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
@@ -150,9 +150,9 @@ public class StudentDAOImpl implements StudentDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-		java.sql.Date enrolmentDate = new java.sql.Date(student.getEnrolmentDate().getTime());
+		java.sql.Date enrollmentDate = new java.sql.Date(student.getEnrollmentDate().getTime());
 
-		String ins = "UPDATE caps.student SET studentName=?, studentEmail=?, studentPhoneNumber=?, studentAddress=?, enrolmentDate=? WHERE studentId = ?; ";
+		String ins = "UPDATE caps.student SET studentName=?, studentEmail=?, studentPhoneNumber=?, studentAddress=?, enrollmentDate=? WHERE studentId = ?; ";
 
 		try {
 			pstatement = connection.prepareStatement(ins);
@@ -160,7 +160,7 @@ public class StudentDAOImpl implements StudentDAO {
 			pstatement.setString(2, student.getStudentEmail());
 			pstatement.setString(3, student.getStudentPhoneNumber());
 			pstatement.setString(4, student.getStudentAddress());
-			pstatement.setDate(5, enrolmentDate);
+			pstatement.setDate(5, enrollmentDate);
 			pstatement.setString(6, student.getStudentId());
 
 			result = pstatement.executeUpdate();

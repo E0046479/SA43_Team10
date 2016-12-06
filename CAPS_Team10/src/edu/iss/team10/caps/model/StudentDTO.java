@@ -20,21 +20,21 @@ public class StudentDTO  implements Serializable{
 
 	String studentAddress;
 
-	Date enrolmentDate;
+	Date enrollmentDate;
 
 	public StudentDTO() {
 		super();
 	}
 
 	public StudentDTO(String studentId, String studentName, String studentEmail, String studentPhoneNumber,
-			String studentAddress, Date enrolmentDate) {
+			String studentAddress, Date enrollmentDate) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
 		this.studentEmail = studentEmail;
 		this.studentPhoneNumber = studentPhoneNumber;
 		this.studentAddress = studentAddress;
-		this.enrolmentDate = enrolmentDate;
+		this.enrollmentDate = enrollmentDate;
 	}
 
 	public String getStudentId() {
@@ -77,19 +77,19 @@ public class StudentDTO  implements Serializable{
 		this.studentAddress = studentAddress;
 	}
 
-	public Date getEnrolmentDate() {
-		return enrolmentDate;
+	public Date getEnrollmentDate() {
+		return enrollmentDate;
 	}
 
-	public void setEnrolmentDate(Date enrolmentDate) {
-		this.enrolmentDate = enrolmentDate;
+	public void setEnrollmentDate(Date enrollmentDate) {
+		this.enrollmentDate = enrollmentDate;
 	}
 
 	@Override
 	public String toString() {
 		return "StudentDTO [studentId=" + studentId + ", studentName=" + studentName + ", studentEmail=" + studentEmail
 				+ ", studentPhoneNumber=" + studentPhoneNumber + ", studentAddress=" + studentAddress
-				+ ", enrolmentDate=" + enrolmentDate + "]";
+				+ ", enrolmentDate=" + enrollmentDate + "]";
 	}
 
 }

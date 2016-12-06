@@ -21,7 +21,7 @@ import edu.iss.team10.caps.service.StudentManager;
 /**
  * Servlet implementation class AdminHome
  */
-@WebServlet({ "/adminHome", "/adminHome/studentInsert", "/adminHome/studentEdit", "/adminHome/studentDelete" })
+@WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -43,13 +43,13 @@ public class AdminHome extends HttpServlet {
 		System.out.println("AdminHome Servlet: URL : " + path);
 
 		switch (path) {
-		case "/adminHome/studentInsert":
+		case "/studentInsert":
 
 			break;
-		case "/adminHome/studentEdit":
+		case "/studentEdit":
 			doEditStudent(request, response);
 			break;
-		case "/adminHome/studentDelete":
+		case "/studentDelete":
 
 			break;
 
@@ -74,34 +74,36 @@ public class AdminHome extends HttpServlet {
 		}
 	}
 
-	private void doEditStudent(HttpServletRequest request, HttpServletResponse response) {
-		String studentId = (String) request.getAttribute("studentId");
-		String studentName = (String) request.getAttribute("studentName");
-		String studentEmail = (String) request.getAttribute("studentEmail");
-		String studentPhoneNumber = (String) request.getAttribute("studentPhoneNumber");
-		String studentAddress = (String) request.getAttribute("studentAddress");
-		String enrollmentDate = (String) request.getAttribute("enrollmentDate");
+	private void doEditStudent(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String studentId = (String) request.getParameter("studentId");
+		String studentName = (String) request.getParameter("studentName");
+		String studentEmail = (String) request.getParameter("studentEmail");
+		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
+		String studentAddress = (String) request.getParameter("studentAddress");
+		String enrollmentString = (String) request.getParameter("enrollmentDate");
+		System.out.println(enrollmentString);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
-		Date enrolmentDate = null;
+		Date enrollmentDate = null;
 		try {
-			enrolmentDate = format.parse(enrollmentDate);
+			enrollmentDate = format.parse(enrollmentString);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
-				enrolmentDate);
+				enrollmentDate);
 		int update = studentManager.updateStudent(studentDTO);
 		System.out.println("Update Success");
-		RequestDispatcher rd = request.getRequestDispatcher("views/Student_List.jsp");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/main");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	/**

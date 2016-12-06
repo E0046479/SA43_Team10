@@ -8,6 +8,8 @@ public abstract class DAOFactory {
 
 	public abstract LoginDAO getLoginDAO();
 
+	public abstract CourseDAO getCourseDAO();
+	
 	public static DAOFactory loadInstance() {
 		return new DAOFactoryImpl();
 	}

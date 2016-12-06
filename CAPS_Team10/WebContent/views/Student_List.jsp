@@ -39,7 +39,7 @@
 						<td class="nowrap">${student.studentId}</td>
 						<td class="nowrap">${student.studentName}</td>
 						<td class="nowrap">${student.studentEmail}</td>
-						<td class="nowrap">${student.enrolmentDate}</td>
+						<td class="nowrap">${student.enrollmentDate}</td>
 						<td class="nowrap"><c:url var="updurl" scope="page"
 								value="views/Student_Edit.jsp">
 								<c:param name="studentId" value="${student.studentId}" />
@@ -48,7 +48,7 @@
 								<c:param name="studentPhoneNumber"
 									value="${student.studentPhoneNumber}" />
 								<c:param name="studentAddress" value="${student.studentAddress}" />
-								<c:param name="enrollmentDate" value="${student.enrolmentDate}" />
+								<c:param name="enrollmentDate" value="${student.enrollmentDate}" />
 							</c:url> <a href="${updurl}" class="btn btn-warning" role="button"><span
 								class="glyphicon glyphicon-floppy-open"></span></a> <!--  --> <c:url
 								var="delurl" scope="page" value="/deleteStudent">
