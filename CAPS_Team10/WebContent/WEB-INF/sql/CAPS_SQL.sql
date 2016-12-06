@@ -40,14 +40,14 @@ CREATE TABLE `caps`.`login` (
   `studentEmail` VARCHAR(45) NULL,
   `studentPhoneNumber` VARCHAR(45) NULL,
   `studentAddress` VARCHAR(150) NULL,
-  `enrolmentDate` DATE NULL,
+  `enrollmentDate` DATE NULL,
   PRIMARY KEY (`studentId`));
   
-  CREATE TABLE `caps`.`enrolment` (
+  CREATE TABLE `caps`.`enrollment` (
   `studentId` VARCHAR(50) NOT NULL,
   `courseId` VARCHAR(50) NOT NULL,
   `courseStartDate` DATE NULL,
-  `courseEnrolmentDate` DATE NULL,
+  `courseEnrollmentDate` DATE NULL,
   `grade` FLOAT NULL,
   PRIMARY KEY (`studentId`, `courseId`),
   INDEX `courseId_idx` (`courseId` ASC),
@@ -69,26 +69,26 @@ LIMIT 0, 1000
 
 -- Date: 2016-12-06 01:14
 */
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s001','Haley Headrick','HaleyHeadrick@gmail.com','23652363','3217 Versante Drive','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s002','Kassie Ardaly','KassieArdaly@gmail.com','34637457','6287 Renwood Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s003','Bettie Laper','BettieLaper@gmail.com','25467547','P. O. Box 501','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s004','Nichole Mosty','NicholeMosty@gmail.com','79765845','9109 Dove Ct','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s005','Tami Vanert','TamiVanert@gmail.com','25437375','1004 Steeplewood Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s006','Ora Purtle ','OraPurtle@gmail.com','69785656','740 Bedford Ct','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s007','Lee Fillo','LeeFillo@gmail.com','53475447','4601 Deville Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s008','Merlin Prok ','MerlinProk@gmail.com','98708676','637 Sandy Trail','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s009','Vincent Lofton ','VincentLofton@gmail.com','95246754','427 Crestview Drive','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s010','Oma Bannett ','Oma Bannett@gmail.com','34786865','712 Admiralty Way','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s011','Grover Evitt','GroverEvitt@gmail.com','24675467','3809 Shawnee Tr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s012','Kitty Blomstrand','KittyBlomstrand@gmail.com','67975656','9848 Private Rd','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s013','Cristopher Yakel','CristopherYakel@gmail.com','85433637','1201 Forum Way South','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s014','Amy Smith','AmySmith@gmail.com','75685843','145 Highview Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s015','Victor Johnson','VictorJohnson@gmail.com','37848856','1120 Oakbend Lane','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s016','Francis Mollett','FrancisMollett@gmail.com','45645688','1409 Lamplighter Lane','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s017','Forest Turpen ','ForestTurpen@gmail.com','64895647','7820 Sheridan Rd','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s018','Christal Gali','ChristalGali@gmail.com','76585699','6430 Stream Side Court','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s019','Malinda Shelley ','MalindaShelley@gmail.com','67658658','717 Vickie Drive','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrolmentDate`) VALUES ('s020','Jimmy Stoppel','JimmyStoppel@gmail.com','79568522','6201 Whitman Ave','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s001','Haley Headrick','HaleyHeadrick@gmail.com','23652363','3217 Versante Drive','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s002','Kassie Ardaly','KassieArdaly@gmail.com','34637457','6287 Renwood Dr','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s003','Bettie Laper','BettieLaper@gmail.com','25467547','P. O. Box 501','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s004','Nichole Mosty','NicholeMosty@gmail.com','79765845','9109 Dove Ct','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s005','Tami Vanert','TamiVanert@gmail.com','25437375','1004 Steeplewood Dr','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s006','Ora Purtle ','OraPurtle@gmail.com','69785656','740 Bedford Ct','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s007','Lee Fillo','LeeFillo@gmail.com','53475447','4601 Deville Dr','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s008','Merlin Prok ','MerlinProk@gmail.com','98708676','637 Sandy Trail','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s009','Vincent Lofton ','VincentLofton@gmail.com','95246754','427 Crestview Drive','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s010','Oma Bannett ','Oma Bannett@gmail.com','34786865','712 Admiralty Way','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s011','Grover Evitt','GroverEvitt@gmail.com','24675467','3809 Shawnee Tr','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s012','Kitty Blomstrand','KittyBlomstrand@gmail.com','67975656','9848 Private Rd','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s013','Cristopher Yakel','CristopherYakel@gmail.com','85433637','1201 Forum Way South','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s014','Amy Smith','AmySmith@gmail.com','75685843','145 Highview Dr','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s015','Victor Johnson','VictorJohnson@gmail.com','37848856','1120 Oakbend Lane','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s016','Francis Mollett','FrancisMollett@gmail.com','45645688','1409 Lamplighter Lane','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s017','Forest Turpen ','ForestTurpen@gmail.com','64895647','7820 Sheridan Rd','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s018','Christal Gali','ChristalGali@gmail.com','76585699','6430 Stream Side Court','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s019','Malinda Shelley ','MalindaShelley@gmail.com','67658658','717 Vickie Drive','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s020','Jimmy Stoppel','JimmyStoppel@gmail.com','79568522','6201 Whitman Ave','2016-08-01');
 
 /*
 -- Query: SELECT * FROM caps.lecturer
@@ -148,49 +148,49 @@ INSERT INTO `login` (`userId`,`password`,`role`) VALUES ('s019','s019','student'
 INSERT INTO `login` (`userId`,`password`,`role`) VALUES ('s020','s020','student');
 
 /*
--- Query: SELECT * FROM caps.enrolment
+-- Query: SELECT * FROM caps.enrollment
 LIMIT 0, 1000
 
 -- Date: 2016-12-05 17:06
 */
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s001','c001','2016-08-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s001','c002','2016-10-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s002','c003','2017-01-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s002','c004','2016-08-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s003','c005','2017-01-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s003','c006','2016-10-01','2016-07-13',5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s004','c001','2016-08-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s004','c003','2017-01-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s005','c004','2016-08-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s005','c005','2017-01-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s006','c002','2016-10-01','2016-07-13',5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s006','c006','2016-10-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s007','c001','2016-08-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s007','c004','2016-08-01','2016-07-13',3);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s008','c005','2017-01-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s008','c006','2016-10-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s009','c002','2016-10-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s009','c003','2017-01-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s010','c001','2016-08-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s010','c005','2017-01-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s011','c002','2016-10-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s011','c006','2016-10-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s012','c003','2017-01-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s012','c004','2016-08-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s013','c001','2016-08-01','2016-07-13',3);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s013','c006','2016-10-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s014','c002','2016-10-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s014','c003','2017-01-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s015','c004','2016-08-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s015','c005','2017-01-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s016','c002','2016-10-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s016','c004','2016-08-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s017','c001','2016-08-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s017','c003','2017-01-01','2016-07-13',3.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s018','c005','2017-01-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s018','c006','2016-10-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s019','c003','2017-01-01','2016-07-13',4.5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s019','c006','2016-10-01','2016-07-13',4);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s020','c002','2016-10-01','2016-07-13',5);
-INSERT INTO `enrolment` (`studentId`,`courseId`,`courseStartDate`,`courseEnrolmentDate`,`grade`) VALUES ('s020','c005','2017-01-01','2016-07-13',5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c001','2016-08-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c002','2016-10-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s002','c003','2017-01-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s002','c004','2016-08-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s003','c005','2017-01-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s003','c006','2016-10-01','2016-07-13',5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s004','c001','2016-08-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s004','c003','2017-01-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s005','c004','2016-08-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s005','c005','2017-01-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s006','c002','2016-10-01','2016-07-13',5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s006','c006','2016-10-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s007','c001','2016-08-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s007','c004','2016-08-01','2016-07-13',3);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s008','c005','2017-01-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s008','c006','2016-10-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s009','c002','2016-10-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s009','c003','2017-01-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s010','c001','2016-08-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s010','c005','2017-01-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s011','c002','2016-10-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s011','c006','2016-10-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s012','c003','2017-01-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s012','c004','2016-08-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s013','c001','2016-08-01','2016-07-13',3);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s013','c006','2016-10-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s014','c002','2016-10-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s014','c003','2017-01-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s015','c004','2016-08-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s015','c005','2017-01-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s016','c002','2016-10-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s016','c004','2016-08-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s017','c001','2016-08-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s017','c003','2017-01-01','2016-07-13',3.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s018','c005','2017-01-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s018','c006','2016-10-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s019','c003','2017-01-01','2016-07-13',4.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s019','c006','2016-10-01','2016-07-13',4);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s020','c002','2016-10-01','2016-07-13',5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s020','c005','2017-01-01','2016-07-13',5);
 
