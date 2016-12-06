@@ -34,6 +34,14 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logOut(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void authenticateUser(HttpServletRequest request, HttpServletResponse response) {
@@ -87,7 +95,6 @@ public class MainController extends HttpServlet {
 		authenticateUser(request, response);
 	}
 
-	@SuppressWarnings("unused")
 	private void logOut(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.invalidate();
