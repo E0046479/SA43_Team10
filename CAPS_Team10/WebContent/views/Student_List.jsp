@@ -51,8 +51,8 @@
 								<c:param name="enrollmentDate" value="${student.enrollmentDate}" />
 							</c:url> <a href="${updurl}" class="btn btn-warning" role="button"><span
 								class="glyphicon glyphicon-floppy-open"></span></a> <!--  --> <c:url
-								var="delurl" scope="page" value="/deleteStudent">
-								<c:param name="name" value="${student.studentId}" />
+								var="delurl" scope="page" value="/studentDelete">
+								<c:param name="studentId" value="${student.studentId}" />
 							</c:url> <a href="${delurl}" class="btn btn-danger"><span
 								class="glyphicon glyphicon-floppy-remove"></span></a>
 						<!--  --></td>

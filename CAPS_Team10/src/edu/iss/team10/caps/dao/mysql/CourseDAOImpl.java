@@ -13,8 +13,9 @@ import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
 import edu.iss.team10.caps.model.CourseDTO;
 import edu.iss.team10.caps.model.CourseSearchDTO;
+import edu.iss.team10.caps.model.LecturerDTO;
 
-public class CourseDAOImpl implements CourseDAO{
+public class CourseDAOImpl implements CourseDAO {
 
 	private ResultSet rs;
 
@@ -24,17 +25,19 @@ public class CourseDAOImpl implements CourseDAO{
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 
-		String select = "SELECT * FROM caps.course WHERE courseId=?";
+		String selectCourse = "SELECT * FROM caps.course WHERE courseId=?";
+		String selectLecturer = "SELECT * FROM caps.lecturer WHERE lecturerId=?";
 
 		try {
-			pstatement = connection.prepareStatement(select);
+			pstatement = connection.prepareStatement(selectCourse);
 			pstatement.setString(1, courseId);
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
+				LecturerDTO lecturer = new LecturerDTO();
 				courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
-						rs.getString("lecturerId"), rs.getString("courseDescription"),
-						rs.getString("courseType"), rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), 
-						rs.getInt("courseSize"), rs.getFloat("courseCredit"));
+						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
+						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
+						rs.getFloat("courseCredit"));
 			}
 			if (courseDTO == null) {
 				throw new MyDataException("There is no Course Info!");
@@ -58,10 +61,11 @@ public class CourseDAOImpl implements CourseDAO{
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
+				LecturerDTO lecturer = new LecturerDTO();
 				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
-						rs.getString("lecturerId"), rs.getString("courseDescription"),
-						rs.getString("courseType"), rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), 
-						rs.getInt("courseSize"), rs.getFloat("courseCredit"));
+						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
+						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
+						rs.getFloat("courseCredit"));
 				result.add(courseDTO);
 			}
 			if (result.size() == 0) {
@@ -89,8 +93,8 @@ public class CourseDAOImpl implements CourseDAO{
 					+ "%';";
 		} else {
 			if (courseSearchDTO.getCourseName().trim().equalsIgnoreCase("")) {
-				select = "SELECT * FROM caps.course WHERE courseName LIKE '"
-						+ courseSearchDTO.getCourseName().trim() + "%';";
+				select = "SELECT * FROM caps.course WHERE courseName LIKE '" + courseSearchDTO.getCourseName().trim()
+						+ "%';";
 			} else {
 				select = "SELECT * FROM caps.course WHERE courseId LIKE '" + courseSearchDTO.getCourseId().trim()
 						+ "%' AND coursetName LIKE '" + courseSearchDTO.getCourseName() + "%';";
@@ -100,10 +104,11 @@ public class CourseDAOImpl implements CourseDAO{
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
+				LecturerDTO lecturer = new LecturerDTO();
 				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
-						rs.getString("lecturerId"), rs.getString("courseDescription"),
-						rs.getString("courseType"), rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), 
-						rs.getInt("courseSize"), rs.getFloat("courseCredit"));
+						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
+						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
+						rs.getFloat("courseCredit"));
 				result.add(courseDTO);
 			}
 			if (result.size() == 0) {
@@ -124,13 +129,12 @@ public class CourseDAOImpl implements CourseDAO{
 		PreparedStatement pstatement = null;
 
 		String ins = "INSERT INTO caps.course(courseId, courseName, lecturerId, courseDescription, courseType,"
-				+ "courseDuration, courseStartDate, courseSize, courseCredit) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?)";
+				+ "courseDuration, courseStartDate, courseSize, courseCredit) " + "VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, course.getCourseId());
 			pstatement.setString(2, course.getCourseName());
-			pstatement.setString(3, course.getLecturerId());
+			pstatement.setString(3, course.getLecturer().getLecturerId());
 			pstatement.setString(4, course.getCourseDescription());
 			pstatement.setString(5, course.getCourseType());
 			pstatement.setDouble(6, course.getCourseDuration());
@@ -164,7 +168,7 @@ public class CourseDAOImpl implements CourseDAO{
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, course.getCourseId());
 			pstatement.setString(2, course.getCourseName());
-			pstatement.setString(3, course.getLecturerId());
+			pstatement.setString(3, course.getLecturer().getLecturerId());
 			pstatement.setString(4, course.getCourseDescription());
 			pstatement.setString(5, course.getCourseType());
 			pstatement.setDouble(6, course.getCourseDuration());
@@ -213,4 +217,3 @@ public class CourseDAOImpl implements CourseDAO{
 	}
 
 }
-

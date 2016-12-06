@@ -7,26 +7,26 @@ public class CourseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	String courseId;
-	String courseName;
-	String lecturerId;
-	String courseDescription;
-	String courseType;
-	Double courseDuration;
-	Date courseStartDate;
-	int courseSize;
-	float courseCredit;
+	private String courseId;
+	private String courseName;
+	private LecturerDTO lecturer;
+	private String courseDescription;
+	private String courseType;
+	private Double courseDuration;
+	private Date courseStartDate;
+	private int courseSize;
+	private float courseCredit;
 
 	public CourseDTO() {
 		super();
 	}
 
-	public CourseDTO(String courseId, String courseName, String lecturerId, String courseDescription, String courseType,
-			Double courseDuration, Date courseStartDate, int courseSize, float courseCredit) {
+	public CourseDTO(String courseId, String courseName, LecturerDTO lecturerId, String courseDescription,
+			String courseType, Double courseDuration, Date courseStartDate, int courseSize, float courseCredit) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
-		this.lecturerId = lecturerId;
+		this.lecturer = lecturerId;
 		this.courseDescription = courseDescription;
 		this.courseType = courseType;
 		this.courseDuration = courseDuration;
@@ -51,12 +51,12 @@ public class CourseDTO implements Serializable {
 		this.courseName = courseName;
 	}
 
-	public String getLecturerId() {
-		return lecturerId;
+	public LecturerDTO getLecturer() {
+		return lecturer;
 	}
 
-	public void setLecturerId(String lecturerId) {
-		this.lecturerId = lecturerId;
+	public void setLecturer(LecturerDTO lecturerId) {
+		this.lecturer = lecturerId;
 	}
 
 	public String getCourseDescription() {
@@ -107,12 +107,15 @@ public class CourseDTO implements Serializable {
 		this.courseCredit = courseCredit;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
-		return "CourseDTO [courseId=" + courseId + ", courseName=" + courseName + ", lecturerId=" + lecturerId
+		return "CourseDTO [courseId=" + courseId + ", courseName=" + courseName + ", lecturerId=" + lecturer
 				+ ", courseDescription=" + courseDescription + ", courseType=" + courseType + ", courseDuration="
 				+ courseDuration + ", courseStartDate=" + courseStartDate + ", courseSize=" + courseSize
 				+ ", courseCredit=" + courseCredit + "]";
 	}
-
 }

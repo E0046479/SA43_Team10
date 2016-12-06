@@ -21,4 +21,6 @@ public interface StudentDAO {
 
 	public int deleteStudent(StudentDTO student) throws DAOException, MyDataException;
 	
+	public int getTotalStudentCount() throws DAOException;
+	
 }

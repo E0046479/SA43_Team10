@@ -42,7 +42,7 @@ public class StudentDAOImpl implements StudentDAO {
 		} finally {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		}
-		return null;
+		return studentDTO;
 	}
 
 	@Override
@@ -201,6 +201,28 @@ public class StudentDAOImpl implements StudentDAO {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		}
 		return result;
+	}
+
+	@Override
+	public int getTotalStudentCount() throws DAOException{
+		int studentTotalCount = 0;
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+
+		String select = "select count(studentId) as studCount from caps.student;";
+
+		try {
+			pstatement = connection.prepareStatement(select);
+			rs = pstatement.executeQuery();
+			while (rs.next()) {
+				studentTotalCount = rs.getInt("studCount");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to Select Student Count from database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return studentTotalCount;
 	}
 
 }

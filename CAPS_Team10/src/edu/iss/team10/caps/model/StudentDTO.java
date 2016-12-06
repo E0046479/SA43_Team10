@@ -10,17 +10,17 @@ public class StudentDTO  implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	String studentId;
+	private String studentId;
 
-	String studentName;
+	private String studentName;
 
-	String studentEmail;
+	private String studentEmail;
 
-	String studentPhoneNumber;
+	private String studentPhoneNumber;
 
-	String studentAddress;
+	private String studentAddress;
 
-	Date enrollmentDate;
+	private Date enrollmentDate;
 
 	public StudentDTO() {
 		super();

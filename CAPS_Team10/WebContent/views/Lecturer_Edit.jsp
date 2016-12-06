@@ -14,7 +14,7 @@
 <title><fmt:message key="label.lecturerEditJsp.title" /></title>
 </head>
 <body>
-	<form action="/lecturerEdit" method=post>
+	<form action="/adminHome/lecturerEdit" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -23,6 +23,7 @@
 			</div>
 			<div class="panel-body">
 				<center>
+				
 					<table cellpadding=4 cellspacing=2 border=0>
 
 						<tr>

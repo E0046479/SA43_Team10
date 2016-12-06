@@ -17,47 +17,50 @@ public class StudentManager {
 		studentDAO = DAOFactory.loadInstance().getStudentDAO();
 	}
 
-	@SuppressWarnings("finally")
+	public int getTotalStudentCount() {
+		int totalStudentCount = 0;
+		try {
+			totalStudentCount = studentDAO.getTotalStudentCount();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		return totalStudentCount;
+	}
+
 	public ArrayList<StudentDTO> findStudentsByCriteria(StudentSearchDTO studentSearchDTO) {
 		ArrayList<StudentDTO> currentList = new ArrayList<StudentDTO>();
 		try {
 			currentList = studentDAO.findStudentByCriteria(studentSearchDTO);
 		} catch (DAOException e) {
 			e.printStackTrace();
-		}  catch (MyDataException e) {
+		} catch (MyDataException e) {
 			e.printStackTrace();
-		} finally {
-			return currentList;
 		}
+		return currentList;
 	}
 
-	@SuppressWarnings("finally")
 	public StudentDTO findStudent(String studentName) {
 		StudentDTO currentStudent = new StudentDTO();
 		try {
 			currentStudent = studentDAO.findStudent(studentName);
 		} catch (DAOException e) {
 			e.printStackTrace();
-		}  catch (MyDataException e) {
+		} catch (MyDataException e) {
 			e.printStackTrace();
-		} finally {
-			return currentStudent;
 		}
-
+		return currentStudent;
 	}
 
-	@SuppressWarnings("finally")
 	public ArrayList<StudentDTO> findAllStudent() {
 		ArrayList<StudentDTO> currentList = new ArrayList<StudentDTO>();
 		try {
 			currentList = studentDAO.findAllStudent();
 		} catch (DAOException e) {
 			e.printStackTrace();
-		}  catch (MyDataException e) {
+		} catch (MyDataException e) {
 			e.printStackTrace();
-		} finally {
-			return currentList;
 		}
+		return currentList;
 	}
 
 	public int insertStudent(StudentDTO student) {

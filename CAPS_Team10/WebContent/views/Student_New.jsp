@@ -11,7 +11,7 @@
 <title><fmt:message key="label.student.add" /></title>
 </head>
 <body>
-	<form action="/adminHome/studentInsert" method=post>
+	<form action="${pageContext.request.contextPath}/studentInsert" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>

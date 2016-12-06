@@ -10,12 +10,13 @@
 <title><fmt:message key="label.lecturerlistJsp.title" /></title>
 </head>
 <body>
+<form action="/adminHome/lecturerList" method=post>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3> <fmt:message key="label.lecturerListJsp.title" /> </h3>
 		</div>
 		<div class="panel-body">
-			<a href="Lecturer_New.jsp"><fmt:message key="label.lecturer.add" /></a>
+			<a href="views/Lecturer_New.jsp"><fmt:message key="label.lecturer.add" /></a>
 			<br />
 			<br />
 			<table class="borderAll">
@@ -46,7 +47,7 @@
 								<c:param name="lecturerAddress" value="${lecturer.lecturerAddress}" />
 							</c:url> <a href="${updurl}"><fmt:message key="label.lecturer.edit" /></a>							          
 							&nbsp;&nbsp;&nbsp; <c:url var="delurl" scope="page"
-								value="/deleteLecturer">
+								value="/lecturerDelete">
 								<c:param name="name" value="${lecturer.lecturerId}" />
 							</c:url> <a href="${delurl}"><fmt:message key="label.lecturer.delete" /></a>
 						</td>
@@ -55,5 +56,6 @@
 			</table>
 		</div>
 	</div>
+	</form>
 </body>
 </html>

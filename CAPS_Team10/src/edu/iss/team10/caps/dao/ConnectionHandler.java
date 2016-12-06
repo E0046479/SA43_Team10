@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ConnectionHandler {
 
-	public final static String URL = "jdbc:mysql://localhost/test?verifyServerCertificate=false&useSSL=true";
+	public final static String URL = "jdbc:mysql://localhost/caps?verifyServerCertificate=false&useSSL=true";
 	public final static String USER = "root";
 	public final static String PASSWORD = "password";
 	public final static String DRIVER_CLASS = "com.mysql.jdbc.Driver";

@@ -10,6 +10,8 @@ public abstract class DAOFactory {
 
 	public abstract CourseDAO getCourseDAO();
 	
+	public abstract LecturerDAO getLecturerDAO();
+	
 	public static DAOFactory loadInstance() {
 		return new DAOFactoryImpl();
 	}

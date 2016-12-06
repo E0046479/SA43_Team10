@@ -10,7 +10,7 @@
 <title><fmt:message key="label.lecturer.add" /></title>
 </head>
 <body>
-<form action="/lecturerEdit" method=post>
+<form action="/adminHome/lecturerInsert" method=post>
 	<div class="panel panel-default">	
 	<div class="panel-heading"><h3>
 					<fmt:message key="label.lecturer.add" />
