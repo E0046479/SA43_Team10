@@ -20,7 +20,7 @@
 <title><fmt:message key="label.studentEditJsp.title" /></title>
 </head>
 <body>
-	<form action="/adminHome/studentEdit" method=post>
+	<form action="${pageContext.request.contextPath}/adminHome/studentEdit" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>

@@ -1,8 +1,12 @@
 package edu.iss.team10.caps.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -76,10 +80,16 @@ public class AdminHome extends HttpServlet {
 		String studentEmail = (String) request.getAttribute("studentEmail");
 		String studentPhoneNumber = (String) request.getAttribute("studentPhoneNumber");
 		String studentAddress = (String) request.getAttribute("studentAddress");
-		Date enrolmentDate = new Date((String) request.getAttribute("enrollmentDate"));
+		String enrollmentDate = (String) request.getAttribute("enrollmentDate");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		Date enrolmentDate = null;
+		try {
+			enrolmentDate = format.parse(enrollmentDate);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrolmentDate);
-
 		int update = studentManager.updateStudent(studentDTO);
 		System.out.println("Update Success");
 		RequestDispatcher rd = request.getRequestDispatcher("views/Student_List.jsp");
