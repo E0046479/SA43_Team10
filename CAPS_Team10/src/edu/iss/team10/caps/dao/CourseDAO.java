@@ -20,5 +20,7 @@ public interface CourseDAO{
 	public int updateCourse(CourseDTO course) throws DAOException, MyDataException;
 
 	public int deleteCourse(CourseDTO course) throws DAOException, MyDataException;
+	
+	public int getTotalCourseCount() throws DAOException;
 		
 }

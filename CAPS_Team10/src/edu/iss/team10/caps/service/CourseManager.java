@@ -21,6 +21,16 @@ public class CourseManager {
 		courseDAO = DAOFactory.loadInstance().getCourseDAO();
 		enrollmentDAO = DAOFactory.loadInstance().getEnrollmentDAO();
 	}
+	
+	public int getTotalCourseCount() {
+		int totalCourseCount = 0;
+		try {
+			totalCourseCount = courseDAO.getTotalCourseCount();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		return totalCourseCount;
+	}
 
 	@SuppressWarnings("finally")
 	public ArrayList<CourseDTO> findCoursesByCriteria(CourseSearchDTO courseSearchDTO) {

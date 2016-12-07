@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.iss.team10.caps.model.CourseDTO;
 import edu.iss.team10.caps.model.LecturerDTO;
 import edu.iss.team10.caps.model.StudentDTO;
 import edu.iss.team10.caps.service.CourseManager;
@@ -25,7 +26,7 @@ import edu.iss.team10.caps.service.StudentManager;
  * Servlet implementation class AdminHome
  */
 @WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/lecturerList", "/lecturerInsert",
-		"/lecturerEdit", "/lecturerDelete" })
+		"/lecturerEdit", "/lecturerDelete", "/courseList", "/courseInsert", "/courseEdit", "/courseDelete" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -72,6 +73,18 @@ public class AdminHome extends HttpServlet {
 			break;
 		case "/lecturerList":
 			doGetLecturerLsit(request, response);
+			break;
+		case "/courseInsert":
+			doInsertCourse(request, response);
+			break;
+		case "/courseEdit":
+			doEditCourse(request, response);
+			break;
+		case "/courseDelete":
+			doDeleteCourse(request, response);
+			break;
+		case "/courseList":
+			doGetCourseLsit(request, response);
 			break;
 		default:
 			break;
@@ -229,5 +242,112 @@ public class AdminHome extends HttpServlet {
 	}
 
 	// Course Method
+	private void doGetCourseLsit(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<CourseDTO> courseList = courseManager.findAllCourse();
+		request.setAttribute("courseList", courseList);
+		RequestDispatcher rd = request.getRequestDispatcher("views/Course_List.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void doInsertCourse(HttpServletRequest request, HttpServletResponse response) {
+		int totalCourseCount = courseManager.getTotalCourseCount();
+		String courseId = "";
+		if (totalCourseCount == 0) {
+			courseId = "c001";
+		} else {
+			totalCourseCount++;
+			courseId = "c00" + totalCourseCount;
+		}
+		String courseName = (String) request.getParameter("courseName");
+		String lecturerId = (String) request.getParameter("lecturerId");
+		LecturerDTO lecturer = lecturerManager.findLecturer(lecturerId);
+		String courseDescription = (String) request.getParameter("courseDescription");
+		String courseType = (String) request.getParameter("courseType");
+		Double courseDuration = Double.parseDouble(request.getParameter("courseDuration"));
+		String courseStartDateString = (String) request.getParameter("courseStartDate");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		Date courseStartDate = null;
+		try {
+			courseStartDate = format.parse(courseStartDateString);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		int courseSize = Integer.parseInt(request.getParameter("courseSize"));
+		float courseCredit = Float.parseFloat(request.getParameter("courseCredit"));
+		
+		CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturer, courseDescription, courseType,
+				courseDuration, courseStartDate, courseSize, courseCredit);
+		int insert = courseManager.insertCourse(courseDTO);
+		if(insert > 0){
+			System.out.println("Insert Course Success");
+		}else{
+			System.out.println("Fail Course Insert");
+		}
+	}
 
+	private void doEditCourse(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String courseId = (String) request.getParameter("courseId");
+		String courseName = (String) request.getParameter("courseName");
+		String lecturerId = (String) request.getParameter("lecturerId");
+		LecturerDTO lecturer = lecturerManager.findLecturer(lecturerId);
+		String courseDescription = (String) request.getParameter("courseDescription");
+		String courseType = (String) request.getParameter("courseType");
+		Double courseDuration = Double.parseDouble(request.getParameter("courseDuration"));
+		String courseStartDateString = (String) request.getParameter("courseStartDate");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		Date courseStartDate = null;
+		try {
+			courseStartDate = format.parse(courseStartDateString);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		int courseSize = Integer.parseInt(request.getParameter("courseSize"));
+		float courseCredit = Float.parseFloat(request.getParameter("courseCredit"));
+		
+		CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturer, courseDescription, courseType,
+				courseDuration, courseStartDate, courseSize, courseCredit);
+		int update = courseManager.updateCourse(courseDTO);
+		if(update > 0){
+			System.out.println("Update Course Success");
+		}else{
+			System.out.println("Fail Course Update");
+		}
+		
+
+		RequestDispatcher rd = request.getRequestDispatcher("/main");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void doDeleteCourse(HttpServletRequest request, HttpServletResponse response) {
+		String courseId = request.getParameter("courseId");
+		CourseDTO course = new CourseDTO();
+		course.setCourseId(courseId);
+		int delete = courseManager.deletecourse(course);
+		if (delete > 0) {
+			System.out.println("Delete Success");
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/adminHome");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

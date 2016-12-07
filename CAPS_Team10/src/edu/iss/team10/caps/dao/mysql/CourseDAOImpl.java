@@ -63,7 +63,8 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
-				LecturerDTO lecturer = new LecturerDTO();
+				String lecturerId = rs.getString("lecturerId");
+				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
 				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
 						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
 						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
@@ -106,7 +107,8 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
-				LecturerDTO lecturer = new LecturerDTO();
+				String lecturerId = rs.getString("lecturerId");
+				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
 				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
 						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
 						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
@@ -217,5 +219,25 @@ public class CourseDAOImpl implements CourseDAO {
 		}
 		return result;
 	}
+	@Override
+	public int getTotalCourseCount() throws DAOException{
+		int courseTotalCount = 0;
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
 
+		String select = "select count(courseId) as courseCount from caps.course;";
+
+		try {
+			pstatement = connection.prepareStatement(select);
+			rs = pstatement.executeQuery();
+			while (rs.next()) {
+				courseTotalCount = rs.getInt("courseCount");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to Select Course Count from database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return courseTotalCount;
+	}
 }
