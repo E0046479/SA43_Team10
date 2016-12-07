@@ -20,7 +20,7 @@
 			</div>
 			<div class="panel-body">
 				<center>
-					<table cellpadding=4 cellspacing=2 border=0>
+			 		<table cellpadding=4 cellspacing=2 border=0>
 
 						<tr>
 							<td><fmt:message key="label.student.table.title.studentName" /></td>

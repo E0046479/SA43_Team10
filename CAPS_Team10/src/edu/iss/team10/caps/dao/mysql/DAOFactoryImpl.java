@@ -12,6 +12,7 @@ public class DAOFactoryImpl extends DAOFactory {
 	private LoginDAO loginDAO = new LoginDAOImpl();
 	private CourseDAO courseDAO = new CourseDAOImpl();
 	private LecturerDAO lecturerDAO = new LecturerDAOImpl();
+	private EnrollmentDAO enrollmentDAO = new EnrollmentDAOImpl();
 
 	@Override
 	public StudentDAO getStudentDAO() {
@@ -31,5 +32,10 @@ public class DAOFactoryImpl extends DAOFactory {
 	@Override
 	public LecturerDAO getLecturerDAO() {
 		return lecturerDAO;
+	}
+
+	@Override
+	public EnrollmentDAO getEnrollmentDAO() {
+		return enrollmentDAO;
 	}
 }

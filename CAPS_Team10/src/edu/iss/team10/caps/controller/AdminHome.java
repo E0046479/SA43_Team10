@@ -121,7 +121,8 @@ public class AdminHome extends HttpServlet {
 		String studentAddress = (String) request.getParameter("studentAddress");
 		String enrollmentString = (String) request.getParameter("enrollmentDate");
 		System.out.println(enrollmentString);
-		DateFormat format = new SimpleDateFormat("d/MM/yyyy", Locale.ENGLISH);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		//DateFormat format = new SimpleDateFormat("d/MM/yyyy", Locale.ENGLISH);
 		Date enrollmentDate = null;
 		try {
 			enrollmentDate = format.parse(enrollmentString);
@@ -166,8 +167,8 @@ public class AdminHome extends HttpServlet {
 		String studentAddress = (String) request.getParameter("studentAddress");
 		String enrollmentString = (String) request.getParameter("enrollmentDate");
 		System.out.println(enrollmentString);
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
-		DateFormat format = new SimpleDateFormat("d/MM/yyyy", Locale.ENGLISH);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		//DateFormat format = new SimpleDateFormat("d/MM/yyyy", Locale.ENGLISH);
 		Date enrollmentDate = null;
 		try {
 			enrollmentDate = format.parse(enrollmentString);

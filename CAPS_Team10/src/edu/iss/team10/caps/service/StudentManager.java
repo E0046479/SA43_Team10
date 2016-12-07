@@ -39,10 +39,10 @@ public class StudentManager {
 		return currentList;
 	}
 
-	public StudentDTO findStudent(String studentName) {
+	public StudentDTO findStudent(String studentId) {
 		StudentDTO currentStudent = new StudentDTO();
 		try {
-			currentStudent = studentDAO.findStudent(studentName);
+			currentStudent = studentDAO.findStudent(studentId);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		} catch (MyDataException e) {

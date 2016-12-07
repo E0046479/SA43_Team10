@@ -3,18 +3,23 @@ package edu.iss.team10.caps.service;
 import java.util.ArrayList;
 
 import edu.iss.team10.caps.dao.DAOFactory;
+import edu.iss.team10.caps.dao.mysql.EnrollmentDAO;
 import edu.iss.team10.caps.dao.CourseDAO;
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
 import edu.iss.team10.caps.model.CourseDTO;
 import edu.iss.team10.caps.model.CourseSearchDTO;
+import edu.iss.team10.caps.model.EnrollmentDTO;
 
 public class CourseManager {
 
 	private CourseDAO courseDAO;
 
+	private EnrollmentDAO enrollmentDAO;
+
 	public CourseManager() {
 		courseDAO = DAOFactory.loadInstance().getCourseDAO();
+		enrollmentDAO = DAOFactory.loadInstance().getEnrollmentDAO();
 	}
 
 	@SuppressWarnings("finally")
@@ -24,7 +29,7 @@ public class CourseManager {
 			currentList = courseDAO.findCourseByCriteria(courseSearchDTO);
 		} catch (DAOException e) {
 			e.printStackTrace();
-		}  catch (MyDataException e) {
+		} catch (MyDataException e) {
 			e.printStackTrace();
 		} finally {
 			return currentList;
@@ -38,7 +43,7 @@ public class CourseManager {
 			currentCourse = courseDAO.findCourse(courseName);
 		} catch (DAOException e) {
 			e.printStackTrace();
-		}  catch (MyDataException e) {
+		} catch (MyDataException e) {
 			e.printStackTrace();
 		} finally {
 			return currentCourse;
@@ -53,7 +58,7 @@ public class CourseManager {
 			currentList = courseDAO.findAllCourse();
 		} catch (DAOException e) {
 			e.printStackTrace();
-		}  catch (MyDataException e) {
+		} catch (MyDataException e) {
 			e.printStackTrace();
 		} finally {
 			return currentList;
@@ -94,5 +99,15 @@ public class CourseManager {
 			e.printStackTrace();
 		}
 		return delete;
+	}
+
+	public ArrayList<EnrollmentDTO> listByStudentID(String userId) {
+		ArrayList<EnrollmentDTO> currentList = new ArrayList<EnrollmentDTO>();
+		try {
+			currentList = enrollmentDAO.listByStudentId(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return currentList;
 	}
 }

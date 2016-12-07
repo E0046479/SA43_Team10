@@ -14,6 +14,7 @@ import edu.iss.team10.caps.exception.MyDataException;
 import edu.iss.team10.caps.model.CourseDTO;
 import edu.iss.team10.caps.model.CourseSearchDTO;
 import edu.iss.team10.caps.model.LecturerDTO;
+import edu.iss.team10.caps.service.LecturerManager;
 
 public class CourseDAOImpl implements CourseDAO {
 
@@ -33,7 +34,8 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement.setString(1, courseId);
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
-				LecturerDTO lecturer = new LecturerDTO();
+				String lecturerId = rs.getString("lecturerId");
+				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
 				courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
 						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
 						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
