@@ -21,7 +21,7 @@ import edu.iss.team10.caps.service.CourseManager;
 @WebServlet({ "/studentHome", "/studentEnrollCourse", })
 public class StudentHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	CourseManager courseManager = new CourseManager();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -77,7 +77,7 @@ public class StudentHome extends HttpServlet {
 		if(user == null){
 			path = "login.jsp";
 		}else {
-			CourseManager courseManager = new CourseManager();
+			
 			ArrayList<EnrollmentDTO> courseList = courseManager.listByStudentID(user.getUserId());
 			request.setAttribute("courseList", courseList);
 			path = "views/GradeAndGPA.jsp";

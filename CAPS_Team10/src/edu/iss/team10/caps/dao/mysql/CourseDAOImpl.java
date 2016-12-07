@@ -27,7 +27,6 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement pstatement = null;
 
 		String selectCourse = "SELECT * FROM caps.course WHERE courseId=?";
-		String selectLecturer = "SELECT * FROM caps.lecturer WHERE lecturerId=?";
 
 		try {
 			pstatement = connection.prepareStatement(selectCourse);
@@ -38,7 +37,7 @@ public class CourseDAOImpl implements CourseDAO {
 				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
 				courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
 						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
-						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
+						rs.getDouble("courseDuration"), rs.getDate("courseStartDate"), rs.getInt("courseSize"),
 						rs.getFloat("courseCredit"));
 			}
 			if (courseDTO == null) {
@@ -49,7 +48,7 @@ public class CourseDAOImpl implements CourseDAO {
 		} finally {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		}
-		return null;
+		return courseDTO;
 	}
 
 	@Override

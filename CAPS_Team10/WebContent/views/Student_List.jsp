@@ -22,7 +22,7 @@
 			<br /> <br />
 			<table class="table table-bordered">
 				<tr class="info">
-					<th class="text-center">#</th>
+					<th class="text-center">No.</th>
 					<th class="text-center"><fmt:message
 							key="label.student.table.title.studentId" /></th>
 					<th class="text-center"><fmt:message

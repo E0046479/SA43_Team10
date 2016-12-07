@@ -41,7 +41,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		} finally {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		}
-		return null;
+		return lecturerDTO;
 	}
 
 	@Override

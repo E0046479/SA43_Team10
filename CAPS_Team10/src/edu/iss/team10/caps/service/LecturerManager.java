@@ -31,10 +31,10 @@ public class LecturerManager {
 	}
 
 	@SuppressWarnings("finally")
-	public LecturerDTO findLecturer(String lecturerName) {
+	public LecturerDTO findLecturer(String lecturerId) {
 		LecturerDTO currentLecturer = new LecturerDTO();
 		try {
-			currentLecturer = lecturerDAO.findLecturer(lecturerName);
+			currentLecturer = lecturerDAO.findLecturer(lecturerId);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}  catch (MyDataException e) {

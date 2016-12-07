@@ -229,6 +229,11 @@ public class AdminHome extends HttpServlet {
 		LecturerDTO lecturerDTO = new LecturerDTO(lecturerId, lecturerName, lecturerEmail, lecturerPhoneNumber,
 				lecturerAddress);
 		int update = lecturerManager.updateLecturer(lecturerDTO);
+		if(update > 0){
+			System.out.println("Update Lecturer Success");
+		}else{
+			System.out.println("Fail Lecturer Update");
+		}
 		System.out.println("Update Success");
 		RequestDispatcher rd = request.getRequestDispatcher("views/Lecturer_List.jsp");
 		try {
@@ -249,10 +254,8 @@ public class AdminHome extends HttpServlet {
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -322,7 +325,6 @@ public class AdminHome extends HttpServlet {
 			System.out.println("Fail Course Update");
 		}
 		
-
 		RequestDispatcher rd = request.getRequestDispatcher("/main");
 		try {
 			rd.forward(request, response);
