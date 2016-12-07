@@ -22,4 +22,6 @@ public interface LecturerDAO {
 
 	int deleteLecturer(LecturerDTO lecturer) throws DAOException, MyDataException;
 
+	int getTotalLecturerCount() throws DAOException;
+
 }

@@ -2,6 +2,7 @@ package edu.iss.team10.caps.dao.mysql;
 
 import edu.iss.team10.caps.dao.CourseDAO;
 import edu.iss.team10.caps.dao.DAOFactory;
+import edu.iss.team10.caps.dao.EnrollmentDAO;
 import edu.iss.team10.caps.dao.LecturerDAO;
 import edu.iss.team10.caps.dao.LoginDAO;
 import edu.iss.team10.caps.dao.StudentDAO;

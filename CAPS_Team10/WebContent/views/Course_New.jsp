@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<fmt:setBundle basename="messages"/>
+<fmt:setBundle basename="messages" />
 <title><fmt:message key="label.course.add" /></title>
 </head>
 <body>
-<form action="/courseEdit" method=post>
-	<div class="panel panel-default">	
-	<div class="panel-heading"><h3>
+	<form action="${pageContext.request.contextPath}/courseInsert" method=post>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>
 					<fmt:message key="label.course.add" />
-				</h3></div>	
-		<div class="panel-body">
-<center>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<center>
 					<table cellpadding=4 cellspacing=2 border=0>
 
 						<tr>
@@ -26,8 +28,7 @@
 								value="true" /></td>
 						</tr>
 						<tr>
-							<td><fmt:message
-									key="label.course.table.title.lecturerId" /></td>
+							<td><fmt:message key="label.course.table.title.lecturerId" /></td>
 							<td><input type="text" name="lecturerId" size=15
 								maxlength=20></td>
 						</tr>
@@ -38,8 +39,7 @@
 								maxlength=20></td>
 						</tr>
 						<tr>
-							<td><fmt:message
-									key="label.course.table.title.courseType" /></td>
+							<td><fmt:message key="label.course.table.title.courseType" /></td>
 							<td><input type="text" name="courseType" size=15
 								maxlength=20></td>
 						</tr>
@@ -52,18 +52,16 @@
 						<tr>
 							<td><fmt:message
 									key="label.course.table.title.courseStartDate" /></td>
-							<td><input type="text" name="courseStartDate" size=15
+							<td><input type="text" id="enrollmentDate" name="courseStartDate" size=15
 								maxlength=20></td>
 						</tr>
 						<tr>
-							<td><fmt:message
-									key="label.course.table.title.courseSize" /></td>
+							<td><fmt:message key="label.course.table.title.courseSize" /></td>
 							<td><input type="text" name="courseSize" size=15
 								maxlength=20></td>
 						</tr>
 						<tr>
-							<td><fmt:message
-									key="label.course.table.title.courseCredit" /></td>
+							<td><fmt:message key="label.course.table.title.courseCredit" /></td>
 							<td><input type="text" name="courseCredit" size=15
 								maxlength=20></td>
 						</tr>

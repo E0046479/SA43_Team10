@@ -16,6 +16,15 @@ public class LecturerManager {
 		lecturerDAO = DAOFactory.loadInstance().getLecturerDAO();
 	}
 
+    public int getTotalLecturerCount() {
+    	int totallecturercount=0;
+    	try {
+			totallecturercount=lecturerDAO.getTotalLecturerCount();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+    	return totallecturercount;
+    }
 	@SuppressWarnings("finally")
 	public ArrayList<LecturerDTO> findLecturersByCriteria(LecturerSearchDTO lecturerSearchDTO) {
 		ArrayList<LecturerDTO> currentList = new ArrayList<LecturerDTO>();
@@ -25,12 +34,10 @@ public class LecturerManager {
 			e.printStackTrace();
 		}  catch (MyDataException e) {
 			e.printStackTrace();
-		} finally {
-			return currentList;
 		}
+		return currentList;
 	}
-
-	@SuppressWarnings("finally")
+  
 	public LecturerDTO findLecturer(String lecturerId) {
 		LecturerDTO currentLecturer = new LecturerDTO();
 		try {
@@ -39,13 +46,11 @@ public class LecturerManager {
 			e.printStackTrace();
 		}  catch (MyDataException e) {
 			e.printStackTrace();
-		} finally {
-			return currentLecturer;
 		}
-
+		return currentLecturer;
 	}
 
-	@SuppressWarnings("finally")
+
 	public ArrayList<LecturerDTO> findAllLecturer() {
 		ArrayList<LecturerDTO> currentList = new ArrayList<LecturerDTO>();
 		try {
@@ -54,9 +59,8 @@ public class LecturerManager {
 			e.printStackTrace();
 		}  catch (MyDataException e) {
 			e.printStackTrace();
-		} finally {
-			return currentList;
 		}
+		return currentList;
 	}
 
 	public int insertLecturer(LecturerDTO lecturer) {
@@ -94,4 +98,6 @@ public class LecturerManager {
 		}
 		return delete;
 	}
+
+	
 }

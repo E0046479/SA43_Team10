@@ -66,7 +66,7 @@ public class CourseDAOImpl implements CourseDAO {
 				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
 				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
 						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
-						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
+						rs.getDouble("courseDuration"), rs.getDate("courseStartDate"), rs.getInt("courseSize"),
 						rs.getFloat("courseCredit"));
 				result.add(courseDTO);
 			}
@@ -110,7 +110,7 @@ public class CourseDAOImpl implements CourseDAO {
 				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
 				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
 						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
-						rs.getDouble("courseDuration"), rs.getDate("enrolmentDate"), rs.getInt("courseSize"),
+						rs.getDouble("courseDuration"), rs.getDate("courseStartDate"), rs.getInt("courseSize"),
 						rs.getFloat("courseCredit"));
 				result.add(courseDTO);
 			}
@@ -130,7 +130,8 @@ public class CourseDAOImpl implements CourseDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
+		java.sql.Date courseStartDate = new java.sql.Date(course.getCourseStartDate().getTime());
+		
 		String ins = "INSERT INTO caps.course(courseId, courseName, lecturerId, courseDescription, courseType,"
 				+ "courseDuration, courseStartDate, courseSize, courseCredit) " + "VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
@@ -141,7 +142,7 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement.setString(4, course.getCourseDescription());
 			pstatement.setString(5, course.getCourseType());
 			pstatement.setDouble(6, course.getCourseDuration());
-			pstatement.setDate(7, (Date) course.getCourseStartDate());
+			pstatement.setDate(7, courseStartDate);
 			pstatement.setInt(8, course.getCourseSize());
 			pstatement.setFloat(9, course.getCourseCredit());
 
@@ -164,21 +165,20 @@ public class CourseDAOImpl implements CourseDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
+		java.sql.Date courseStartDate = new java.sql.Date(course.getCourseStartDate().getTime());
 		String ins = "UPDATE caps.course SET courseName=?, lecturerId=?, courseDescription=?, courseType=?, courseDuration=?, courseStartDate=?, courseSize=?, courseCredit=? WHERE courseId = ?; ";
 
 		try {
 			pstatement = connection.prepareStatement(ins);
-			pstatement.setString(1, course.getCourseId());
-			pstatement.setString(2, course.getCourseName());
-			pstatement.setString(3, course.getLecturer().getLecturerId());
-			pstatement.setString(4, course.getCourseDescription());
-			pstatement.setString(5, course.getCourseType());
-			pstatement.setDouble(6, course.getCourseDuration());
-			pstatement.setDate(7, (Date) course.getCourseStartDate());
-			pstatement.setInt(8, course.getCourseSize());
-			pstatement.setFloat(9, course.getCourseCredit());
-
+			pstatement.setString(1, course.getCourseName());
+			pstatement.setString(2, course.getLecturer().getLecturerId());
+			pstatement.setString(3, course.getCourseDescription());
+			pstatement.setString(4, course.getCourseType());
+			pstatement.setDouble(5, course.getCourseDuration());
+			pstatement.setDate(6, courseStartDate );
+			pstatement.setInt(7, course.getCourseSize());
+			pstatement.setFloat(8, course.getCourseCredit());
+			pstatement.setString(9, course.getCourseId());
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Update Specific Course!");

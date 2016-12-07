@@ -14,7 +14,7 @@
 <title><fmt:message key="label.courseEditJsp.title" /></title>
 </head>
 <body>
-	<form action="/courseEdit" method=post>
+	<form action="${pageContext.request.contextPath}/courseEdit" method="post">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -28,8 +28,8 @@
 						<tr>
 							<td><fmt:message key="label.course.table.title.courseName" /></td>
 							<td><input type="text" name="courseName" size=15 value="${param['courseName']}"
-								maxlength=20> <input type="hidden" name="ins"
-								value="true" /></td>
+								maxlength=20> <input type="hidden" name="courseId"
+								value="${param['courseId']}" /></td>
 						</tr>
 						<tr>
 							<td><fmt:message
@@ -58,7 +58,7 @@
 						<tr>
 							<td><fmt:message
 									key="label.course.table.title.courseStartDate" /></td>
-							<td><input type="text" name="courseStartDate" size=15 value="${param['courseStartDate']}"
+							<td><input type="text" id="enrollmentDate" name="courseStartDate" size=15 value="${param['courseStartDate']}"
 								maxlength=20></td>
 						</tr>
 						<tr>

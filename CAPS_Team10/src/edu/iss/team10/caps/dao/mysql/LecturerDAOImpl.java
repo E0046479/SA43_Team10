@@ -197,5 +197,23 @@ public class LecturerDAOImpl implements LecturerDAO {
 		}
 		return result;
 	}
+	@Override
+	public int getTotalLecturerCount() {
+		int getcount=0;
+		PreparedStatement ps = null;
+		Connection connection=ConnectionHandler.openConnection();		
+		String count="SELECT count(lectureID) as lecturercount from caps.lecturer;";
+		try{ ps=connection.prepareStatement(count);
+		rs=ps.executeQuery();
+		while(rs.next()){
+		getcount=rs.getInt("lecturercount");}}
+		catch(SQLException e){
+			System.err.println("Error: Unable to Select Lecturer Count from database.\n"+e.getMessage());
+		}finally{
+			ConnectionHandler.closeConnection(connection, ps);
+		}
+		return getcount;
+	}
+	
 
 }

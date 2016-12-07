@@ -15,12 +15,12 @@
 			<h3> <fmt:message key="label.courseListJsp.title" /> </h3>
 		</div>
 		<div class="panel-body">
-			<a href="Course_New.jsp"><fmt:message key="label.course.add" /></a>
+			<a href="views/Course_New.jsp"><fmt:message key="label.course.add" /></a>
 			<br />
 			<br />
 			<table class="borderAll">
 				<tr>
-					<th>#</th>					
+					<th>No.</th>					
 				    <th><fmt:message key="label.course.table.title.courseId"/>
 					</th> 
 					<th> <fmt:message key="label.course.table.title.courseName"/> 
@@ -39,24 +39,28 @@
 						<td class="nowrap">${course.courseName}</td>
 						<td class="nowrap">${course.courseDuration}</td>
 						<td class="nowrap">${course.courseStartDate}</td>
-						<td class="nowrap"><c:url var="updurl" scope="page"
+						<td class="nowrap">
+						<c:url var="updurl" scope="page"
 								value="views/Course_Edit.jsp">
 								<c:param name="courseId" value="${course.courseId}" />
 								<c:param name="courseName" value="${course.courseName}" />
-								<c:param name="lecturerId" value="${course.lecturerId}" />
+								<c:param name="lecturerId" value="${course.lecturer.lecturerId}" />
 								<c:param name="courseDescription" value="${course.courseDescription}" />
 								<c:param name="courseType" value="${course.courseType}" />
 								<c:param name="courseDuration" value="${course.courseDuration}" />
 								<c:param name="courseStartDate" value="${course.courseStartDate}" />
 								<c:param name="courseSize" value="${course.courseSize}" />
 								<c:param name="courseCredit" value="${course.courseCredit}" />
-							</c:url> <a href="${updurl}"><fmt:message key="label.course.edit" /></a>							          
-							&nbsp;&nbsp;&nbsp; <c:url var="delurl" scope="page"
-								value="/deleteCourse">
-								<c:param name="name" value="${course.courseId}" />
+							</c:url> 
+							<a href="${updurl}"><fmt:message key="label.course.edit" /></a>							          
+							&nbsp;&nbsp;&nbsp; 
+							<c:url var="delurl" scope="page"
+								value="/courseDelete">
+								<c:param name="courseId" value="${course.courseId}" />
 							</c:url> <a href="${delurl}"><fmt:message key="label.course.delete" /></a>
 						</td>
 					</tr>
+					 lecturer : <c:out value="${course.lecturer.lecturerId}" />
 				</c:forEach>
 			</table>
 		</div>

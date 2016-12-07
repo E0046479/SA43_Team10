@@ -15,7 +15,7 @@
 <title>AddCourse</title>
 </head>
 <body>
-		<form action="/courseDetail" method=post>
+		<form action="${pageContext.request.contextPath}/courseDetail" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>

@@ -28,15 +28,15 @@
 						class="glyphicon glyphicon-dashboard"></span> <fmt:message
 							key="label.Admin.Manage.Student" /></a></li>
 				<li><a
-					href="<%=request.getContextPath()%>/views/lecturer_List.jsp"><span
+					href="<%=request.getContextPath()%>/lecturerList"><span
 						class="glyphicon glyphicon-plane"></span> <fmt:message
 							key="label.Admin.Manage.Lecturers" /></a></li>
 				<li><a
-					href="<%=request.getContextPath()%>/views/Course_List.jsp"><span
+					href="<%=request.getContextPath()%>/courseList"><span
 						class="glyphicon glyphicon-cloud"></span> <fmt:message
 							key="label.Admin.Manage.Courses" /></a></li>
 				<li><a
-					href="<%=request.getContextPath()%>/views/Enrollment_List.jsp"><span
+					href="<%=request.getContextPath()%>/adminEnrollment"><span
 						class="glyphicon glyphicon-cloud"></span> <fmt:message
 							key="label.Admin.Manage.Enrollment" /></a></li>
 			</c:if>
@@ -44,12 +44,15 @@
 			<!-- Student Navigation -->
 			<c:if test="${sessionScope['user'].role == 'student'}">
 				<li class="active"><a
-					href="<%=request.getContextPath()%>/views/Student_GradeAndGPA.jsp"><span
+					href="<%=request.getContextPath()%>/studentHome"><span
 						class="glyphicon glyphicon-dashboard"></span> <fmt:message
 							key="label.Student.Manage.GradeAndGPA" /></a></li>
 				<li><a href="<%=request.getContextPath()%>/views/"><span
 						class="glyphicon glyphicon-plane"></span> <fmt:message
 							key="label.Student.Manage.ViewCourses" /></a></li>
+							<li><a href="<%=request.getContextPath()%>/EnrolledCourses"><span
+						class="glyphicon glyphicon-plane"></span> <fmt:message
+							key="label.enrolledCourses" /></a></li>
 			</c:if>
 
 			<!-- Lecturer Navigation -->

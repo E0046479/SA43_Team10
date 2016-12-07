@@ -14,7 +14,7 @@
 <title><fmt:message key="label.lecturerEditJsp.title" /></title>
 </head>
 <body>
-	<form action="/adminHome/lecturerEdit" method=post>
+	<form action="${pageContext.request.contextPath}/lecturerEdit" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -29,8 +29,9 @@
 						<tr>
 							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
 							<td><input type="text" name="lecturerName" size=15 value="${param['lecturerName']}"
-								maxlength=20> <input type="hidden" name="ins"
-								value="true" /></td>
+								maxlength=20> <input type="hidden" name="lecturerId"
+								value="${param['lecturerId']}" /></td>
+								
 						</tr>
 						<tr>
 							<td><fmt:message
