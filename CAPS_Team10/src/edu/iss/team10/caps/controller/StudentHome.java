@@ -2,6 +2,7 @@ package edu.iss.team10.caps.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,10 +23,13 @@ import edu.iss.team10.caps.service.StudentManager;
 /**
  * Servlet implementation class StudentHome
  */
-@WebServlet({ "/studentHome", "/studentEnrollCourse", "/EnrolledCourses", "/studentDeleteEnroll"})
+@WebServlet({ "/studentHome", "/studentEnrollCourseList", "/EnrolledCourses", "/studentDeleteEnroll",
+		"/studentEnrollCourseSave" })
 public class StudentHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CourseManager courseManager = new CourseManager();
+	private CourseManager courseManager = new CourseManager();
+	private StudentManager studentManger = new StudentManager();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -47,7 +51,7 @@ public class StudentHome extends HttpServlet {
 		case "/studentHome":
 			doGetGPAList(request, response);
 			break;
-		case "/studentEnrollCourse":
+		case "/studentEnrollCourseList":
 			doGetStudentEnrollCourseList(request, response);
 			break;
 		case "/EnrolledCourses":
@@ -55,6 +59,9 @@ public class StudentHome extends HttpServlet {
 			break;
 		case "/studentDeleteEnroll":
 			doDeleteEnrolledCourses(request, response);
+			break;
+		case "/studentEnrollCourseSave":
+			doGetStudentEnrollCourseSave(request, response);
 			break;
 		default:
 			break;
@@ -83,7 +90,8 @@ public class StudentHome extends HttpServlet {
 		}
 		if (user != null) {
 			EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
-			ArrayList<EnrollmentDTO> enrolledCoursesList = enrollmentListManager.loadStudentEnrollment(user.getUserId());
+			ArrayList<EnrollmentDTO> enrolledCoursesList = enrollmentListManager
+					.loadStudentEnrollment(user.getUserId());
 			request.setAttribute("enrolledCoursesList", enrolledCoursesList);
 			path = "views/EnrolledCourses.jsp";
 		} else {
@@ -98,11 +106,33 @@ public class StudentHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void doGetStudentEnrollCourseList(HttpServletRequest request, HttpServletResponse response) {
-		
+		LoginDTO user = null;
+		String path = "";
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			user = (LoginDTO) session.getAttribute("user");
+		}
+		System.out.println("StudentHome.doGetStudentEnrollCourseList() : " + user.getUserId());
+		if (user == null) {
+			path = "login.jsp";
+		} else {
+
+			ArrayList<CourseDTO> courseList = courseManager.listByCourse(user.getUserId());
+			request.setAttribute("courseList", courseList);
+			path = "views/StudentEnrollCourse.jsp";
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -124,13 +154,49 @@ public class StudentHome extends HttpServlet {
 			user = (LoginDTO) session.getAttribute("user");
 		}
 		System.out.println("StudentHome.doGetGPAList() : " + user.getUserId());
-		if(user == null){
+		if (user == null) {
 			path = "login.jsp";
-		}else {
-			
+		} else {
+
 			ArrayList<EnrollmentDTO> courseList = courseManager.listByStudentID(user.getUserId());
 			request.setAttribute("courseList", courseList);
 			path = "views/GradeAndGPA.jsp";
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void doGetStudentEnrollCourseSave(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		LoginDTO user = null;
+		String path = "";
+		if (session != null) {
+			user = (LoginDTO) session.getAttribute("user");
+		}
+		System.out.println("StudentHome.doGetStudentEnrollCourseSave() : " + user.getUserId());
+		if (user == null) {
+			path = "login.jsp";
+		} else {
+			String courseId = (String) request.getParameter("courseId");
+			CourseDTO newCourse = courseManager.findCourse(courseId);
+			StudentDTO newStudent = studentManger.findStudent(user.getUserId());
+			EnrollmentDTO enrollmentDTO = new EnrollmentDTO(newCourse, newStudent, new Date(), 0.0f, true);
+			// ArrayList<CourseDTO> courseList =
+			// courseManager.enrollCourseSave(user.getUserId(),courseId);
+			// request.setAttribute("courseList", courseList);
+			int insert = courseManager.insertEnroll(enrollmentDTO);
+			if (insert > 0) {
+				System.out.println("Success Insert enrollment");
+			} else {
+				System.out.println("Fail Insert enrollment");
+			}
+			path = "/studentEnrollCourseList";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		try {

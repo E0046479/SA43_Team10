@@ -33,6 +33,8 @@ public interface LecturerDAO {
 	public String saveStudentGrade(String studentId,String courseName,Float grade) throws DAOException, MyDataException;
 	
 	public ArrayList<EnrollmentDTO> viewStudentPerformance(String courseId) throws DAOException, MyDataException;
+	
+	public ArrayList<EnrollmentDTO> viewEnrollmentStudents(String courseId) throws DAOException, MyDataException;	
 
 	public String getLastLecturer() throws DAOException;
 }

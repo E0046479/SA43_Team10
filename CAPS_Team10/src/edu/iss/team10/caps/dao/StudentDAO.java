@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
+import edu.iss.team10.caps.model.EnrollmentDTO;
 import edu.iss.team10.caps.model.StudentDTO;
 import edu.iss.team10.caps.model.StudentSearchDTO;
 
@@ -24,5 +25,7 @@ public interface StudentDAO {
 	public int getTotalStudentCount() throws DAOException;
 	
 	public String getLastStudent() throws DAOException;
+	
+	public int insertEnroll(EnrollmentDTO enrollmentDTO) throws  DAOException, MyDataException;
 	
 }

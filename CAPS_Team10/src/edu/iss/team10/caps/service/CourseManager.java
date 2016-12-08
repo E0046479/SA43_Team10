@@ -2,9 +2,10 @@ package edu.iss.team10.caps.service;
 
 import java.util.ArrayList;
 
+import edu.iss.team10.caps.dao.CourseDAO;
 import edu.iss.team10.caps.dao.DAOFactory;
 import edu.iss.team10.caps.dao.EnrollmentDAO;
-import edu.iss.team10.caps.dao.CourseDAO;
+import edu.iss.team10.caps.dao.StudentDAO;
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
 import edu.iss.team10.caps.model.CourseDTO;
@@ -17,11 +18,14 @@ public class CourseManager {
 
 	private EnrollmentDAO enrollmentDAO;
 
+	private StudentDAO studentDAO;
+
 	public CourseManager() {
 		courseDAO = DAOFactory.loadInstance().getCourseDAO();
 		enrollmentDAO = DAOFactory.loadInstance().getEnrollmentDAO();
+		studentDAO = DAOFactory.loadInstance().getStudentDAO();
 	}
-	
+
 	public int getTotalCourseCount() {
 		int totalCourseCount = 0;
 		try {
@@ -44,7 +48,6 @@ public class CourseManager {
 		return currentList;
 	}
 
-
 	public CourseDTO findCourse(String courseName) {
 		CourseDTO currentCourse = new CourseDTO();
 		try {
@@ -65,7 +68,7 @@ public class CourseManager {
 			e.printStackTrace();
 		} catch (MyDataException e) {
 			e.printStackTrace();
-		} 
+		}
 		return currentList;
 	}
 
@@ -114,8 +117,8 @@ public class CourseManager {
 		}
 		return currentList;
 	}
-	
-	public String getLastCourse(){
+
+	public String getLastCourse() {
 		String courseId = "";
 		try {
 			courseId = courseDAO.getLastCourse();
@@ -123,5 +126,27 @@ public class CourseManager {
 			e.printStackTrace();
 		}
 		return courseId;
+	}
+
+	public ArrayList<CourseDTO> listByCourse(String userId) {
+		ArrayList<CourseDTO> currentList = new ArrayList<CourseDTO>();
+		try {
+			currentList = courseDAO.listByCourse(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return currentList;
+	}
+
+	public int insertEnroll(EnrollmentDTO enrollmentDTO) {
+		int insert = 0;
+		try {
+			insert = studentDAO.insertEnroll(enrollmentDTO);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		} catch (MyDataException e) {
+			e.printStackTrace();
+		}
+		return insert;
 	}
 }

@@ -24,4 +24,6 @@ public interface CourseDAO{
 	public int getTotalCourseCount() throws DAOException;
 	
 	public String getLastCourse() throws DAOException;
+	
+	public ArrayList<CourseDTO> listByCourse(String userId);
 }

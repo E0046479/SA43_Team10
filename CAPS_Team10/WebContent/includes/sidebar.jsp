@@ -47,9 +47,9 @@
 					href="<%=request.getContextPath()%>/studentHome"><span
 						class="glyphicon glyphicon-dashboard"></span> <fmt:message
 							key="label.Student.Manage.GradeAndGPA" /></a></li>
-				<li><a href="<%=request.getContextPath()%>/views/"><span
+				<li><a href="<%=request.getContextPath()%>/studentEnrollCourseList"><span
 						class="glyphicon glyphicon-plane"></span> <fmt:message
-							key="label.Student.Manage.ViewCourses" /></a></li>
+							key="label.student.view.course.enroll" /></a></li>
 							<li><a href="<%=request.getContextPath()%>/EnrolledCourses"><span
 						class="glyphicon glyphicon-plane"></span> <fmt:message
 							key="label.enrolledCourses" /></a></li>

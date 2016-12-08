@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.iss.team10.caps.dao.ConnectionHandler;
 import edu.iss.team10.caps.dao.CourseDAO;
@@ -262,4 +263,34 @@ public class CourseDAOImpl implements CourseDAO {
 		return courseId;
 	}
 
+	public ArrayList<CourseDTO> listByCourse(String userId) {
+		ArrayList<CourseDTO> courseList = new ArrayList<CourseDTO>();
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+
+		String select = "select * from (select c.courseId,c.courseName,c.courseStartDate ,c.courseDuration,c.courseSize - count(e.courseId)As AvailableSlot"
+				+ " from course c left join enrollment e on c.courseId=e.courseId group by c.courseId) s where s.courseid not in"
+				+ " (select c.courseId from caps.course c,caps.enrollment e,caps.student s where c.courseID =e.courseId and e.studentId=s.studentId"
+				+ " and s.studentId=? group by c.courseId);";
+		try {
+			pstatement = connection.prepareStatement(select);
+			pstatement.setString(1, userId);
+			rs = pstatement.executeQuery();
+			while (rs.next()) {
+				String courseId = rs.getString("courseId");
+				String courseName = rs.getString("courseName"); 	
+				Date courseStartDate = rs.getDate("courseStartDate");
+				Double courseDuration = rs.getDouble("courseDuration");
+				int courseSize = rs.getInt("AvailableSlot");
+				LecturerDTO lecturerDTO = new LecturerDTO();
+				CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturerDTO, "", "", courseDuration,
+						courseStartDate, courseSize, 0.0f, new Date());
+				courseList.add(courseDTO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return courseList;
+	}
 }

@@ -45,6 +45,12 @@ table th {
                             <c:param name="courseName" value="${course.courseName}"/>                         
                         </c:url>
                         <a href="${updurl}"><fmt:message key="label.enrollment.table.title.Performance"></fmt:message></a>
+                        &nbsp;&nbsp;&nbsp;
+                        
+                        <c:url var="updurl" scope="page" value="/viewEnrolledStudents">
+                            <c:param name="courseId" value="${course.courseId}"/>                                              
+                        </c:url>
+                        <a href="${updurl}"><fmt:message key="label.enrollment.table.title.ViewEnrolledStudent"></fmt:message></a>
                     </td>
                 </tr>
             </c:forEach>

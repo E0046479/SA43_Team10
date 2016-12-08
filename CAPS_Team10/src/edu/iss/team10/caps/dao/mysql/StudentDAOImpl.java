@@ -10,6 +10,7 @@ import edu.iss.team10.caps.dao.ConnectionHandler;
 import edu.iss.team10.caps.dao.StudentDAO;
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
+import edu.iss.team10.caps.model.EnrollmentDTO;
 import edu.iss.team10.caps.model.StudentDTO;
 import edu.iss.team10.caps.model.StudentSearchDTO;
 
@@ -203,7 +204,7 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public int getTotalStudentCount() throws DAOException{
+	public int getTotalStudentCount() throws DAOException {
 		int studentTotalCount = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
@@ -246,4 +247,34 @@ public class StudentDAOImpl implements StudentDAO {
 		return studentId;
 	}
 
+	@Override
+	public int insertEnroll(EnrollmentDTO enrollmentDTO) throws DAOException, MyDataException {
+		int result = 0;
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+		java.sql.Date enrollmentDate = new java.sql.Date(enrollmentDTO.getCourseEnrollmentDate().getTime());
+		java.sql.Date corseStartDate = new java.sql.Date(enrollmentDTO.getCourseDTO().getCourseStartDate().getTime());
+
+		String ins = "INSERT INTO caps.enrollment(studentId, courseId, courseStartDate, courseEnrollmentDate, grade) "
+				+ "VALUES (?,?,?,?,?)";
+		try {
+			pstatement = connection.prepareStatement(ins);
+			pstatement.setString(1, enrollmentDTO.getStudentDTO().getStudentId());
+			pstatement.setString(2, enrollmentDTO.getCourseDTO().getCourseId());
+			pstatement.setDate(3, corseStartDate);
+			pstatement.setDate(4, enrollmentDate);
+			pstatement.setFloat(5, enrollmentDTO.getGrade());
+			result = pstatement.executeUpdate();
+			if (result <= 0) {
+				throw new MyDataException("FAIL! Insert Specific Student!");
+			} else {
+				System.out.println("Success ! Insert Student!");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to insert Student info to database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return result;
+	}
 }

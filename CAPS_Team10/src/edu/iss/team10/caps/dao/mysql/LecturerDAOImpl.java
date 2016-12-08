@@ -349,7 +349,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		StudentDTO studentDTO;
 		try {
 			pstatement = connection.prepareStatement(
-					"SELECT s.studentId,s.studentName,c.courseName,e.grade FROM caps.enrollment e,caps.course c,caps.student s WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ? AND YEAR(e.courseEnrollmentDate) = ? AND e.grade IS NOT NULL");
+					"SELECT s.studentId,s.studentName,c.courseName,e.grade FROM caps.enrollment e,caps.course c,caps.student s WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ? AND YEAR(e.courseEnrollmentDate) = ? AND e.grade != 0");
 			pstatement.setString(1, courseId);
 			pstatement.setInt(2, year);
 			rs = pstatement.executeQuery();
@@ -384,6 +384,46 @@ public class LecturerDAOImpl implements LecturerDAO {
 		}
 		return result;
 
+	}
+	
+	@Override
+	public ArrayList<EnrollmentDTO> viewEnrollmentStudents(String courseId) throws DAOException, MyDataException {
+		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;	
+		rs=null;		
+		EnrollmentDTO enrollmentDTO;
+		CourseDTO courseDTO;
+		StudentDTO studentDTO;
+		try {	
+			pstatement = connection.prepareStatement("SELECT s.studentId,s.studentName,s.studentEmail,s.enrollmentDate,c.courseName FROM caps.course c,caps.student s,caps.enrollment e WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ?");
+			pstatement.setString(1,courseId);			
+		    rs = pstatement.executeQuery();		
+		    System.out.println(rs.getRow());
+			while (rs.next()) {				
+				enrollmentDTO = new EnrollmentDTO();
+				courseDTO = new CourseDTO();
+				studentDTO = new StudentDTO();
+				enrollmentDTO.setCourseDTO(courseDTO);	
+				enrollmentDTO.setStudentDTO(studentDTO);
+				enrollmentDTO.getStudentDTO().setStudentId(rs.getString("studentId"));
+				enrollmentDTO.getStudentDTO().setStudentName(rs.getString("studentName"));				
+				enrollmentDTO.getStudentDTO().setStudentEmail(rs.getString("studentEmail"));	
+				enrollmentDTO.setCourseEnrollmentDate(rs.getDate("enrollmentDate"));
+				enrollmentDTO.getCourseDTO().setCourseName(rs.getString("courseName"));				
+				result.add(enrollmentDTO);
+			}
+			if (result.size() == 0) {
+				throw new MyDataException("There is no Student Info!");
+			}	
+			ConnectionHandler.closeConnection(connection, pstatement);
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
+			
+		} finally {			
+							
+		}	
+		return result;
 	}
 
 	@Override

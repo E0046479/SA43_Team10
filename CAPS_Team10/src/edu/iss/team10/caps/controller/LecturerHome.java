@@ -21,7 +21,7 @@ import edu.iss.team10.caps.service.LecturerManager;
  * Servlet implementation class LecturerHome
  */
 @WebServlet({ "/lecturerHome", "/gradeStudent", "/giveGrade", "/gradeSudent_Save", "/studentPerformance",
-		"/individualStudentPerformance" })
+		"/individualStudentPerformance", "/viewEnrolledStudents" })
 public class LecturerHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CourseManager courseManager = new CourseManager();
@@ -129,8 +129,32 @@ public class LecturerHome extends HttpServlet {
 		case "/individualStudentPerformance":
 			doGetGPAList(request, response);
 			break;
+		case "/viewEnrolledStudents":
+			viewEnrolledStudents(request,response);
+			break;
 		default:
 			break;
+		}
+	}
+	
+	private void viewEnrolledStudents(HttpServletRequest request, HttpServletResponse response){
+		String courseId = (String)request.getParameter("courseId");		
+		LecturerManager lecturerCourseManager = new LecturerManager();
+		ArrayList<EnrollmentDTO> enrolledStudentList = lecturerCourseManager.viewEnrolledStudents(courseId);		
+		request.setAttribute("enrolledStudentList", enrolledStudentList);
+		String courseName = enrolledStudentList.get(0).getCourseDTO().getCourseName();
+		if(enrolledStudentList.size() > 0){
+			request.setAttribute("C_Name", enrolledStudentList.get(0).getCourseDTO().getCourseName());			
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("views/ViewCourseEnrollment.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -170,6 +194,8 @@ public class LecturerHome extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	private void doGetGPAList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -160,6 +160,20 @@ public class LecturerManager {
 		return enrollmentDTOs;		
 	}
 	
+	public ArrayList<EnrollmentDTO> viewEnrolledStudents(String courseId){
+		ArrayList<EnrollmentDTO> enrollmentDTOs = null;
+		try {
+			enrollmentDTOs = lecturerDAO.viewEnrollmentStudents(courseId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}  catch (MyDataException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return enrollmentDTOs;			
+	}
+	
 	public String getLastLecturer() {
 		String lecturerId = "";
 		try {
