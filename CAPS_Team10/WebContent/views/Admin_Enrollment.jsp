@@ -39,24 +39,22 @@
 		</div>
 		<div class="panel-body">
 			<div>
-				<fmt:message key="label.enrollment.total" />${fn:length(enrollmentList)}</div>
+				<h4><span class="label label-default"><fmt:message key="label.enrollment.total" /></span>${fn:length(enrollmentList)}</h4></div>
 			<br />
 			<table class="table table-striped table-bordered">
-				<thead>
-					<tr class="info text-center">
-						<td class="col-sm-1"><fmt:message
-								key="label.student.table.title.studentId" /></td>
-						<td class="col-sm-3 text-center"><fmt:message
-								key="label.student.table.title.studentName" /></td>
-						<td class="col-sm-1"><fmt:message
-								key="label.enrollment.courseId" /></td>
-						<td class="col-sm-3 text-center"><fmt:message
-								key="label.enrollment.courseName" /></td>
-						<td class="col-sm-2 text-center"><fmt:message
-								key="label.enrollment.courseEnrollmentDate" /></td>
-						<td class="col-lg-1"><fmt:message key="label.enrollment.delete" /></td>
+					<tr class="info">
+						<td class="text-center"><strong><fmt:message
+								key="label.student.table.title.studentId" /></strong></td>
+						<td class="text-center"><strong><fmt:message
+								key="label.student.table.title.studentName" /></strong></td>
+						<td class="text-center"><strong><fmt:message
+								key="label.enrollment.courseId" /></strong></td>
+						<td class="text-center"><strong><fmt:message
+								key="label.enrollment.courseName" /></strong></td>
+						<td class="text-center"><strong><fmt:message
+								key="label.enrollment.courseEnrollmentDate" /></strong></td>
+						<td class="text-center"><span class="glyphicon glyphicon-cog"></span></td>
 					</tr>
-				</thead>
 				<tbody>
 					<c:forEach var="enrollment" items="${enrollmentList}">
 						<tr class="text-center">

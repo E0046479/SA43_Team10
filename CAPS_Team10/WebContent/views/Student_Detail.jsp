@@ -11,14 +11,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <fmt:setBundle basename="messages"/>
-<title><fmt:message key="label.lecturerDetailJsp.title" /></title>
+<title><fmt:message key="label.studentDetailJsp.title" /></title>
 </head>
 <body>
-		<form action="/lecturerDetail" method=post>
+		<form action="/studentDetail" method=post>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
-					<fmt:message key="label.lecturerDetailJsp.title" />
+					<fmt:message key="label.studentDetailJsp.title" />
 				</h3>
 			</div>
 			<div class="panel-body">
@@ -26,35 +26,41 @@
 					<table cellpadding=4 cellspacing=2 border=0>
 						<tr>
 							<td><fmt:message
-									key="label.lecturer.table.title.lecturerId" /></td>
-							<td><input type="text" name="lecturerId" size=15
-								value="${param['lecturerId']}" maxlength=20
-								readonly="readonly"> <input type="hidden" name="ins"
-								value="true" /></td>
+									key="label.student.table.title.studentId" /></td>
+							<td><input type="text" name="studentId" size=15
+								value="${param['studentId']}" maxlength=20
+								readonly="readonly"> 
+								</td>
 						</tr>
 						<tr>
-							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
-							<td><input type="text" name="lecturerName" size=15 value="${param['lecturerName']}"
+							<td><fmt:message key="label.student.table.title.studentName" /></td>
+							<td><input type="text" name="studentName" size=15 value="${param['studentName']}"
 								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>
 						<tr>
 							<td><fmt:message
-									key="label.lecturer.table.title.lecturerEmail" /></td>
-							<td><input type="text" name="lecturerEmail" size=15 value="${param['lecturerEmail']}"
+									key="label.student.table.title.studentEmail" /></td>
+							<td><input type="text" name="studentEmail" size=15 value="${param['studentEmail']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message
-									key="label.lecturer.table.title.lecturerPhoneNumber" /></td>
-							<td><input type="text" name="lecturerPhoneNumber" size=15 value="${param['lecturerPhoneNumber']}"
+									key="label.student.table.title.studentPhoneNumber" /></td>
+							<td><input type="text" name="studentPhoneNumber" size=15 value="${param['studentPhoneNumber']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message
-									key="label.lecturer.table.title.lecturerAddress" /></td>
-							<td><input type="text" name="lecturerAddress" size=15 value="${param['lecturerAddress']}"
+									key="label.student.table.title.studentAddress" /></td>
+							<td><input type="text" name="studentAddress" size=15 value="${param['studentAddress']}"
 								maxlength=20 readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td><fmt:message key="label.student.table.title.enrollmentDate" /></td>
+							<td><input type="text" name="enrollmentDate" size=15 value="${param['enrollmentDate']}"
+								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
+								value="true" /></td>
 						</tr>
 				</table>
 				</center>

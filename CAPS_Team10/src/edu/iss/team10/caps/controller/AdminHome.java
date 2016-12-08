@@ -1,4 +1,4 @@
-package edu.iss.team10.caps.controller;
+  package edu.iss.team10.caps.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -78,7 +78,7 @@ public class AdminHome extends HttpServlet {
 			doGetLecturerLsit(request, response);
 			break;
 		case "/courseInsert":
-			doInsertCourse(request, response);
+			doInsertCourse(request, response); 
 			break;
 		case "/courseEdit":
 			doEditCourse(request, response);

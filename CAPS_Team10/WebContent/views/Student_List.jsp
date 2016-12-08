@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false" %>
+<%@ page session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,11 +18,11 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<a href="views/Student_New.jsp"><fmt:message key="label.student.add" /></a>
-			<br /> <br />
-			<table class="table table-bordered">
+			<a href="views/Student_New.jsp" class="btn btn-success"><fmt:message
+					key="label.student.add" /></a> <br /> <br />
+			<table class="table table-striped table-bordered">
 				<tr class="info">
-					<th class="text-center">No.</th>
+					<th class="text-center"><fmt:message key="label.table.No" /></th>
 					<th class="text-center"><fmt:message
 							key="label.student.table.title.studentId" /></th>
 					<th class="text-center"><fmt:message
@@ -40,22 +40,40 @@
 						<td class="nowrap">${student.studentName}</td>
 						<td class="nowrap">${student.studentEmail}</td>
 						<td class="nowrap">${student.enrollmentDate}</td>
-						<td class="nowrap"><c:url var="updurl" scope="page"
-								value="views/Student_Edit.jsp">
+						<td class="nowrap">
+						<c:url var="detailurl" scope="page" value="views/Student_Detail.jsp">
 								<c:param name="studentId" value="${student.studentId}" />
 								<c:param name="studentName" value="${student.studentName}" />
 								<c:param name="studentEmail" value="${student.studentEmail}" />
-								<c:param name="studentPhoneNumber"
-									value="${student.studentPhoneNumber}" />
+								<c:param name="studentPhoneNumber" value="${student.studentPhoneNumber}" />
 								<c:param name="studentAddress" value="${student.studentAddress}" />
 								<c:param name="enrollmentDate" value="${student.enrollmentDate}" />
-							</c:url> <a href="${updurl}" class="btn btn-warning" role="button"><span
-								class="glyphicon glyphicon-floppy-open"></span></a> <!--  --> <c:url
-								var="delurl" scope="page" value="/studentDelete">
+						</c:url> 
+						<a href="${detailurl}" class="btn btn-info" role="button">
+						<span class="glyphicon glyphicon-info-sign">
+						</span>
+						</a>
+						
+						<c:url var="updurl" scope="page" value="views/Student_Edit.jsp">
 								<c:param name="studentId" value="${student.studentId}" />
-							</c:url> <a href="${delurl}" class="btn btn-danger"><span
-								class="glyphicon glyphicon-floppy-remove"></span></a>
-						<!--  --></td>
+								<c:param name="studentName" value="${student.studentName}" />
+								<c:param name="studentEmail" value="${student.studentEmail}" />
+								<c:param name="studentPhoneNumber" value="${student.studentPhoneNumber}" />
+								<c:param name="studentAddress" value="${student.studentAddress}" />
+								<c:param name="enrollmentDate" value="${student.enrollmentDate}" />
+						</c:url> 
+						<a href="${updurl}" class="btn btn-warning" role="button"><span
+								class="glyphicon glyphicon-floppy-open">
+						</span>
+						</a>
+						
+						<c:url var="delurl" scope="page" value="/studentDelete">
+								<c:param name="studentId" value="${student.studentId}" />
+						</c:url> 
+						<a href="${delurl}" class="btn btn-danger">
+						<span class="glyphicon glyphicon-floppy-remove"></span>
+						</a> 
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
