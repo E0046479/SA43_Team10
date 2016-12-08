@@ -270,7 +270,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		int year = now.getYear();
 		try {
 			pstatement = connection.prepareStatement(
-					"SELECT e.grade,c.courseName,c.courseCredit,s.studentId,s.studentName FROM caps.enrollment e,caps.course c,caps.student s WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ? AND YEAR(e.courseEnrollmentDate) = ? AND e.grade IS NULL AND NOW() > DATE_ADD(c.courseStartDate,INTERVAL c.courseDuration DAY)");
+					"SELECT e.grade,c.courseName,c.courseCredit,s.studentId,s.studentName FROM caps.enrollment e,caps.course c,caps.student s WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ? AND YEAR(e.courseEnrollmentDate) = ? AND e.grade = 0 AND NOW() > DATE_ADD(c.courseStartDate,INTERVAL c.courseDuration DAY)");
 			pstatement.setString(1, courseId);
 			pstatement.setInt(2, year);
 
@@ -295,14 +295,12 @@ public class LecturerDAOImpl implements LecturerDAO {
 				enrollmentDTO.setGrade(rs.getFloat("grade"));
 				result.add(enrollmentDTO);
 			}
-			if (result.size() == 0) {
+			/*if (result.size() == 0) {
 				throw new MyDataException("There is no Student Info!");
-			}
+			}*/
 			ConnectionHandler.closeConnection(connection, pstatement);
 		} catch (SQLException e) {
 			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
-
-		} finally {
 
 		}
 		return result;
