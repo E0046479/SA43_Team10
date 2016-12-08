@@ -4,14 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import edu.iss.team10.caps.dao.ConnectionHandler;
 import edu.iss.team10.caps.dao.LecturerDAO;
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
+import edu.iss.team10.caps.model.CourseDTO;
+import edu.iss.team10.caps.model.EnrollmentDTO;
 import edu.iss.team10.caps.model.LecturerDTO;
 import edu.iss.team10.caps.model.LecturerSearchDTO;
+import edu.iss.team10.caps.model.StudentDTO;
 
 public class LecturerDAOImpl implements LecturerDAO {
 
@@ -215,5 +219,159 @@ public class LecturerDAOImpl implements LecturerDAO {
 		return getcount;
 	}
 	
+	@Override
+	public ArrayList<CourseDTO> findCoursesByLecturer(String lecturerId) throws DAOException, MyDataException {
+		ArrayList<CourseDTO> result = new ArrayList<CourseDTO>();
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;	
+		LocalDateTime now = LocalDateTime.now();
+		int year = now.getYear();
+		try {
+			pstatement = connection.prepareStatement("SELECT Distinct(c.courseId),c.courseName,c.courseSize FROM caps.course c,caps.enrollment e WHERE c.courseId = e.courseId AND c.lecturerId = ? AND YEAR(e.courseEnrollmentDate) = ?");
+			pstatement.setString(1,lecturerId);	
+			pstatement.setInt(2, year);
+		    rs = pstatement.executeQuery();									
+			while (rs.next()) {
+				CourseDTO courseDTO = new CourseDTO();
+				courseDTO.setCourseId(rs.getString("courseId"));
+				courseDTO.setCourseName(rs.getString("courseName"));
+				courseDTO.setCourseSize(rs.getInt("courseSize"));
+				result.add(courseDTO);
+			}
+			if (result.size() == 0) {
+				throw new MyDataException("There is no Student Info!");
+			}	
+			ConnectionHandler.closeConnection(connection, pstatement);
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
+			
+		} finally {			
+							
+		}	
+		return result;
+	}
+	
+	
+	@Override	
+	public ArrayList<EnrollmentDTO> gradeStudent(String courseId) throws DAOException, MyDataException {
+		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;	
+		EnrollmentDTO enrollmentDTO;
+		CourseDTO courseDTO;
+		StudentDTO studentDTO;
+		rs=null;
+		LocalDateTime now = LocalDateTime.now();
+		int year = now.getYear();
+		try {	
+			pstatement = connection.prepareStatement("SELECT e.grade,c.courseName,c.courseCredit,s.studentId,s.studentName FROM caps.enrollment e,caps.course c,caps.student s WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ? AND YEAR(e.courseEnrollmentDate) = ? AND e.grade IS NULL AND NOW() > DATE_ADD(c.courseStartDate,INTERVAL c.courseDuration DAY)");
+			pstatement.setString(1,courseId);
+			pstatement.setInt(2, year);
+			
+		    rs = pstatement.executeQuery();		
+		    System.out.println(rs.getRow());
+			while (rs.next()) {	
+				enrollmentDTO = new EnrollmentDTO();
+				courseDTO = new CourseDTO();
+				studentDTO = new StudentDTO();
+				enrollmentDTO.setCourseDTO(courseDTO);	
+				enrollmentDTO.setStudentDTO(studentDTO);
+				/*EnrollmentDTO gradeStudentDTO = new EnrollmentDTO(rs.getString("courseName"), rs.getFloat("courseCredit"),
+						rs.getString("studentId"), rs.getString("studentName"),rs.getFloat("grade"));	*/
+				enrollmentDTO.getCourseDTO().setCourseName(rs.getString("courseName"));
+				enrollmentDTO.getCourseDTO().setCourseCredit(rs.getFloat("courseCredit"));
+				enrollmentDTO.getStudentDTO().setStudentId(rs.getString("studentId"));
+				enrollmentDTO.getStudentDTO().setStudentName(rs.getString("studentName"));
+				enrollmentDTO.setGrade(rs.getFloat("grade"));
+				result.add(enrollmentDTO);
+			}
+			if (result.size() == 0) {
+				throw new MyDataException("There is no Student Info!");
+			}	
+			ConnectionHandler.closeConnection(connection, pstatement);
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
+			
+		} finally {			
+							
+		}	
+		return result;
+	}
+
+
+	@Override
+	public String saveStudentGrade(String studentId, String courseName, Float grade) throws DAOException, MyDataException {
+		int result = 0;		
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;	
+		rs=null;
+		String courseId = null;
+		try {	
+			pstatement = connection.prepareStatement("SELECT courseId FROM caps.course WHERE courseName = ?");
+			pstatement.setString(1, courseName);	
+		    rs = pstatement.executeQuery();		
+			while (rs.next()) {
+				courseId = rs.getString("courseId"); 				
+			}
+			pstatement = connection.prepareStatement("UPDATE caps.enrollment SET grade = ? WHERE studentId = ? AND courseId = ?");
+			pstatement.setFloat(1, grade);
+			pstatement.setString(2, studentId);		
+			pstatement.setString(3, courseId);			
+			result = pstatement.executeUpdate();			
+			ConnectionHandler.closeConnection(connection, pstatement);
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
+			
+		} finally {			
+							
+		}	
+		return courseId;
+	}
+
+
+	@Override
+	public ArrayList<EnrollmentDTO> viewStudentPerformance(String courseId) throws DAOException, MyDataException {
+		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;	
+		rs=null;
+		LocalDateTime now = LocalDateTime.now();
+		int year = now.getYear();
+		EnrollmentDTO enrollmentDTO;
+		CourseDTO courseDTO;
+		StudentDTO studentDTO;
+		try {	
+			pstatement = connection.prepareStatement("SELECT s.studentId,s.studentName,c.courseName,e.grade FROM caps.enrollment e,caps.course c,caps.student s WHERE e.courseId=c.courseId AND e.studentId=s.studentId AND c.courseId = ? AND YEAR(e.courseEnrollmentDate) = ? AND e.grade IS NOT NULL");
+			pstatement.setString(1,courseId);
+			pstatement.setInt(2, year);			
+		    rs = pstatement.executeQuery();		
+		    System.out.println(rs.getRow());
+			while (rs.next()) {				
+				enrollmentDTO = new EnrollmentDTO();
+				courseDTO = new CourseDTO();
+				studentDTO = new StudentDTO();
+				enrollmentDTO.setCourseDTO(courseDTO);	
+				enrollmentDTO.setStudentDTO(studentDTO);
+				/*EnrollmentDTO gradeStudentDTO = new EnrollmentDTO(rs.getString("courseName"), rs.getFloat("courseCredit"),
+						rs.getString("studentId"), rs.getString("studentName"),rs.getFloat("grade"));	*/
+				enrollmentDTO.getCourseDTO().setCourseName(rs.getString("courseName"));			
+				enrollmentDTO.getStudentDTO().setStudentId(rs.getString("studentId"));
+				enrollmentDTO.getStudentDTO().setStudentName(rs.getString("studentName"));
+				enrollmentDTO.setGrade(rs.getFloat("grade"));
+				result.add(enrollmentDTO);
+			}
+			if (result.size() == 0) {
+				throw new MyDataException("There is no Student Info!");
+			}	
+			ConnectionHandler.closeConnection(connection, pstatement);
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
+			
+		} finally {			
+							
+		}	
+		return result;
+
+	}
 
 }

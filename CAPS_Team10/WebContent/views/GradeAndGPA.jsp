@@ -21,7 +21,7 @@
 		<br /> <br />
 		<table class="table table-bordered">
 				<tr class="info">
-				<th class="text-center">No.</th>
+				<th class="text-center"><fmt:message key="label.table.No" /></th>
 				<th class="text-center"><fmt:message
 							key="label.course.table.title.courseid" /></th>
 					<th class="text-center"><fmt:message
@@ -39,7 +39,6 @@
 						<td class="nowrap">${enrollment.courseDTO.courseCredit}</td>
 						<td class="nowrap">${enrollment.grade}</td>
 						</c:forEach>
-						<%= request.getAttribute("courseList") %>
 				</table>
 				</div>
 				</div>

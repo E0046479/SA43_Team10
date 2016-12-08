@@ -24,58 +24,58 @@
 			</div>
 			<div class="panel-body">
 				<center>
-					<table cellpadding=4 cellspacing=2 border=0>
+					<table class="table" style="width:50%">
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseId" /></td>
 							<td><input type="text" name="courseId" size=15 value="${param['courseId']}" 
 							    maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>
 						<tr>
-							<td><fmt:message key="label.course.table.title.courseName" /></td>
+							<td class="text-right h3"><fmt:message key="label.course.table.title.courseName" /></td>
 							<td><input type="text" name="courseName" size=15 value="${param['courseName']}"
 								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.lecturerId" /></td>
 							<td><input type="text" name="lecturerId" size=15 value="${param['lecturerId']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseDescription" /></td>
-							<td><input type="text" name="courseDescription" size=15 value="${param['courseDescription']}"
-								maxlength=20 readonly="readonly"></td>
+							<td><textarea class="form-control" row="15" type="text" name="courseDescription" 
+								maxlength=20 readonly="readonly">${param['courseDescription']}</textarea></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseType" /></td>
 							<td><input type="text" name="courseType" size=15 value="${param['courseType']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseDuration" /></td>
 							<td><input type="text" name="courseDuration" size=15 value="${param['courseDuration']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseStartDate" /></td>
 							<td><input type="text" name="courseStartDate" size=15 value="${param['courseStartDate']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseSize" /></td>
 							<td><input type="text" name="courseSize" size=15 value="${param['courseSize']}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td><fmt:message
+							<td class="text-right h3"><fmt:message
 									key="label.course.table.title.courseCredit" /></td>
 							<td><input type="text" name="courseCredit" size=15 value="${param['courseCredit']}"
 								maxlength=20 readonly="readonly"></td>

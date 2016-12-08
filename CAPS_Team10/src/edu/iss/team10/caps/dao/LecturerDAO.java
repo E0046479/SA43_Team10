@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
+import edu.iss.team10.caps.model.CourseDTO;
+import edu.iss.team10.caps.model.EnrollmentDTO;
 import edu.iss.team10.caps.model.LecturerDTO;
 import edu.iss.team10.caps.model.LecturerSearchDTO;
 
@@ -23,5 +25,13 @@ public interface LecturerDAO {
 	int deleteLecturer(LecturerDTO lecturer) throws DAOException, MyDataException;
 
 	int getTotalLecturerCount() throws DAOException;
+	
+	public ArrayList<CourseDTO> findCoursesByLecturer(String lecturerId) throws DAOException, MyDataException;
+
+	public ArrayList<EnrollmentDTO> gradeStudent(String courseId) throws DAOException, MyDataException;
+	
+	public String saveStudentGrade(String studentId,String courseName,Float grade) throws DAOException, MyDataException;
+	
+	public ArrayList<EnrollmentDTO> viewStudentPerformance(String courseId) throws DAOException, MyDataException;
 
 }

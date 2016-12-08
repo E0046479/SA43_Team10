@@ -152,7 +152,7 @@ public class StudentDAOImpl implements StudentDAO {
 		PreparedStatement pstatement = null;
 		java.sql.Date enrollmentDate = new java.sql.Date(student.getEnrollmentDate().getTime());
 
-		String ins = "UPDATE caps.student SET studentName=?, studentEmail=?, studentPhoneNumber=?, studentAddress=?, enrollmentDate=? WHERE studentId = ?; ";
+		String ins = "UPDATE caps.student SET studentName=?, studentEmail=?, studentPhoneNumber=?, studentAddress=? WHERE studentId = ?; ";
 
 		try {
 			pstatement = connection.prepareStatement(ins);
@@ -160,8 +160,7 @@ public class StudentDAOImpl implements StudentDAO {
 			pstatement.setString(2, student.getStudentEmail());
 			pstatement.setString(3, student.getStudentPhoneNumber());
 			pstatement.setString(4, student.getStudentAddress());
-			pstatement.setDate(5, enrollmentDate);
-			pstatement.setString(6, student.getStudentId());
+			pstatement.setString(5, student.getStudentId());
 
 			result = pstatement.executeUpdate();
 			if (result <= 0) {

@@ -58,7 +58,7 @@
 			<!-- Lecturer Navigation -->
 			<c:if test="${sessionScope['user'].role== 'lecturer'}">
 				<li class="active"><a
-					href="<%=request.getContextPath()%>/views/Lecturer_ViewCourseTaught.jsp"><span
+					href="<%=request.getContextPath()%>/lecturerHome"><span
 						class="glyphicon glyphicon-dashboard"></span> <fmt:message
 							key="label.home" /></a></li>
 			</c:if>

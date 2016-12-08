@@ -28,7 +28,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		PreparedStatement pstatement = null;
 
 		String select = "select * from caps.course c,caps.enrollment e,caps.student s"
-				+ " where c.courseID =e.courseId and e.studentId=s.studentId and s.studentId=?";
+				+ " where c.courseID =e.courseId and e.studentId=s.studentId and e.grade is not null and s.studentId= ?;";
 
 		try {
 			pstatement = connection.prepareStatement(select);

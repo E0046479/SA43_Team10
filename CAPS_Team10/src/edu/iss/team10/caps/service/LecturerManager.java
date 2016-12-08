@@ -6,8 +6,11 @@ import edu.iss.team10.caps.dao.DAOFactory;
 import edu.iss.team10.caps.dao.LecturerDAO;
 import edu.iss.team10.caps.exception.DAOException;
 import edu.iss.team10.caps.exception.MyDataException;
+import edu.iss.team10.caps.model.CourseDTO;
+import edu.iss.team10.caps.model.EnrollmentDTO;
 import edu.iss.team10.caps.model.LecturerDTO;
 import edu.iss.team10.caps.model.LecturerSearchDTO;
+
 
 public class LecturerManager {
 	private LecturerDAO lecturerDAO;
@@ -25,7 +28,8 @@ public class LecturerManager {
 		}
     	return totallecturercount;
     }
-	@SuppressWarnings("finally")
+    
+    
 	public ArrayList<LecturerDTO> findLecturersByCriteria(LecturerSearchDTO lecturerSearchDTO) {
 		ArrayList<LecturerDTO> currentList = new ArrayList<LecturerDTO>();
 		try {
@@ -99,5 +103,60 @@ public class LecturerManager {
 		return delete;
 	}
 
+
+	public ArrayList<CourseDTO> findCoursesByLecturer(String lecturerId) {
+		ArrayList<CourseDTO> courseDTOs = null;
+		try {
+			courseDTOs = lecturerDAO.findCoursesByLecturer(lecturerId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}  catch (MyDataException e) {
+			e.printStackTrace();
+		} finally {			
+		}
+		return courseDTOs;
+	}
 	
+	public ArrayList<EnrollmentDTO> gradeStudent(String courseId) {
+		ArrayList<EnrollmentDTO> enrollmentDTOs = null;
+		try {
+			enrollmentDTOs = lecturerDAO.gradeStudent(courseId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}  catch (MyDataException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return enrollmentDTOs;		
+	}
+	
+	public String saveStudentGrade(String studentId,String courseName,Float grade) {		
+		String courseId = null;
+		try {
+			courseId = lecturerDAO.saveStudentGrade(studentId,courseName,grade);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}  catch (MyDataException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return courseId;		
+	}
+	
+	
+	public ArrayList<EnrollmentDTO> viewStudentPerformance(String courseId) {		
+		ArrayList<EnrollmentDTO> enrollmentDTOs = null;
+		try {
+			enrollmentDTOs = lecturerDAO.viewStudentPerformance(courseId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}  catch (MyDataException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return enrollmentDTOs;		
+	}
 }

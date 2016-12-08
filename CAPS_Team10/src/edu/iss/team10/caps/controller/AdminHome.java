@@ -130,6 +130,7 @@ public class AdminHome extends HttpServlet {
 		if (totalStudentCount == 0) {
 			studentId = "s001";
 		} else {
+			int lastStudentRecord = 
 			totalStudentCount++;
 			studentId = "s00" + totalStudentCount;
 		}
@@ -137,17 +138,16 @@ public class AdminHome extends HttpServlet {
 		String studentEmail = (String) request.getParameter("studentEmail");
 		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
 		String studentAddress = (String) request.getParameter("studentAddress");
-		String enrollmentString = (String) request.getParameter("enrollmentDate");
-		System.out.println(enrollmentString);
-		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		// String enrollmentString = (String) request.getParameter("enrollmentDate");
+		// DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
 		// DateFormat format = new SimpleDateFormat("d/MM/yyyy",
 		// Locale.ENGLISH);
-		Date enrollmentDate = null;
-		try {
-			enrollmentDate = format.parse(enrollmentString);
+		Date enrollmentDate = new Date();
+		/*try {
+			enrollmentDate = format.(enrollmentDate);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
 		int insert = studentManager.insertStudent(studentDTO);
@@ -171,15 +171,10 @@ public class AdminHome extends HttpServlet {
 		String studentEmail = (String) request.getParameter("studentEmail");
 		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
 		String studentAddress = (String) request.getParameter("studentAddress");
-		String enrollmentString = (String) request.getParameter("enrollmentDate");
-		System.out.println(enrollmentString);
-		DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
-		Date enrollmentDate = null;
-		try {
-			enrollmentDate = format.parse(enrollmentString);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		// String enrollmentString = (String) request.getParameter("enrollmentDate");
+		// DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		Date enrollmentDate = new Date();
+	
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
 		int update = studentManager.updateStudent(studentDTO);

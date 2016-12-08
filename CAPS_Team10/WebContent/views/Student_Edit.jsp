@@ -46,12 +46,6 @@
 							<td><input type="text" id="studentAddress" name="studentAddress" size=15 value="${param['studentAddress']}"
 								maxlength=20></td>
 						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.enrollmentDate" /></td>
-							<td><input type="text" id="enrollmentDate" name="enrollmentDate" size=15 value="${param['enrollmentDate']}"
-								 maxlength=20></td>
-						</tr>
 					</table>
 					<input type="submit" value="Submit"> <input type="reset" value="Reset">
 				</center>

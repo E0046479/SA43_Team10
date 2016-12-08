@@ -45,12 +45,6 @@
 							<td><input type="text" name="studentAddress" size=15
 								maxlength=20></td>
 						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.enrollmentDate" /></td>
-							<td><input type="text" name="enrollmentDate" size=15
-								id="enrollmentDate" maxlength=20></td>
-						</tr>
 					</table>
 					<input type="submit" value="Submit"> <input type="reset"
 						value="Reset">
