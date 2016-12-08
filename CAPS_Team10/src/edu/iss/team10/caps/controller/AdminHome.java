@@ -1,4 +1,4 @@
-  package edu.iss.team10.caps.controller;
+package edu.iss.team10.caps.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -29,7 +29,7 @@ import edu.iss.team10.caps.service.StudentManager;
  */
 @WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/lecturerList", "/lecturerInsert",
 		"/lecturerEdit", "/lecturerDelete", "/courseList", "/courseInsert", "/courseEdit", "/courseDelete",
-		"/adminEnrollment", "/deleteEnrollment" })
+		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -78,7 +78,7 @@ public class AdminHome extends HttpServlet {
 			doGetLecturerLsit(request, response);
 			break;
 		case "/courseInsert":
-			doInsertCourse(request, response); 
+			doInsertCourse(request, response);
 			break;
 		case "/courseEdit":
 			doEditCourse(request, response);
@@ -95,6 +95,9 @@ public class AdminHome extends HttpServlet {
 		case "/deleteEnrollment":
 			doDeleteEnrollment(request, response);
 			break;
+		case "/searchEnroll":
+			doSearchEnrollment(request, response);
+			break;	
 		default:
 			break;
 		}
@@ -130,24 +133,26 @@ public class AdminHome extends HttpServlet {
 		if (totalStudentCount == 0) {
 			studentId = "s001";
 		} else {
-			int lastStudentRecord = 
-			totalStudentCount++;
-			studentId = "s00" + totalStudentCount;
+			String lastStudentId = studentManager.getLastStudent();
+			String lastNoString = lastStudentId.substring(1);
+			int lastNo = Integer.parseInt(lastNoString) + 1;
+			studentId = "s00" + lastNo;
 		}
 		String studentName = (String) request.getParameter("studentName");
 		String studentEmail = (String) request.getParameter("studentEmail");
 		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
 		String studentAddress = (String) request.getParameter("studentAddress");
-		// String enrollmentString = (String) request.getParameter("enrollmentDate");
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		// String enrollmentString = (String)
+		// request.getParameter("enrollmentDate");
+		// DateFormat format = new SimpleDateFormat("yyyy-MM-d",
+		// Locale.ENGLISH);
 		// DateFormat format = new SimpleDateFormat("d/MM/yyyy",
 		// Locale.ENGLISH);
 		Date enrollmentDate = new Date();
-		/*try {
-			enrollmentDate = format.(enrollmentDate);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}*/
+		/*
+		 * try { enrollmentDate = format.(enrollmentDate); } catch
+		 * (ParseException e1) { e1.printStackTrace(); }
+		 */
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
 		int insert = studentManager.insertStudent(studentDTO);
@@ -171,10 +176,12 @@ public class AdminHome extends HttpServlet {
 		String studentEmail = (String) request.getParameter("studentEmail");
 		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
 		String studentAddress = (String) request.getParameter("studentAddress");
-		// String enrollmentString = (String) request.getParameter("enrollmentDate");
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		// String enrollmentString = (String)
+		// request.getParameter("enrollmentDate");
+		// DateFormat format = new SimpleDateFormat("yyyy-MM-d",
+		// Locale.ENGLISH);
 		Date enrollmentDate = new Date();
-	
+
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
 		int update = studentManager.updateStudent(studentDTO);
@@ -233,8 +240,9 @@ public class AdminHome extends HttpServlet {
 		String lecturerEmail = (String) request.getParameter("lecturerEmail");
 		String lecturerPhoneNumber = (String) request.getParameter("lecturerPhoneNumber");
 		String lecturerAddress = (String) request.getParameter("lecturerAddress");
+		Date joiningDate = new Date();
 		LecturerDTO lecturerDTO = new LecturerDTO(lecturerId, lecturerName, lecturerEmail, lecturerPhoneNumber,
-				lecturerAddress);
+				lecturerAddress, joiningDate);
 		int update = lecturerManager.updateLecturer(lecturerDTO);
 		if (update > 0) {
 			System.out.println("Update Lecturer Success");
@@ -258,16 +266,19 @@ public class AdminHome extends HttpServlet {
 		if (totallecturercount == 0) {
 			id = "l001";
 		} else {
-			totallecturercount++;
-			id = "l00" + totallecturercount;
+			String lastCourseId = courseManager.getLastCourse();
+			String lastNoString = lastCourseId.substring(1);
+			int lastNo = Integer.parseInt(lastNoString) + 1;
+			id = "s00" + lastNo;
 		}
 		String lecturerId = id;
 		String lecturerName = request.getParameter("lecturerName");
 		String lecturerEmail = request.getParameter("lecturerEmail");
 		String lecturerAddress = request.getParameter("lecturerAddress");
 		String lecturerPhoneNumber = request.getParameter("lecturerPhoneNumber");
+		Date joiningDate = new Date();
 		LecturerDTO lecturer = new LecturerDTO(lecturerId, lecturerName, lecturerEmail, lecturerPhoneNumber,
-				lecturerAddress);
+				lecturerAddress, joiningDate);
 		int insert = lecturerManager.insertLecturer(lecturer);
 		if (insert > 0) {
 			System.out.println("Insert Lecturer successfully!");
@@ -295,7 +306,7 @@ public class AdminHome extends HttpServlet {
 		} else {
 			System.out.println("Fail Delete Lecturer");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/adminHome");
+		RequestDispatcher rd = request.getRequestDispatcher("/lecturerList");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
@@ -326,8 +337,10 @@ public class AdminHome extends HttpServlet {
 		if (totalCourseCount == 0) {
 			courseId = "c001";
 		} else {
-			totalCourseCount++;
-			courseId = "c00" + totalCourseCount;
+			String lastCourseId = courseManager.getLastCourse();
+			String lastNoString = lastCourseId.substring(1);
+			int lastNo = Integer.parseInt(lastNoString) + 1;
+			courseId = "s00" + lastNo;
 		}
 		String courseName = (String) request.getParameter("courseName");
 		String lecturerId = (String) request.getParameter("lecturerId");
@@ -345,9 +358,9 @@ public class AdminHome extends HttpServlet {
 		}
 		int courseSize = Integer.parseInt(request.getParameter("courseSize"));
 		float courseCredit = Float.parseFloat(request.getParameter("courseCredit"));
-
+		Date createdDate = new Date();
 		CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturer, courseDescription, courseType,
-				courseDuration, courseStartDate, courseSize, courseCredit);
+				courseDuration, courseStartDate, courseSize, courseCredit, createdDate);
 		int insert = courseManager.insertCourse(courseDTO);
 		if (insert > 0) {
 			System.out.println("Insert Course Success");
@@ -384,9 +397,9 @@ public class AdminHome extends HttpServlet {
 		}
 		int courseSize = Integer.parseInt(request.getParameter("courseSize"));
 		float courseCredit = Float.parseFloat(request.getParameter("courseCredit"));
-
+		Date createdDate = new Date();
 		CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturer, courseDescription, courseType,
-				courseDuration, courseStartDate, courseSize, courseCredit);
+				courseDuration, courseStartDate, courseSize, courseCredit, createdDate);
 		int update = courseManager.updateCourse(courseDTO);
 		if (update > 0) {
 			System.out.println("Update Course Success");
@@ -451,4 +464,25 @@ public class AdminHome extends HttpServlet {
 		}
 
 	}
+	
+	private void doSearchEnrollment(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+		EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
+		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager
+				.loadStudentEnrollment(request.getParameter("studentId"));
+		request.setAttribute("enrollmentList", enrollmentList);
+		RequestDispatcher rd = request.getRequestDispatcher("views/Admin_Enrollment.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }
+
+

@@ -34,10 +34,10 @@ public class CourseDAOImpl implements CourseDAO {
 			while (rs.next()) {
 				String lecturerId = rs.getString("lecturerId");
 				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
-				courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
-						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
-						rs.getDouble("courseDuration"), rs.getDate("courseStartDate"), rs.getInt("courseSize"),
-						rs.getFloat("courseCredit"));
+				courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"), lecturer,
+						rs.getString("courseDescription"), rs.getString("courseType"), rs.getDouble("courseDuration"),
+						rs.getDate("courseStartDate"), rs.getInt("courseSize"), rs.getFloat("courseCredit"),
+						rs.getDate("createdDate"));
 			}
 			if (courseDTO == null) {
 				throw new MyDataException("There is no Course Info!");
@@ -63,10 +63,10 @@ public class CourseDAOImpl implements CourseDAO {
 			while (rs.next()) {
 				String lecturerId = rs.getString("lecturerId");
 				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
-				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
-						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
-						rs.getDouble("courseDuration"), rs.getDate("courseStartDate"), rs.getInt("courseSize"),
-						rs.getFloat("courseCredit"));
+				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"), lecturer,
+						rs.getString("courseDescription"), rs.getString("courseType"), rs.getDouble("courseDuration"),
+						rs.getDate("courseStartDate"), rs.getInt("courseSize"), rs.getFloat("courseCredit"),
+						rs.getDate("createdDate"));
 				result.add(courseDTO);
 			}
 			if (result.size() == 0) {
@@ -107,10 +107,10 @@ public class CourseDAOImpl implements CourseDAO {
 			while (rs.next()) {
 				String lecturerId = rs.getString("lecturerId");
 				LecturerDTO lecturer = new LecturerManager().findLecturer(lecturerId);
-				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"),
-						lecturer, rs.getString("courseDescription"), rs.getString("courseType"),
-						rs.getDouble("courseDuration"), rs.getDate("courseStartDate"), rs.getInt("courseSize"),
-						rs.getFloat("courseCredit"));
+				CourseDTO courseDTO = new CourseDTO(rs.getString("courseId"), rs.getString("courseName"), lecturer,
+						rs.getString("courseDescription"), rs.getString("courseType"), rs.getDouble("courseDuration"),
+						rs.getDate("courseStartDate"), rs.getInt("courseSize"), rs.getFloat("courseCredit"),
+						rs.getDate("createdDate"));
 				result.add(courseDTO);
 			}
 			if (result.size() == 0) {
@@ -130,7 +130,7 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		java.sql.Date courseStartDate = new java.sql.Date(course.getCourseStartDate().getTime());
-		
+
 		String ins = "INSERT INTO caps.course(courseId, courseName, lecturerId, courseDescription, courseType,"
 				+ "courseDuration, courseStartDate, courseSize, courseCredit) " + "VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
@@ -174,7 +174,7 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement.setString(3, course.getCourseDescription());
 			pstatement.setString(4, course.getCourseType());
 			pstatement.setDouble(5, course.getCourseDuration());
-			pstatement.setDate(6, courseStartDate );
+			pstatement.setDate(6, courseStartDate);
 			pstatement.setInt(7, course.getCourseSize());
 			pstatement.setFloat(8, course.getCourseCredit());
 			pstatement.setString(9, course.getCourseId());
@@ -217,8 +217,9 @@ public class CourseDAOImpl implements CourseDAO {
 		}
 		return result;
 	}
+
 	@Override
-	public int getTotalCourseCount() throws DAOException{
+	public int getTotalCourseCount() throws DAOException {
 		int courseTotalCount = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
@@ -238,4 +239,27 @@ public class CourseDAOImpl implements CourseDAO {
 		}
 		return courseTotalCount;
 	}
+
+	@Override
+	public String getLastCourse() throws DAOException {
+		String courseId = "";
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+
+		String select = "SELECT courseId FROM caps.course order by createdDate DESC limit 1;";
+
+		try {
+			pstatement = connection.prepareStatement(select);
+			rs = pstatement.executeQuery();
+			while (rs.next()) {
+				courseId = rs.getString("courseId");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to Select Last Course ID from database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return courseId;
+	}
+
 }

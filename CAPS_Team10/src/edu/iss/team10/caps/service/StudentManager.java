@@ -98,4 +98,14 @@ public class StudentManager {
 		}
 		return delete;
 	}
+	
+	public String getLastStudent() {
+		String studentId = "";
+		try {
+			studentId = studentDAO.getLastStudent();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		return studentId;
+	}
 }

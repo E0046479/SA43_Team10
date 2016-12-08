@@ -66,7 +66,7 @@ public class StudentHome extends HttpServlet {
 		StudentDTO student = new StudentManager().findStudent(request.getParameter("studentID"));
 		CourseDTO course = new CourseManager().findCourse(request.getParameter("courseID"));
 		enrollmentListManager.deleteEnrollment(student, course);
-		RequestDispatcher rd = request.getRequestDispatcher("/views/EnrolledCourses.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/EnrolledCourses");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {

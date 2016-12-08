@@ -224,4 +224,26 @@ public class StudentDAOImpl implements StudentDAO {
 		return studentTotalCount;
 	}
 
+	@Override
+	public String getLastStudent() throws DAOException {
+		String studentId = "";
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+
+		String select = "SELECT studentId FROM caps.student order by enrollmentDate DESC limit 1;";
+
+		try {
+			pstatement = connection.prepareStatement(select);
+			rs = pstatement.executeQuery();
+			while (rs.next()) {
+				studentId = rs.getString("studentId");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to Select Last Student ID from database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return studentId;
+	}
+
 }

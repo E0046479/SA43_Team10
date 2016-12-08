@@ -159,4 +159,14 @@ public class LecturerManager {
 		}
 		return enrollmentDTOs;		
 	}
+	
+	public String getLastLecturer() {
+		String lecturerId = "";
+		try {
+			lecturerId = lecturerDAO.getLastLecturer();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		return lecturerId;
+	}
 }

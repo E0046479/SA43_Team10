@@ -34,4 +34,5 @@ public interface LecturerDAO {
 	
 	public ArrayList<EnrollmentDTO> viewStudentPerformance(String courseId) throws DAOException, MyDataException;
 
+	public String getLastLecturer() throws DAOException;
 }

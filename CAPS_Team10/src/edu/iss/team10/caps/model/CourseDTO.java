@@ -16,23 +16,26 @@ public class CourseDTO implements Serializable {
 	private Date courseStartDate;
 	private int courseSize;
 	private float courseCredit;
+	private Date createdDate;
 
 	public CourseDTO() {
 		super();
 	}
 
-	public CourseDTO(String courseId, String courseName, LecturerDTO lecturerId, String courseDescription,
-			String courseType, Double courseDuration, Date courseStartDate, int courseSize, float courseCredit) {
+	public CourseDTO(String courseId, String courseName, LecturerDTO lecturer, String courseDescription,
+			String courseType, Double courseDuration, Date courseStartDate, int courseSize, float courseCredit,
+			Date createdDate) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
-		this.lecturer = lecturerId;
+		this.lecturer = lecturer;
 		this.courseDescription = courseDescription;
 		this.courseType = courseType;
 		this.courseDuration = courseDuration;
 		this.courseStartDate = courseStartDate;
 		this.courseSize = courseSize;
 		this.courseCredit = courseCredit;
+		this.createdDate = createdDate;
 	}
 
 	public String getCourseId() {
@@ -55,8 +58,8 @@ public class CourseDTO implements Serializable {
 		return lecturer;
 	}
 
-	public void setLecturer(LecturerDTO lecturerId) {
-		this.lecturer = lecturerId;
+	public void setLecturer(LecturerDTO lecturer) {
+		this.lecturer = lecturer;
 	}
 
 	public String getCourseDescription() {
@@ -107,15 +110,24 @@ public class CourseDTO implements Serializable {
 		this.courseCredit = courseCredit;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "CourseDTO [courseId=" + courseId + ", courseName=" + courseName + ", lecturerId=" + lecturer
+		return "CourseDTO [courseId=" + courseId + ", courseName=" + courseName + ", lecturer=" + lecturer
 				+ ", courseDescription=" + courseDescription + ", courseType=" + courseType + ", courseDuration="
 				+ courseDuration + ", courseStartDate=" + courseStartDate + ", courseSize=" + courseSize
-				+ ", courseCredit=" + courseCredit + "]";
+				+ ", courseCredit=" + courseCredit + ", createdDate=" + createdDate + "]";
 	}
+
 }

@@ -114,4 +114,14 @@ public class CourseManager {
 		}
 		return currentList;
 	}
+	
+	public String getLastCourse(){
+		String courseId = "";
+		try {
+			courseId = courseDAO.getLastCourse();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		return courseId;
+	}
 }

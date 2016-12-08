@@ -14,24 +14,7 @@
 <body>
 
 
-	<!--  	<form class="form-inline" method="POST">
-		<div class="col-md-3">
-			<div class="input-group">
-				<input type="text" name="search" placeholder="Enter Student ID">
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-secondary">
-						<fmt:message key="label.search" />
-					</button>
-				</span>
-			</div>
-		</div>
-	</form>
-
-	<br />
-	<br /> -->
-
-
-	<div class="panel panel-default">
+<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>
 				<fmt:message key="label.enrollment.list" />
@@ -39,22 +22,36 @@
 		</div>
 		<div class="panel-body">
 			<div>
-				<h4><span class="label label-default"><fmt:message key="label.enrollment.total" /></span>${fn:length(enrollmentList)}</h4></div>
+				<br />
+				<form action="/CAPS_Team10/searchEnroll" method="POST">
+					<table>
+						<tr>
+							<td><input type="text" name="studentId"
+								value="${param['studentId']}" placeholder="Enter Student ID"></td>
+							<td><input type="submit" value="Search" /></td>
+						</tr>
+					</table>
+				</form>
+				<br />
+				<fmt:message key="label.enrollment.total" />${fn:length(enrollmentList)}</div>
 			<br />
-			<table class="table table-striped table-bordered">
-					<tr class="info">
-						<td class="text-center"><strong><fmt:message
-								key="label.student.table.title.studentId" /></strong></td>
-						<td class="text-center"><strong><fmt:message
-								key="label.student.table.title.studentName" /></strong></td>
-						<td class="text-center"><strong><fmt:message
-								key="label.enrollment.courseId" /></strong></td>
-						<td class="text-center"><strong><fmt:message
-								key="label.enrollment.courseName" /></strong></td>
-						<td class="text-center"><strong><fmt:message
-								key="label.enrollment.courseEnrollmentDate" /></strong></td>
-						<td class="text-center"><span class="glyphicon glyphicon-cog"></span></td>
-					</tr>
+			<table class="table table-bordered">
+
+				<tr class="info">
+					<th class="text-center"><fmt:message
+							key="label.student.table.title.studentId" /></th>
+					<th class="text-center"><fmt:message
+							key="label.student.table.title.studentName" /></th>
+					<th class="text-center"><fmt:message
+							key="label.enrollment.courseId" /></th>
+					<th class="text-center"><fmt:message
+							key="label.enrollment.courseName" /></th>
+					<th class="text-center"><fmt:message
+							key="label.course.table.title.courseStartDate" /></th>
+					<th class="text-center"><fmt:message
+							key="label.enrollment.delete" /></th>
+				</tr>
+
 				<tbody>
 					<c:forEach var="enrollment" items="${enrollmentList}">
 						<tr class="text-center">
@@ -62,11 +59,13 @@
 							<td class="nowrap">${enrollment.studentDTO.studentName}</td>
 							<td class="nowrap">${enrollment.courseDTO.courseId}</td>
 							<td class="nowrap">${enrollment.courseDTO.courseName}</td>
-							<td class="nowrap">${enrollment.courseEnrollmentDate}</td>
+							<td class="nowrap">${enrollment.courseDTO.courseStartDate}</td>
 							<td class="nowrap"><c:url var="delurl" scope="page"
 									value="/deleteEnrollment">
-									<c:param name="studentID" value="${enrollment.studentDTO.studentId}" />
-									<c:param name="courseID" value="${enrollment.courseDTO.courseId}" />
+									<c:param name="studentID"
+										value="${enrollment.studentDTO.studentId}" />
+									<c:param name="courseID"
+										value="${enrollment.courseDTO.courseId}" />
 								</c:url> <a href="${delurl}"><button type="button"
 										${enrollment.allowDelete== false? 'style="display:none;"':''}
 										class="btn btn-danger">
@@ -78,6 +77,7 @@
 			</table>
 		</div>
 	</div>
+
 
 
 </body>

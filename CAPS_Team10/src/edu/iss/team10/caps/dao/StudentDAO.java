@@ -23,4 +23,6 @@ public interface StudentDAO {
 	
 	public int getTotalStudentCount() throws DAOException;
 	
+	public String getLastStudent() throws DAOException;
+	
 }

@@ -14,6 +14,7 @@ CREATE TABLE `caps`.`login` (
   `lecturerEmail` VARCHAR(45) NULL,
   `lecturerPhoneNumber` VARCHAR(45) NULL,
   `lecturerAddress` VARCHAR(150) NULL,
+  `joiningDate` DATETIME NULL,
   PRIMARY KEY (`lecturerId`));
   
   CREATE TABLE `caps`.`course` (
@@ -26,6 +27,7 @@ CREATE TABLE `caps`.`login` (
   `courseStartDate` DATE NULL,
   `courseSize` INT NULL,
   `courseCredit` FLOAT NULL,
+  `createdDate` DATETIME NULL,
   PRIMARY KEY (`courseId`),
   INDEX `lecturerId_idx` (`lecturerId` ASC),
   CONSTRAINT `lecturerId`
@@ -40,7 +42,7 @@ CREATE TABLE `caps`.`login` (
   `studentEmail` VARCHAR(45) NULL,
   `studentPhoneNumber` VARCHAR(45) NULL,
   `studentAddress` VARCHAR(150) NULL,
-  `enrollmentDate` DATE NULL,
+  `enrollmentDate` DATETIME NULL,
   PRIMARY KEY (`studentId`));
   
   CREATE TABLE `caps`.`enrollment` (
@@ -69,26 +71,26 @@ LIMIT 0, 1000
 
 -- Date: 2016-12-06 01:14
 */
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s001','Haley Headrick','HaleyHeadrick@gmail.com','23652363','3217 Versante Drive','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s002','Kassie Ardaly','KassieArdaly@gmail.com','34637457','6287 Renwood Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s003','Bettie Laper','BettieLaper@gmail.com','25467547','P. O. Box 501','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s004','Nichole Mosty','NicholeMosty@gmail.com','79765845','9109 Dove Ct','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s005','Tami Vanert','TamiVanert@gmail.com','25437375','1004 Steeplewood Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s006','Ora Purtle ','OraPurtle@gmail.com','69785656','740 Bedford Ct','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s007','Lee Fillo','LeeFillo@gmail.com','53475447','4601 Deville Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s008','Merlin Prok ','MerlinProk@gmail.com','98708676','637 Sandy Trail','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s009','Vincent Lofton ','VincentLofton@gmail.com','95246754','427 Crestview Drive','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s010','Oma Bannett ','Oma Bannett@gmail.com','34786865','712 Admiralty Way','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s011','Grover Evitt','GroverEvitt@gmail.com','24675467','3809 Shawnee Tr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s012','Kitty Blomstrand','KittyBlomstrand@gmail.com','67975656','9848 Private Rd','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s013','Cristopher Yakel','CristopherYakel@gmail.com','85433637','1201 Forum Way South','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s014','Amy Smith','AmySmith@gmail.com','75685843','145 Highview Dr','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s015','Victor Johnson','VictorJohnson@gmail.com','37848856','1120 Oakbend Lane','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s016','Francis Mollett','FrancisMollett@gmail.com','45645688','1409 Lamplighter Lane','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s017','Forest Turpen ','ForestTurpen@gmail.com','64895647','7820 Sheridan Rd','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s018','Christal Gali','ChristalGali@gmail.com','76585699','6430 Stream Side Court','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s019','Malinda Shelley ','MalindaShelley@gmail.com','67658658','717 Vickie Drive','2016-08-01');
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s020','Jimmy Stoppel','JimmyStoppel@gmail.com','79568522','6201 Whitman Ave','2016-08-01');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s001','Haley Headrick','HaleyHeadrick@gmail.com','23652363','3217 Versante Drive','2016-01-01 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s002','Kassie Ardaly','KassieArdaly@gmail.com','34637457','6287 Renwood Dr','2016-01-02 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s003','Bettie Laper','BettieLaper@gmail.com','25467547','P. O. Box 501','2016-01-03 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s004','Nichole Mosty','NicholeMosty@gmail.com','79765845','9109 Dove Ct','2016-01-04 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s005','Tami Vanert','TamiVanert@gmail.com','25437375','1004 Steeplewood Dr','2016-02-01 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s006','Ora Purtle ','OraPurtle@gmail.com','69785656','740 Bedford Ct','2016-02-02 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s007','Lee Fillo','LeeFillo@gmail.com','53475447','4601 Deville Dr','2016-02-03 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s008','Merlin Prok ','MerlinProk@gmail.com','98708676','637 Sandy Trail','2016-02-04 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s009','Vincent Lofton ','VincentLofton@gmail.com','95246754','427 Crestview Drive','2016-02-05 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s010','Oma Bannett ','Oma Bannett@gmail.com','34786865','712 Admiralty Way','2016-02-06 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s011','Grover Evitt','GroverEvitt@gmail.com','24675467','3809 Shawnee Tr','2016-02-07 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s012','Kitty Blomstrand','KittyBlomstrand@gmail.com','67975656','9848 Private Rd','2016-03-03 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s013','Cristopher Yakel','CristopherYakel@gmail.com','85433637','1201 Forum Way South','2016-03-04 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s014','Amy Smith','AmySmith@gmail.com','75685843','145 Highview Dr','2016-04-04 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s015','Victor Johnson','VictorJohnson@gmail.com','37848856','1120 Oakbend Lane','2016-04-05 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s016','Francis Mollett','FrancisMollett@gmail.com','45645688','1409 Lamplighter Lane','2016-05-05 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s017','Forest Turpen ','ForestTurpen@gmail.com','64895647','7820 Sheridan Rd','2016-05-06 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s018','Christal Gali','ChristalGali@gmail.com','76585699','6430 Stream Side Court','2016-06-05 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s019','Malinda Shelley ','MalindaShelley@gmail.com','67658658','717 Vickie Drive','2016-07-05 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s020','Jimmy Stoppel','JimmyStoppel@gmail.com','79568522','6201 Whitman Ave','2016-08-05 1:10:00');
 
 /*
 -- Query: SELECT * FROM caps.lecturer
@@ -96,10 +98,10 @@ LIMIT 0, 1000
 
 -- Date: 2016-12-06 01:10
 */
-INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`) VALUES ('l001','Barry Easton','BarryEaston@gmail.com','78976075','524 Pecan Street');
-INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`) VALUES ('l002','Cassidy Poucher','CassidyPoucher@gmail.com','23675454','1246 Everett Avenue');
-INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`) VALUES ('l003','Maxwell Stillman','MaxwellStillman@gmail.com','97695575','7105 Plover Circle');
-INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`) VALUES ('l004','Clint Holom','ClintHolom@gmail.com','56856724','1022 Bridges Dr');
+INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`,`joiningDate`) VALUES ('l001','Barry Easton','BarryEaston@gmail.com','78976075','524 Pecan Street','2016-01-01 1:10:00');
+INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`,`joiningDate`) VALUES ('l002','Cassidy Poucher','CassidyPoucher@gmail.com','23675454','1246 Everett Avenue','2016-02-01 1:10:00');
+INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`,`joiningDate`) VALUES ('l003','Maxwell Stillman','MaxwellStillman@gmail.com','97695575','7105 Plover Circle','2016-03-01 1:10:00');
+INSERT INTO `lecturer` (`lecturerId`,`lecturerName`,`lecturerEmail`,`lecturerPhoneNumber`,`lecturerAddress`,`joiningDate`) VALUES ('l004','Clint Holom','ClintHolom@gmail.com','56856724','1022 Bridges Dr','2016-04-01 1:10:00');
 
 /*
 -- Query: SELECT * FROM caps.course
@@ -107,12 +109,12 @@ LIMIT 0, 1000
 
 -- Date: 2016-12-05 17:04
 */
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`) VALUES ('c001','l004','Theatre Studies','study of theatrical performance in relation to its literary, physical, psycho-biological, sociological, and historical contexts',24,'Arts','2016-08-01',10,6);
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`) VALUES ('c002','l001','Architecture','principles of design and construction and ornamentation of fine buildings',32,'Arts','2016-10-01',10,8);
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`) VALUES ('c003','l003','Economics','production and distribution and consumption of goods and services and their management',32,'Economy','2017-01-01',10,8);
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`) VALUES ('c004','l001','Finance','management of money and credit and banking and investments',40,'Economy','2016-08-01',10,10);
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`) VALUES ('c005','l002','Philosophy','rational investigation of questions about existence and knowledge and ethics',24,'Philosophy','2017-01-01',10,6);
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`) VALUES ('c006','l004','Statistics','collection and interpretation of quantitative data and the use of probability theory to estimate population parameters',32,'Math','2016-10-01',10,8);
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c001','l004','Theatre Studies','study of theatrical performance in relation to its literary, physical, psycho-biological, sociological, and historical contexts',24,'Arts','2016-08-01',10,6,'2016-01-01 1:10:00');
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c002','l001','Architecture','principles of design and construction and ornamentation of fine buildings',32,'Arts','2016-10-01',10,8,'2016-01-02 1:10:00');
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c003','l003','Economics','production and distribution and consumption of goods and services and their management',32,'Economy','2017-01-01',10,8,'2016-02-01 1:10:00');
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c004','l001','Finance','management of money and credit and banking and investments',40,'Economy','2016-08-01',10,10,'2016-03-01 1:10:00');
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c005','l002','Philosophy','rational investigation of questions about existence and knowledge and ethics',24,'Philosophy','2017-01-01',10,6,'2016-04-01 1:10:00');
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c006','l004','Statistics','collection and interpretation of quantitative data and the use of probability theory to estimate population parameters',32,'Math','2016-10-01',10,8,'2016-05-01 1:10:00');
 
 /*
 -- Query: SELECT * FROM caps.login

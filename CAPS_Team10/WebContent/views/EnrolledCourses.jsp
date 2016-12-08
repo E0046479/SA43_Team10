@@ -15,46 +15,56 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
+		<h3>
 			<fmt:message key="label.enrolledCourses" />
+			</h3>
 		</div>
 		<div class="panel-body">
-		<div><fmt:message key="label.enrolledCourses.total"/>${fn:length(enrolledCoursesList)}</div>
-			<br/>
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr class="info text-center">
-						<td class="col-sm-1"><fmt:message
-								key="label.enrollment.courseId" /></td>
-						<td class="col-sm-3"><fmt:message
-								key="label.enrollment.courseName" /></td>
-						<td class="col-sm-2"><fmt:message
-								key="label.enrollment.courseEnrollmentDate" /></td>
-						<td class="col-lg-1"></></td>
+			<div>
+				<fmt:message key="label.enrolledCourses.total" />${fn:length(enrolledCoursesList)}</div>
+			<br />
+			<table class="table table-bordered">
+					<tr class="info">
+					<th class="text-center"><fmt:message key="label.enrolledCourses.Number" /></th>
+						<th class=" text-center"><fmt:message
+								key="label.enrollment.courseId" /></th>
+						<th class="text-center"><fmt:message
+								key="label.enrollment.courseName" /></th>
+						<th class="text-center"><fmt:message
+								key="label.course.table.title.courseStartDate" /></th>
+						<th class="text-center"><fmt:message
+								key="label.enrollment.courseEnrollmentDate" /></th>
+						<th class="text-center"><fmt:message
+								key="label.enrollment.delete" /></th>
 					</tr>
-				</thead>
 				<tbody>
-					<c:forEach var="enrolledCourses" items="${enrolledCoursesList}">
-						<tr class="text-center">
+					<c:forEach var="enrolledCourses" items="${enrolledCoursesList}"
+						varStatus="status">
+						<tr class="${status.index%2==0? 'even':'odd' } text-center">
+							<td class="nowrap">${status.index+1}</td>
 							<td class="nowrap">${enrolledCourses.courseDTO.courseId}</td>
 							<td class="nowrap">${enrolledCourses.courseDTO.courseName}</td>
+							<td class="nowrap">${enrolledCourses.courseDTO.courseStartDate}</td>
 							<td class="nowrap">${enrolledCourses.courseEnrollmentDate}</td>
 							<td class="nowrap"><c:url var="delurl" scope="page"
 									value="/studentDeleteEnroll">
-									<c:param name="studentID" value="${enrolledCourses.studentDTO.studentId}" />
-									<c:param name="courseID" value="${enrolledCourses.courseDTO.courseId}" />
-								</c:url>
-								<a href="${delurl}"><button type="button" 
-								${enrolledCourses.allowDelete== false? 'style="display:none;"':''} class="btn btn-danger">
-									<span class="glyphicon glyphicon-floppy-remove"></span>
-								</button>
-								</a>
-								</td>
+									<c:param name="studentID"
+										value="${enrolledCourses.studentDTO.studentId}" />
+									<c:param name="courseID"
+										value="${enrolledCourses.courseDTO.courseId}" />
+								</c:url> <a href="${delurl}"><button type="button"
+										${enrolledCourses.allowDelete== false? 'style="display:none;"':''}
+										class="btn btn-danger">
+										<span class="glyphicon glyphicon-floppy-remove"></span>
+									</button> </a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
+
+
 
 
 </body>

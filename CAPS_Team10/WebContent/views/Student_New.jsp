@@ -24,7 +24,7 @@
 
 						<tr>
 							<td><fmt:message key="label.student.table.title.studentName" /></td>
-							<td><input type="text" name=" " size=15
+							<td><input type="text" name="studentName" size=15 
 								maxlength=20></td>
 						</tr>
 						<tr>

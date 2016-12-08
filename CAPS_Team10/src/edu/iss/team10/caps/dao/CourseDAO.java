@@ -22,5 +22,6 @@ public interface CourseDAO{
 	public int deleteCourse(CourseDTO course) throws DAOException, MyDataException;
 	
 	public int getTotalCourseCount() throws DAOException;
-		
+	
+	public String getLastCourse() throws DAOException;
 }
