@@ -24,7 +24,7 @@ import edu.iss.team10.caps.service.StudentManager;
  * Servlet implementation class StudentHome
  */
 @WebServlet({ "/studentHome", "/studentEnrollCourseList", "/EnrolledCourses", "/studentDeleteEnroll",
-		"/studentEnrollCourseSave" })
+		"/studentEnrollCourseSave","/courseSearchByStudent" })
 public class StudentHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CourseManager courseManager = new CourseManager();
@@ -62,6 +62,9 @@ public class StudentHome extends HttpServlet {
 			break;
 		case "/studentEnrollCourseSave":
 			doGetStudentEnrollCourseSave(request, response);
+			break;
+		case "/courseSearchByStudent":
+			doSearchCourse(request, response);
 			break;
 		default:
 			break;
@@ -206,5 +209,29 @@ public class StudentHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void doSearchCourse(HttpServletRequest request, HttpServletResponse response) {
+		String Id=(String) request.getParameter("courseId");
+		System.out.println(Id);
+		CourseDTO course=courseManager.findCourse(Id);	
+		request.setAttribute("courseId", course.getCourseId());
+		request.setAttribute("courseName", course.getCourseName());
+		request.setAttribute("courseDescription", course.getCourseDescription());
+		request.setAttribute("courseType",course.getCourseType());
+		request.setAttribute("courseDuration", course.getCourseDuration());
+		request.setAttribute("courseStartDate", course.getCourseStartDate());
+		request.setAttribute("courseSize",course.getCourseSize());
+		request.setAttribute("lecturerId", course.getLecturer().getLecturerId());
+		request.setAttribute("courseCredit",course.getCourseCredit());
+		RequestDispatcher rd=request.getRequestDispatcher("views/Course_Detail.jsp");
+		  try{
+	        	rd.forward(request, response);
+	        }catch(ServletException e){
+	        	e.printStackTrace();
+	        }catch(IOException e){
+	        	e.printStackTrace();
+	        }
+		
 	}
 }

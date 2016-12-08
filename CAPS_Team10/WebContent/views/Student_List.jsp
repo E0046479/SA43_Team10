@@ -20,6 +20,14 @@
 		<div class="panel-body">
 			<a href="views/Student_New.jsp" class="btn btn-success"><fmt:message
 					key="label.student.add" /></a> <br /> <br />
+					<form action="${pageContext.request.contextPath}/studentSearch" method="post">
+<div align="right">
+					<fmt:message key="label.table.search" />
+					<input type="text" name="studentId"></input>
+					<input type="submit" value="Search"></input>
+				</div>
+</form>
+<br />
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>
@@ -41,7 +49,7 @@
 						<td class="nowrap">${student.studentEmail}</td>
 						<td class="nowrap">${student.enrollmentDate}</td>
 						<td class="nowrap">
-						<c:url var="detailurl" scope="page" value="views/Student_Detail.jsp">
+						<c:url var="detailurl" scope="page" value="/studentSearch">
 								<c:param name="studentId" value="${student.studentId}" />
 								<c:param name="studentName" value="${student.studentName}" />
 								<c:param name="studentEmail" value="${student.studentEmail}" />

@@ -19,6 +19,13 @@
 		<div class="panel-body">
 			<a href="views/Course_New.jsp" class="btn btn-success"><fmt:message
 					key="label.course.add" /></a> <br /> <br />
+					<form action="${pageContext.request.contextPath}/courseSearch" method="post">
+<div align="right">
+					<fmt:message key="label.table.search" />
+					<input type="text" name="courseId"></input>
+					<input type="submit" value="Search"></input>
+				</div>
+</form>
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>
@@ -39,7 +46,7 @@
 						<td class="nowrap">${course.courseDuration}</td>
 						<td class="nowrap">${course.courseStartDate}</td>
 						<td class="nowrap">
-						<c:url var="detailurl" scope="page" value="views/Course_Detail.jsp">
+						<c:url var="detailurl" scope="page" value="/courseSearch">
 								<c:param name="courseId" value="${course.courseId}" />
 								<c:param name="courseName" value="${course.courseName}" />
 								<c:param name="lecturerId" value="${course.lecturer.lecturerId}" />

@@ -48,7 +48,7 @@
 							</c:url> <a href="${enrollUrl}" class="btn btn-danger">
 						<fmt:message key="label.course.Enroll" /></a>
 						
-							<c:url var="enrollDetailsUrl" scope="page" value="">
+							<c:url var="enrollDetailsUrl" scope="page" value="/courseSearchByStudent">
 								<c:param name="courseId" value="${course.courseId}" />
 							</c:url> <a href="${enrollDetailsUrl}" class="btn btn-danger">
 						<fmt:message key="label.course.Enroll.Details" /></a>

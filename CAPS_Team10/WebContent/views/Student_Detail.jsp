@@ -28,37 +28,37 @@
 							<td><fmt:message
 									key="label.student.table.title.studentId" /></td>
 							<td><input type="text" name="studentId" size=15
-								value="${param['studentId']}" maxlength=20
+								value="${studentId}" maxlength=20
 								readonly="readonly"> 
 								</td>
 						</tr>
 						<tr>
 							<td><fmt:message key="label.student.table.title.studentName" /></td>
-							<td><input type="text" name="studentName" size=15 value="${param['studentName']}"
+							<td><input type="text" name="studentName" size=15 value="${studentName}"
 								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.studentEmail" /></td>
-							<td><input type="text" name="studentEmail" size=15 value="${param['studentEmail']}"
+							<td><input type="text" name="studentEmail" size=15 value="${studentEmail}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.studentPhoneNumber" /></td>
-							<td><input type="text" name="studentPhoneNumber" size=15 value="${param['studentPhoneNumber']}"
+							<td><input type="text" name="studentPhoneNumber" size=15 value="${studentPhoneNumber}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.student.table.title.studentAddress" /></td>
-							<td><input type="text" name="studentAddress" size=15 value="${param['studentAddress']}"
+							<td><input type="text" name="studentAddress" size=15 value="${studentAddress}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message key="label.student.table.title.enrollmentDate" /></td>
-							<td><input type="text" name="enrollmentDate" size=15 value="${param['enrollmentDate']}"
+							<td><input type="text" name="enrollmentDate" size=15 value="${enrollmentDate}"
 								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>

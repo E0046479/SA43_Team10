@@ -29,7 +29,7 @@ import edu.iss.team10.caps.service.StudentManager;
  */
 @WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/lecturerList", "/lecturerInsert",
 		"/lecturerEdit", "/lecturerDelete", "/courseList", "/courseInsert", "/courseEdit", "/courseDelete",
-		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll" })
+		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll" ,"/lecturerSearch","/studentSearch","/courseSearch"})
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -65,6 +65,9 @@ public class AdminHome extends HttpServlet {
 		case "/adminHome":
 			doGetStudentLsit(request, response);
 			break;
+		case "/studentSearch":
+			doSearchStudent(request, response);
+			break;
 		case "/lecturerInsert":
 			doInsertLecturer(request, response);
 			break;
@@ -77,6 +80,9 @@ public class AdminHome extends HttpServlet {
 		case "/lecturerList":
 			doGetLecturerLsit(request, response);
 			break;
+		case "/lecturerSearch":
+			doSearchLecturer(request, response);
+			break;
 		case "/courseInsert":
 			doInsertCourse(request, response);
 			break;
@@ -88,6 +94,9 @@ public class AdminHome extends HttpServlet {
 			break;
 		case "/courseList":
 			doGetCourseLsit(request, response);
+			break;
+		case "/courseSearch":
+			doSearchCourse(request, response);
 			break;
 		case "/adminEnrollment":
 			doGetEnrollmentList(request, response);
@@ -219,6 +228,27 @@ public class AdminHome extends HttpServlet {
 		}
 	}
 
+	private void doSearchStudent(HttpServletRequest request, HttpServletResponse response) {
+		String Id=(String) request.getParameter("studentId");
+		System.out.println(Id);
+		StudentDTO student=studentManager.findStudent(Id);	
+		request.setAttribute("studentId", student.getStudentId());
+		request.setAttribute("studentName", student.getStudentName());
+		request.setAttribute("studentEmail", student.getStudentEmail());
+		request.setAttribute("studentAddress",student.getStudentAddress());
+		request.setAttribute("studentPhoneNumber", student.getStudentPhoneNumber());
+		request.setAttribute("enrollmentDate", student.getEnrollmentDate());
+		RequestDispatcher rd=request.getRequestDispatcher("views/Student_Detail.jsp");
+		  try{
+	        	rd.forward(request, response);
+	        }catch(ServletException e){
+	        	e.printStackTrace();
+	        }catch(IOException e){
+	        	e.printStackTrace();
+	        }
+		
+	}
+	
 	// Lecturer Methods
 	private void doGetLecturerLsit(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<LecturerDTO> lecturerList = lecturerManager.findAllLecturer();
@@ -317,6 +347,25 @@ public class AdminHome extends HttpServlet {
 		return del;
 	}
 
+	public void doSearchLecturer(HttpServletRequest request, HttpServletResponse response){
+		String Id=(String) request.getParameter("lecturerId");
+		System.out.println(Id);
+		LecturerDTO lecturer=lecturerManager.findLecturer(Id);	
+		request.setAttribute("lecturerId", lecturer.getLecturerId());
+		request.setAttribute("lecturerName", lecturer.getLecturerName());
+		request.setAttribute("lecturerEmail", lecturer.getLecturerEmail());
+		request.setAttribute("lecturerAddress",lecturer.getLecturerAddress());
+		request.setAttribute("lecturerPhoneNumber", lecturer.getLecturerPhoneNumber());
+		RequestDispatcher rd=request.getRequestDispatcher("views/Lecturer_Detail.jsp");
+		  try{
+	        	rd.forward(request, response);
+	        }catch(ServletException e){
+	        	e.printStackTrace();
+	        }catch(IOException e){
+	        	e.printStackTrace();
+	        }
+	}
+	
 	// Course Method
 	private void doGetCourseLsit(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<CourseDTO> courseList = courseManager.findAllCourse();
@@ -435,6 +484,29 @@ public class AdminHome extends HttpServlet {
 		}
 	}
 
+	private void doSearchCourse(HttpServletRequest request, HttpServletResponse response) {
+		String Id=(String) request.getParameter("courseId");
+		System.out.println(Id);
+		CourseDTO course=courseManager.findCourse(Id);	
+		request.setAttribute("courseId", course.getCourseId());
+		request.setAttribute("courseName", course.getCourseName());
+		request.setAttribute("courseDescription", course.getCourseDescription());
+		request.setAttribute("courseType",course.getCourseType());
+		request.setAttribute("courseDuration", course.getCourseDuration());
+		request.setAttribute("courseStartDate", course.getCourseStartDate());
+		request.setAttribute("courseSize",course.getCourseSize());
+		request.setAttribute("lecturerId", course.getLecturer().getLecturerId());
+		request.setAttribute("courseCredit",course.getCourseCredit());
+		RequestDispatcher rd=request.getRequestDispatcher("views/Course_Detail.jsp");
+		  try{
+	        	rd.forward(request, response);
+	        }catch(ServletException e){
+	        	e.printStackTrace();
+	        }catch(IOException e){
+	        	e.printStackTrace();
+	        }
+		
+	}
 	// Enrollment
 
 	private void doGetEnrollmentList(HttpServletRequest request, HttpServletResponse response) {

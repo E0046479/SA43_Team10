@@ -34,26 +34,26 @@
 						</tr>
 						<tr>
 							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
-							<td><input type="text" name="lecturerName" size=15 value="${param['lecturerName']}"
+							<td><input type="text" name="lecturerName" size=15 value="$lecturerName}"
 								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.lecturer.table.title.lecturerEmail" /></td>
-							<td><input type="text" name="lecturerEmail" size=15 value="${param['lecturerEmail']}"
+							<td><input type="text" name="lecturerEmail" size=15 value="${lecturerEmail}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.lecturer.table.title.lecturerPhoneNumber" /></td>
-							<td><input type="text" name="lecturerPhoneNumber" size=15 value="${param['lecturerPhoneNumber']}"
+							<td><input type="text" name="lecturerPhoneNumber" size=15 value="${lecturerPhoneNumber}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td><fmt:message
 									key="label.lecturer.table.title.lecturerAddress" /></td>
-							<td><input type="text" name="lecturerAddress" size=15 value="${param['lecturerAddress']}"
+							<td><input type="text" name="lecturerAddress" size=15 value="${lecturerAddress}"
 								maxlength=20 readonly="readonly"></td>
 						</tr>
 				</table>
