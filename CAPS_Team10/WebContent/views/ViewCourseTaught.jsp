@@ -51,8 +51,9 @@ table th {
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <c:url var="updurl" scope="page"
 								value="/viewEnrolledStudents">
 								<c:param name="courseId" value="${course.courseId}" />
-							</c:url> <a href="${updurl}"><fmt:message
-									key="label.viewCourseTaught.table.title.ViewEnrolledStudent"></fmt:message></a>
+							</c:url> <a href="${updurl}" class="btn btn-success" title="<fmt:message
+									key="label.viewCourseTaught.table.title.ViewEnrolledStudent"></fmt:message>">
+									<span class="glyphicon glyphicon-eye-open"></span></a>
 						</td>
 					</tr>
 				</c:forEach>

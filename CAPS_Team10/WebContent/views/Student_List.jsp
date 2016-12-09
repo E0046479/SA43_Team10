@@ -29,9 +29,11 @@
 							placeholder="<fmt:message key="label.table.search" />"
 							name="studentId"> <span class="input-group-btn">
 							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
-						</span>
-						
+						</span>						
 					</div>
+					<c:if test="${requestScope['errorMessage'] !=null}">
+			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorMessage") %></div>
+			    	    </c:if>
 					</div>
 				</form>
 			</div>

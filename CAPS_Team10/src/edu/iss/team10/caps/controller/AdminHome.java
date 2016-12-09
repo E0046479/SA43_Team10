@@ -246,8 +246,8 @@ public class AdminHome extends HttpServlet {
 		System.out.println(Id);
 		StudentDTO student = studentManager.findStudent(Id);
 		String path = "";
-		if (student == null) {
-			path = "views/Error_Page.jsp";
+		if (student.getStudentId() == null && student.getStudentId()!= Id) {
+			path = "adminHome";
 			request.setAttribute("errorMessage", "There is no record for this student ID");
 		} else {
 			request.setAttribute("studentId", student.getStudentId());
@@ -384,12 +384,20 @@ public class AdminHome extends HttpServlet {
 		String Id = (String) request.getParameter("lecturerId");
 		System.out.println(Id);
 		LecturerDTO lecturer = lecturerManager.findLecturer(Id);
+		String path="";
+		if(lecturer.getLecturerId() ==null && Id!=lecturer.getLecturerId())
+		{
+			path="lecturerList";
+			request.setAttribute("errorLecturer", "There is no record for this LecturerId");
+		}else{
 		request.setAttribute("lecturerId", lecturer.getLecturerId());
 		request.setAttribute("lecturerName", lecturer.getLecturerName());
 		request.setAttribute("lecturerEmail", lecturer.getLecturerEmail());
 		request.setAttribute("lecturerAddress", lecturer.getLecturerAddress());
 		request.setAttribute("lecturerPhoneNumber", lecturer.getLecturerPhoneNumber());
-		RequestDispatcher rd = request.getRequestDispatcher("views/Lecturer_Detail.jsp");
+		path="views/Lecturer_Detail.jsp";
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(path);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
@@ -532,6 +540,12 @@ public class AdminHome extends HttpServlet {
 		String Id = (String) request.getParameter("courseId");
 		System.out.println(Id);
 		CourseDTO course = courseManager.findCourse(Id);
+		String path="";
+		if(course.getCourseId()==null && course.getCourseId() !=Id)
+		{
+			path="courseList";
+			request.setAttribute("errorCourse", "There is no record for this CourseId");
+		}else{
 		request.setAttribute("courseId", course.getCourseId());
 		request.setAttribute("courseName", course.getCourseName());
 		request.setAttribute("courseDescription", course.getCourseDescription());
@@ -541,7 +555,9 @@ public class AdminHome extends HttpServlet {
 		request.setAttribute("courseSize", course.getCourseSize());
 		request.setAttribute("lecturerId", course.getLecturer().getLecturerId());
 		request.setAttribute("courseCredit", course.getCourseCredit());
-		RequestDispatcher rd = request.getRequestDispatcher("views/Course_Detail.jsp");
+		path="views/Course_Detail.jsp";
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(path);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
@@ -565,6 +581,7 @@ public class AdminHome extends HttpServlet {
 		request.setAttribute("enrollmentList", enrollmentList);
 		request.setAttribute("noOfPages", noOfPages);
 		request.setAttribute("currentPage", page);
+		request.setAttribute("TOTAL_RECORDS", EnrollmentDAOImpl.noOfRecords);
 		RequestDispatcher rd = request.getRequestDispatcher("views/Admin_Enrollment.jsp");
 		try {
 			rd.forward(request, response);
@@ -595,18 +612,29 @@ public class AdminHome extends HttpServlet {
 	}
 
 	private void doSearchEnrollment(HttpServletRequest request, HttpServletResponse response) {
+		String Id= (String) request.getParameter("studentId");
+		String path="";
 		int page = 1;
 		int recordsPerPage = 10;
 		if (request.getParameter("page") != null)
 			page = Integer.parseInt(request.getParameter("page"));
 		EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
 		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager
-				.loadStudentEnrollment(request.getParameter("studentId"), (page - 1) * recordsPerPage, recordsPerPage);
-		int noOfPages = (int) Math.ceil(CourseDAOImpl.noOfRecords * 1.0 / recordsPerPage);
-		request.setAttribute("enrollmentList", enrollmentList);
-		request.setAttribute("noOfPages", noOfPages);
-		request.setAttribute("currentPage", page);
-		RequestDispatcher rd = request.getRequestDispatcher("views/Admin_Enrollment.jsp");
+				.loadStudentEnrollment(request.getParameter("studentId"), (page - 1) * recordsPerPage, recordsPerPage);		
+		if(enrollmentList.size() >0)
+		{
+			int noOfPages = (int) Math.ceil(CourseDAOImpl.noOfRecords * 1.0 / recordsPerPage);
+			request.setAttribute("enrollmentList", enrollmentList);
+			request.setAttribute("noOfPages", noOfPages);
+			request.setAttribute("currentPage", page);
+			path="views/Admin_Enrollment.jsp";
+		}else
+		{
+			request.setAttribute("enrorEnroll", "There is no record for this ID");
+			path="/adminEnrollment";
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher(path);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {

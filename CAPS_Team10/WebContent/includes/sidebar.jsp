@@ -22,15 +22,15 @@
 							key="label.Admin.Manage.Student" /></a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/lecturerList"><span
-						class="glyphicon glyphicon-plane"></span> <fmt:message
+						class="glyphicon glyphicon-education"></span> <fmt:message
 							key="label.Admin.Manage.Lecturers" /></a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/courseList"><span
-						class="glyphicon glyphicon-cloud"></span> <fmt:message
+						class="glyphicon glyphicon-book"></span> <fmt:message
 							key="label.Admin.Manage.Courses" /></a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/adminEnrollment"><span
-						class="glyphicon glyphicon-cloud"></span> <fmt:message
+						class="glyphicon glyphicon-list-alt"></span> <fmt:message
 							key="label.Admin.Manage.Enrollment" /></a></li>
 			</c:if>
 

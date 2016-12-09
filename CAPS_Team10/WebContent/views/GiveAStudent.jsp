@@ -13,13 +13,13 @@
 	<br />
 	<c:set var="courseName" scope="session" value="${courseName}" />
 	<div class="container">
-		<div class="row vertical-offset-100">
-			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
+				<div class="panel-heading">
 					<h3>
 						<fmt:message key="label.gradeAStudentJsp.title" />
 					</h3>
-					<div class="panel-body">
+					</div>
+					<div class="panel-body"><div class="col-md-4">
 						<form action="${pageContext.request.contextPath}/gradeSudent_Save"
 							method="post" "UTF-8" role="form">
 							<fieldset>
@@ -34,17 +34,15 @@
 									<label for="Grade"><fmt:message
 											key="label.enrollment.table.title.grade" /></label> <input
 										class="form-control" placeholder="Grade" name="grade"
-										type="text" value="">
+										type="number" min="0" max="5" step="0.1" value="">
 								</div>
 								<input class="btn btn-lg btn-success btn-block" type="submit"
 									value="Save">
 							</fieldset>
-						</form>
+						</form></div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="views/bootstrap/js/bootstrap.min.js"></script>

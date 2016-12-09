@@ -24,16 +24,16 @@ table th {
 		<div class="panel-body">
 			<table class="table table-striped table-bordered">
 				<tr class="info text-center">
-					<th>No.</th>
-					<th>Student ID</th>
-					<th>Student Name</th>
-					<th>Course Name</th>
-					<th>Grade</th>
-					<th></th>
+					<th class="text-center">No.</th>
+					<th class="text-center">Student ID</th>
+					<th class="text-center">Student Name</th>
+					<th class="text-center">Course Name</th>
+					<th class="text-center">Grade</th>
+					<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
 				</tr>
 				<c:forEach var="list" items="${studentPerformanceList}"
 					varStatus="status">
-					<tr class="${status.index%2==0?'even':'odd'}">
+					<tr class="${status.index%2==0?'even':'odd'} text-center">
 						<td class="nowrap">${status.index + 1}</td>
 						<td class="nowrap">${list.studentDTO.studentId}</td>
 						<td class="nowrap">${list.studentDTO.studentName}</td>
@@ -42,7 +42,7 @@ table th {
 						<td class="nowrap"><c:url var="updurl" scope="page"
 								value="/individualStudentPerformance">
 								<c:param name="userId" value="${list.studentDTO.studentId}" />
-							</c:url> <a href="${updurl}">View</a> &nbsp;&nbsp;&nbsp;</td>
+							</c:url> <a href="${updurl}" class="btn btn-primary" title="VIEW"><span class="glyphicon glyphicon-eye-open"></span></a></td>
 					</tr>
 				</c:forEach>
 			</table>

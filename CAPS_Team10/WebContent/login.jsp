@@ -10,6 +10,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="bootstrap/css/custome.css" rel="stylesheet">
+<style>
+body {
+	background-image: url("img/bg2.jpg");
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body><br/>
@@ -29,11 +34,11 @@
 			    		<div class="form-group">
 			    			<input class="form-control" placeholder="Password" name="password" type="password" value="" required="true">
 			    		</div>
-			    		<div class="checkbox">
+<!-- 			    		<div class="checkbox">
 			    	    	<label>
 			    	    		<input name="remember" type="checkbox" value="Remember Me"> Remember Me
 			    	    	</label>
-			    	    </div>
+			    	    </div> -->
 			    	    <c:if test="${requestScope['logInError'] !=null}">
 			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("logInError") %></div>
 			    	    </c:if>

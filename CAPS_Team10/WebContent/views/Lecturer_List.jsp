@@ -30,6 +30,9 @@
 							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
 						</span>
 					</div>
+					<c:if test="${requestScope['errorLecturer'] !=null}">
+			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorLecturer") %></div>
+			    	    </c:if>
 					</div>
 				</form>
 			</div>

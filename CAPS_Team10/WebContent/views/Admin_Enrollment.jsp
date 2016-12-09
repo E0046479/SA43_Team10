@@ -24,7 +24,7 @@
 					<div class="text-left">
 				<span class="label label-success" style="font-size: 12pt;">
 				<fmt:message key="label.enrollment.total" />
-				<font style="color: red;">${fn:length(enrollmentList)}</font></span>
+				<font style="color: red;">${TOTAL_RECORDS}</font></span>
 			</div><br/>
 			<div class="text-left">
 				<form action="${pageContext.request.contextPath}/searchEnroll" method="post" class="form-search">
@@ -35,6 +35,9 @@
 							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
 						</span>
 					</div>
+					<c:if test="${requestScope['enrorEnroll'] !=null}">
+			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("enrorEnroll") %></div>
+			    	    </c:if>
 					</div>
 				</form>
 			</div><br /><br/>

@@ -19,10 +19,10 @@
 		</div>
 		<div class="panel-body">
 			<div>
-				<label for="courseName"><fmt:message
-						key="label.course.table.title.coursename" /> (${C_Name})</label>
+				<label for="courseName"><font style="font-size: 14pt"><fmt:message
+						key="label.course.table.title.coursename" /></font>&nbsp;:&nbsp;<font style="color: red; font-size: 13pt">${C_Name}</font></label>
 			</div>
-			<table class="table table-bordered">
+			<table class="table table-bordered table-striped">
 				<tr class="info">
 					<th class="text-center">No.</th>
 					<th class="text-center"><fmt:message
