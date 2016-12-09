@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +21,7 @@ import edu.iss.team10.caps.model.StudentDTO;
 import edu.iss.team10.caps.service.CourseManager;
 import edu.iss.team10.caps.service.EnrollmentListManager;
 import edu.iss.team10.caps.service.StudentManager;
+import edu.iss.team10.caps.util.Email;
 
 /**
  * Servlet implementation class StudentHome
@@ -77,6 +79,11 @@ public class StudentHome extends HttpServlet {
 		StudentDTO student = new StudentManager().findStudent(request.getParameter("studentID"));
 		CourseDTO course = new CourseManager().findCourse(request.getParameter("courseID"));
 		enrollmentListManager.deleteEnrollment(student, course);
+		try {
+			Email.generateAndSendEmail(student, course, "STUDENT_CANCEL_ENROLLMENT", "student");
+		} catch (MessagingException | IOException e1) {
+			e1.printStackTrace();
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/EnrolledCourses");
 		try {
 			rd.forward(request, response);
@@ -209,6 +216,11 @@ public class StudentHome extends HttpServlet {
 			// courseManager.enrollCourseSave(user.getUserId(),courseId);
 			// request.setAttribute("courseList", courseList);
 			int insert = courseManager.insertEnroll(enrollmentDTO);
+			try {
+				Email.generateAndSendEmail(newStudent, newCourse, "CONFIRM_COURSE_ENROLLED", "admin");
+			} catch (MessagingException | IOException e) {
+				e.printStackTrace();
+			} 
 			if (insert > 0) {
 				System.out.println("Success Insert enrollment");
 			} else {

@@ -275,7 +275,7 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement pstatement = null;
 
 		String select = "select * from (select c.courseId,c.courseName,c.courseStartDate ,c.courseDuration,c.courseSize - count(e.courseId)As AvailableSlot"
-				+ " from course c left join enrollment e on c.courseId=e.courseId group by c.courseId) s where s.courseid not in"
+				+ " from course c left join enrollment e on c.courseId=e.courseId where now() < c.courseStartDate group by c.courseId) s where s.courseid not in"
 				+ " (select c.courseId from caps.course c,caps.enrollment e,caps.student s where c.courseID =e.courseId and e.studentId=s.studentId"
 				+ " and s.studentId=? group by c.courseId);";
 		try {
