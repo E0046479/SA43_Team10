@@ -42,4 +42,31 @@ public class LoginDAOImpl implements LoginDAO{
 		return loginDTO;
 	}
 	
+	@Override
+	public int insertUser(String userId, String password, String role) throws DAOException, MyDataException {
+		int result = 0;
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+
+		String ins = "INSERT INTO caps.login(userId, password, role)"
+				+ "VALUES (?,?,?)";
+		try {
+			pstatement = connection.prepareStatement(ins);
+			pstatement.setString(1, userId);
+			pstatement.setString(2, password);
+			pstatement.setString(3, role);
+			
+			result = pstatement.executeUpdate();
+			if (result <= 0) {
+				throw new MyDataException("FAIL! Insert Specific Lecturer!");
+			} else {
+				System.out.println("Success ! Insert Lecturer!");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to insert lecturer info to database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return result;		
+	}
 }

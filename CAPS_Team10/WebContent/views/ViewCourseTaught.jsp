@@ -24,15 +24,15 @@ table th {
 		<div class="panel-body">
 			<table class="table table-striped table-bordered">
 				<tr class="info text-center">
-					<th>No.</th>
-					<th><fmt:message key="label.course.table.title.courseId" /></th>
-					<th><fmt:message key="label.course.table.title.courseName" /></th>
-					<th><fmt:message key="label.course.table.title.courseSize" /></th>
-					<th>Action</th>
+					<th class="text-center">No.</th>
+					<th class="text-center"><fmt:message key="label.course.table.title.courseId" /></th>
+					<th class="text-center"><fmt:message key="label.course.table.title.courseName" /></th>
+					<th class="text-center"><fmt:message key="label.course.table.title.courseSize" /></th>
+					<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
 				</tr>
 				<c:forEach var="course" items="${lecturerCourseList}"
 					varStatus="status">
-					<tr class="${status.index%2==0?'even':'odd'}">
+					<tr class="${status.index%2==0?'even':'odd'} text-center">
 						<td class="nowrap">${status.index + 1}</td>
 						<td class="nowrap">${course.courseId}</td>
 						<td class="nowrap">${course.courseName}</td>
@@ -41,14 +41,13 @@ table th {
 						<td class="nowrap"><c:url var="updurl" scope="page"
 								value="/gradeStudent">
 								<c:param name="courseId" value="${course.courseId}" />
-							</c:url> <a href="${updurl}"><fmt:message
-									key="label.viewCourseTaught.table.title.grade" /></a>
+							</c:url> <a href="${updurl}" class="btn btn-primary" title="<fmt:message
+									key="label.viewCourseTaught.table.title.grade"/>"><span class="glyphicon glyphicon-pencil"></span></a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <c:url var="updurl" scope="page"
 								value="/studentPerformance">
 								<c:param name="courseId" value="${course.courseId}" />
 								<c:param name="courseName" value="${course.courseName}" />
-							</c:url> <a href="${updurl}"><fmt:message
-									key="label.viewCourseTaught.table.title.Performance"></fmt:message></a>
+							</c:url> <a href="${updurl}" class="btn btn-warning" title="<fmt:message key="label.viewCourseTaught.table.title.Performance"></fmt:message>"><span class="glyphicon glyphicon-star-empty"></span></a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <c:url var="updurl" scope="page"
 								value="/viewEnrolledStudents">
 								<c:param name="courseId" value="${course.courseId}" />

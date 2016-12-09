@@ -19,36 +19,6 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<%-- <center>
-			 		<table cellpadding=4 cellspacing=2 border=0>
-
-						<tr>
-							<td><fmt:message key="label.student.table.title.studentName" /></td>
-							<td><input type="text" id="studentName" name="studentName" size=15 value="${param['studentName']}"
-								maxlength=20> <input type="hidden" name="studentId"
-								value="${param['studentId']}" /></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.studentEmail" /></td>
-							<td><input type="text" id="studentEmail" name="studentEmail" size=15 value="${param['studentEmail']}"
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.studentPhoneNumber" /></td>
-							<td><input type="text" id=""studentPhoneNumber"" name="studentPhoneNumber" size=15 value="${param['studentPhoneNumber']}"
-								maxlength=20></td>
-						</tr> 
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.studentAddress" /></td>
-							<td><input type="text" id="studentAddress" name="studentAddress" size=15 value="${param['studentAddress']}"
-								maxlength=20></td>
-						</tr>
-					</table>
-					<input type="submit" value="Submit"> <input type="reset" value="Reset">
-				</center> --%>
 				<div class="text-center">
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
@@ -65,7 +35,7 @@
 						for="studentEmail"><fmt:message key="label.student.table.title.studentEmail" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="studentEmail" name="studentEmail" type="text" 
-						value="${param['studentEmail']}" maxlength=20
+						value="${param['studentEmail']}" maxlength=125
 						 required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Email formart: (xxx@xxx.xxx)" >
 					</div>
 				</div>
@@ -82,13 +52,6 @@
 						for="sAddress"><fmt:message key="label.student.table.title.studentAddress" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="sAddress" name="studentAddress" type="text" value="${param['studentAddress']}" required="true" >
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
-						for="enrollDate"><fmt:message key="label.student.table.title.enrollmentDate" /></label>
-					<div class="col-md-5 col-sm-5 col-xs-5">
-						<input class="form-control input-md" id="enrollmentDate" name="enrollmentDate" type="text" value="${param['enrollmentDate']}"required="true" >
 					</div>
 				</div>
 				<div class="">

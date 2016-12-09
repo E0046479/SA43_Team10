@@ -30,4 +30,15 @@ public class LoginManager {
 		return currentLogin;
 	}
 
+	public int insertUser(String userId, String password, String role){
+		int insert = 0;
+		try {
+			insert = loginDAO.insertUser(userId, password, role);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		} catch (MyDataException e) {
+			e.printStackTrace();
+		}
+		return insert;
+	}
 }

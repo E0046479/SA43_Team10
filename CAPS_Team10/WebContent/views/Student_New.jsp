@@ -19,36 +19,6 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<%-- <center>
-					<table cellpadding=4 cellspacing=2 border=0>
-
-						<tr>
-							<td><fmt:message key="label.student.table.title.studentName" /></td>
-							<td><input type="text" name="studentName" size=15 
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.studentEmail" /></td>
-							<td><input type="text" name="studentEmail" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.studentPhoneNumber" /></td>
-							<td><input type="text" name="studentPhoneNumber" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.student.table.title.studentAddress" /></td>
-							<td><input type="text" name="studentAddress" size=15
-								maxlength=20></td>
-						</tr>
-					</table>
-					<input type="submit" value="Submit"> <input type="reset"
-						value="Reset">
-				</center> --%>
 				<div class="text-center">
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
@@ -81,13 +51,7 @@
 						<input class="form-control input-md" id="sAddress" name="studentAddress" type="text" required="true" >
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
-						for="enrollDate"><fmt:message key="label.student.table.title.enrollmentDate" /></label>
-					<div class="col-md-5 col-sm-5 col-xs-5">
-						<input class="form-control input-md" id="enrollmentDate" name="enrollmentDate" type="text"  maxlength=20 required="true" >
-					</div>
-				</div>
+				
 				<div class="">
 					  <div class="col-md-4 col-xs-6 col-sm-6 text-right">
 					    <button type="submit" class="btn btn-success">Submit</button>

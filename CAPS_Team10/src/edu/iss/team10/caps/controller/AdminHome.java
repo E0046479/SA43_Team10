@@ -26,6 +26,7 @@ import edu.iss.team10.caps.model.StudentDTO;
 import edu.iss.team10.caps.service.CourseManager;
 import edu.iss.team10.caps.service.EnrollmentListManager;
 import edu.iss.team10.caps.service.LecturerManager;
+import edu.iss.team10.caps.service.LoginManager;
 import edu.iss.team10.caps.service.StudentManager;
 
 /**
@@ -40,6 +41,7 @@ public class AdminHome extends HttpServlet {
 	StudentManager studentManager = new StudentManager();
 	LecturerManager lecturerManager = new LecturerManager();
 	CourseManager courseManager = new CourseManager();
+	LoginManager loginManager = new LoginManager();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -170,9 +172,12 @@ public class AdminHome extends HttpServlet {
 		Date enrollmentDate = new Date();
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
-		int insert = studentManager.insertStudent(studentDTO);
-		if (insert > 0) {
+		int insertStudent = studentManager.insertStudent(studentDTO);
+		int insertUser = loginManager.insertUser(studentId, studentId, "student");
+		if (insertStudent > 0 & insertUser > 0) {
 			System.out.println("Insert Success");
+		} else {
+			System.out.println("Insert Fail");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/main");
 		try {
@@ -314,20 +319,19 @@ public class AdminHome extends HttpServlet {
 
 	private void doInsertLecturer(HttpServletRequest request, HttpServletResponse response) {
 		int totallecturercount = lecturerManager.getTotalLecturerCount();
-		String id = null;
+		String lecturerId = null;
 		if (totallecturercount == 0) {
-			id = "l001";
+			lecturerId = "l001";
 		} else {
 			String lastCourseId = lecturerManager.getLastLecturer();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
 			if (lastNo > 9) {
-				id = "l0" + lastNo;
+				lecturerId = "l0" + lastNo;
 			} else {
-				id = "l00" + lastNo;
+				lecturerId = "l00" + lastNo;
 			}
 		}
-		String lecturerId = id;
 		String lecturerName = request.getParameter("lecturerName");
 		String lecturerEmail = request.getParameter("lecturerEmail");
 		String lecturerAddress = request.getParameter("lecturerAddress");
@@ -335,8 +339,9 @@ public class AdminHome extends HttpServlet {
 		Date joiningDate = new Date();
 		LecturerDTO lecturer = new LecturerDTO(lecturerId, lecturerName, lecturerEmail, lecturerPhoneNumber,
 				lecturerAddress, joiningDate);
-		int insert = lecturerManager.insertLecturer(lecturer);
-		if (insert > 0) {
+		int insertLecturer = lecturerManager.insertLecturer(lecturer);
+		int insertUser = loginManager.insertUser(lecturerId, lecturerId, "lecturer");
+		if (insertLecturer > 0 & insertUser > 0) {
 			System.out.println("Insert Lecturer successfully!");
 		} else {
 			System.out.println("Fail Insert Lecturer");
