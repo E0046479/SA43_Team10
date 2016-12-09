@@ -145,23 +145,17 @@ public class AdminHome extends HttpServlet {
 			String lastStudentId = studentManager.getLastStudent();
 			String lastNoString = lastStudentId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			studentId = "s00" + lastNo;
+			if(lastNo > 9){
+				studentId = "s0" + lastNo;
+			}else{
+				studentId = "s00" + lastNo;
+			}
 		}
 		String studentName = (String) request.getParameter("studentName");
 		String studentEmail = (String) request.getParameter("studentEmail");
 		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
 		String studentAddress = (String) request.getParameter("studentAddress");
-		// String enrollmentString = (String)
-		// request.getParameter("enrollmentDate");
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-d",
-		// Locale.ENGLISH);
-		// DateFormat format = new SimpleDateFormat("d/MM/yyyy",
-		// Locale.ENGLISH);
 		Date enrollmentDate = new Date();
-		/*
-		 * try { enrollmentDate = format.(enrollmentDate); } catch
-		 * (ParseException e1) { e1.printStackTrace(); }
-		 */
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
 		int insert = studentManager.insertStudent(studentDTO);
@@ -296,10 +290,14 @@ public class AdminHome extends HttpServlet {
 		if (totallecturercount == 0) {
 			id = "l001";
 		} else {
-			String lastCourseId = courseManager.getLastCourse();
+			String lastCourseId = lecturerManager.getLastLecturer();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			id = "s00" + lastNo;
+			if(lastNo > 9){
+				id = "l0" + lastNo;
+			}else{
+				id = "l00" + lastNo;
+			}			
 		}
 		String lecturerId = id;
 		String lecturerName = request.getParameter("lecturerName");
@@ -389,7 +387,11 @@ public class AdminHome extends HttpServlet {
 			String lastCourseId = courseManager.getLastCourse();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			courseId = "s00" + lastNo;
+			if(lastNo > 9){
+				courseId = "c0" + lastNo;
+			}else{
+				courseId = "c00" + lastNo;
+			}
 		}
 		String courseName = (String) request.getParameter("courseName");
 		String lecturerId = (String) request.getParameter("lecturerId");
@@ -538,8 +540,6 @@ public class AdminHome extends HttpServlet {
 	}
 	
 	private void doSearchEnrollment(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-
 		EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
 		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager
 				.loadStudentEnrollment(request.getParameter("studentId"));

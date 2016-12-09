@@ -34,7 +34,7 @@
 						</tr>
 						<tr>
 							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
-							<td><input type="text" name="lecturerName" size=15 value="$lecturerName}"
+							<td><input type="text" name="lecturerName" size=15 value="${lecturerName}"
 								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
 								value="true" /></td>
 						</tr>
