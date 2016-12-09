@@ -11,24 +11,29 @@
 </head>
 <body>
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3>
-				<fmt:message key="label.lecturerListJsp.title" />
-			</h3>
-		</div>
-		<div class="panel-body">
-			<a href="views/Lecturer_New.jsp" class="btn btn-success"><fmt:message
-					key="label.lecturer.add" /></a> <br /> <br />
-			<form action="${pageContext.request.contextPath}/lecturerSearch"
-				method="post">
-				<div align="right">
-					<fmt:message key="label.table.search" />
-					<input type="text" name="lecturerId"></input> <input type="submit"
-						value="Search"></input>
-				</div>
-			</form>
-			<form action="/lecturerList" method=post>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>
+					<fmt:message key="label.lecturerListJsp.title" />
+				</h3>
+			</div>
+			<div class="panel-body">
+				<a href="views/Lecturer_New.jsp" class="btn btn-success"><fmt:message
+						key="label.lecturer.add" /></a>
+				<div class="text-left">
+				<form action="${pageContext.request.contextPath}/lecturerSearch"
+					method="post" class="form-search">
+					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search" />"
+							name="lecturerId"> <span class="input-group-btn">
+							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
+						</span>
+					</div>
+					</div>
+				</form>
+			</div>
+				<form action="/lecturerList" method=post>
 				<table class="table table-striped table-bordered">
 					<tr class="info">
 						<th class="text-center"><fmt:message key="label.table.No" /></th>
@@ -56,9 +61,9 @@
 										value="${lecturer.lecturerPhoneNumber}" />
 									<c:param name="lecturerAddress"
 										value="${lecturer.lecturerAddress}" />
-								</c:url> <a href="${detailurl}" class="btn btn-info" role="button"><span
-									class="glyphicon glyphicon-info-sign"></span></a> <c:url
-									var="updurl" scope="page" value="views/Lecturer_Edit.jsp">
+								</c:url> <a href="${detailurl}" class="btn btn-info" role="button"
+								title="DETAIL"><span class="glyphicon glyphicon-info-sign"></span></a>
+								<c:url var="updurl" scope="page" value="views/Lecturer_Edit.jsp">
 									<c:param name="lecturerId" value="${lecturer.lecturerId}" />
 									<c:param name="lecturerName" value="${lecturer.lecturerName}" />
 									<c:param name="lecturerEmail" value="${lecturer.lecturerEmail}" />
@@ -66,17 +71,47 @@
 										value="${lecturer.lecturerPhoneNumber}" />
 									<c:param name="lecturerAddress"
 										value="${lecturer.lecturerAddress}" />
-								</c:url> <a href="${updurl}" class="btn btn-warning" role="button"><span
-									class="glyphicon glyphicon-floppy-open"></a> <c:url
-									var="delurl" scope="page" value="/lecturerDelete">
+								</c:url> <a href="${updurl}" class="btn btn-warning" role="button"
+								title="EDIT"><span class="glyphicon glyphicon-floppy-open"></span></a>
+								<c:url var="delurl" scope="page" value="/lecturerDelete">
 									<c:param name="lecturerId" value="${lecturer.lecturerId}" />
-								</c:url> <a href="${delurl}" class="btn btn-danger"><span
-									class="glyphicon glyphicon-floppy-remove"></a></td>
+								</c:url> <a href="${delurl}" class="btn btn-danger" title="DELETE"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 					</c:forEach>
 				</table>
+				</form>
+				<div class="row text-center">
+					<ul class="pagination">
+						<%-- Previous link  --%>
+						<c:if test="${currentPage != 1}">
+							<li><a
+								href="${pageContext.request.contextPath}/lecturerList?page=${currentPage - 1}">Previous</a></li>
+						</c:if>
+						<%--Page numbers.--%>
+						<li class="text-center">
+							<tr>
+								<c:forEach begin="1" end="${noOfPages}" var="i">
+									<c:choose>
+										<c:when test="${currentPage eq i}">
+											<td><a style="font-size: 16px;"><strong>${i}</strong></a></td>
+										</c:when>
+										<c:otherwise>
+											<td><a
+												href="${pageContext.request.contextPath}/lecturerList?page=${i}">${i}</a></td>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</tr>
+						</li>
+						<%-- Next link --%>
+						<c:if test="${currentPage lt noOfPages}">
+							<li><a
+								href="${pageContext.request.contextPath}/lecturerList?page=${currentPage + 1}">Next</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
 		</div>
-	</div>
-	</form>
 </body>
 </html>

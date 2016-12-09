@@ -60,10 +60,10 @@ public class CourseManager {
 		return currentCourse;
 	}
 
-	public ArrayList<CourseDTO> findAllCourse() {
+	public ArrayList<CourseDTO> findAllCourse(int offSet, int noOfRec) {
 		ArrayList<CourseDTO> currentList = new ArrayList<CourseDTO>();
 		try {
-			currentList = courseDAO.findAllCourse();
+			currentList = courseDAO.findAllCourse(offSet, noOfRec);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		} catch (MyDataException e) {

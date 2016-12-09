@@ -1,6 +1,7 @@
 package edu.iss.team10.caps.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -88,13 +89,17 @@ public class StudentHome extends HttpServlet {
 		HttpSession session = request.getSession();
 		String path = "";
 		LoginDTO user = null;
+		int page=1;
+		int recordsPerPage =10;
+		if(request.getParameter("page")!=null)
+			page = Integer.parseInt(request.getParameter("page"));
 		if (session != null) {
 			user = (LoginDTO) session.getAttribute("user");
 		}
 		if (user != null) {
 			EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
 			ArrayList<EnrollmentDTO> enrolledCoursesList = enrollmentListManager
-					.loadStudentEnrollment(user.getUserId());
+					.loadStudentEnrollment(user.getUserId(), page,recordsPerPage);
 			request.setAttribute("enrolledCoursesList", enrolledCoursesList);
 			path = "views/EnrolledCourses.jsp";
 		} else {
@@ -150,6 +155,9 @@ public class StudentHome extends HttpServlet {
 
 	private void doGetGPAList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		double GPA=0.0;
+		double totalGrade = 0.0;
+		String GPAStr = null;
 		HttpSession session = request.getSession(false);
 		LoginDTO user = null;
 		String path = "";
@@ -162,6 +170,13 @@ public class StudentHome extends HttpServlet {
 		} else {
 
 			ArrayList<EnrollmentDTO> courseList = courseManager.listByStudentID(user.getUserId());
+			for (EnrollmentDTO c : courseList) {
+				GPA += (c.getCourseDTO().getCourseCredit() * c.getGrade());
+				totalGrade += c.getCourseDTO().getCourseCredit();
+			}
+			double GPAValue = GPA / totalGrade;
+			GPAStr =new DecimalFormat("##.##").format(GPAValue);
+			request.setAttribute("GPAStr", GPAStr);
 			request.setAttribute("courseList", courseList);
 			path = "views/GradeAndGPA.jsp";
 		}

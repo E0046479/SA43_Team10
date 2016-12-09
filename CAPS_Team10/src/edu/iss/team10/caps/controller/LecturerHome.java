@@ -1,6 +1,7 @@
 package edu.iss.team10.caps.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -53,7 +54,7 @@ public class LecturerHome extends HttpServlet {
 			request.setAttribute("C_Name", studentList.get(0).getCourseDTO().getCourseName());
 			request.setAttribute("C_Credit", studentList.get(0).getCourseDTO().getCourseCredit());
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("views/GradeStudentList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/GradeACourse.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
@@ -70,7 +71,7 @@ public class LecturerHome extends HttpServlet {
 		String studentName = (String) request.getParameter("studentName");
 		String courseName = (String) request.getSession().getAttribute("courseName");
 
-		RequestDispatcher rd = request.getRequestDispatcher("views/GiveGrade.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/GiveAStudent.jsp");
 
 		request.getSession().setAttribute("studentId", studentId);
 		request.getSession().setAttribute("studentName", studentName);
@@ -130,21 +131,21 @@ public class LecturerHome extends HttpServlet {
 			doGetGPAList(request, response);
 			break;
 		case "/viewEnrolledStudents":
-			viewEnrolledStudents(request,response);
+			viewEnrolledStudents(request, response);
 			break;
 		default:
 			break;
 		}
 	}
-	
-	private void viewEnrolledStudents(HttpServletRequest request, HttpServletResponse response){
-		String courseId = (String)request.getParameter("courseId");		
+
+	private void viewEnrolledStudents(HttpServletRequest request, HttpServletResponse response) {
+		String courseId = (String) request.getParameter("courseId");
 		LecturerManager lecturerCourseManager = new LecturerManager();
-		ArrayList<EnrollmentDTO> enrolledStudentList = lecturerCourseManager.viewEnrolledStudents(courseId);		
+		ArrayList<EnrollmentDTO> enrolledStudentList = lecturerCourseManager.viewEnrolledStudents(courseId);
 		request.setAttribute("enrolledStudentList", enrolledStudentList);
 		String courseName = enrolledStudentList.get(0).getCourseDTO().getCourseName();
-		if(enrolledStudentList.size() > 0){
-			request.setAttribute("C_Name", enrolledStudentList.get(0).getCourseDTO().getCourseName());			
+		if (enrolledStudentList.size() > 0) {
+			request.setAttribute("C_Name", enrolledStudentList.get(0).getCourseDTO().getCourseName());
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("views/ViewCourseEnrollment.jsp");
 		try {
@@ -194,13 +195,21 @@ public class LecturerHome extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	private void doGetGPAList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		double GPA = 0.0;
+		double totalGrade = 0.0;
+		String GPAStr = null;
 		String userId = (String) request.getParameter("userId");
 		ArrayList<EnrollmentDTO> courseList = courseManager.listByStudentID(userId);
+		for (EnrollmentDTO c : courseList) {
+			GPA += (c.getCourseDTO().getCourseCredit() * c.getGrade());
+			totalGrade += c.getCourseDTO().getCourseCredit();
+		}
+		double GPAValue = GPA / totalGrade;
+		GPAStr = new DecimalFormat("##.##").format(GPAValue);
+		request.setAttribute("GPAStr", GPAStr);
 		request.setAttribute("courseList", courseList);
 		String path = "views/GradeAndGPA.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);

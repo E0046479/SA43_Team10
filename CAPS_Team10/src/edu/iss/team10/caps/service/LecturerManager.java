@@ -55,10 +55,10 @@ public class LecturerManager {
 	}
 
 
-	public ArrayList<LecturerDTO> findAllLecturer() {
+	public ArrayList<LecturerDTO> findAllLecturer(int offset,int noOfRecords) {
 		ArrayList<LecturerDTO> currentList = new ArrayList<LecturerDTO>();
 		try {
-			currentList = lecturerDAO.findAllLecturer();
+			currentList = lecturerDAO.findAllLecturer(offset,noOfRecords);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}  catch (MyDataException e) {

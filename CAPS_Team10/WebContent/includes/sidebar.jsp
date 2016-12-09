@@ -11,19 +11,12 @@
 <title><fmt:message key="label.studentListJsp.title" /></title>
 </head>
 <body>
-	<!-- <div class="row"> -->
-	<!-- <div class="absolute-wrapper"></div> -->
-	<!-- <div class="side-menu"> -->
 	<div class="collapse navbar-default navbar-collapse" role="navigation"
 		id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav side-nav">
 			<!-- Admin Navigation -->
 			<c:if test="${sessionScope['user'].role== 'admin'}">
-				<%-- <%
-					LoginDTO user = (LoginDTO) session.getAttribute("user");
-				%>
-				<%=user.getUserId()%> --%>
-				<li class="active"><a
+				<li class=""><a
 					href="${pageContext.request.contextPath}/adminHome"><span
 						class="glyphicon glyphicon-dashboard"></span> <fmt:message
 							key="label.Admin.Manage.Student" /></a></li>
@@ -43,28 +36,26 @@
 
 			<!-- Student Navigation -->
 			<c:if test="${sessionScope['user'].role == 'student'}">
-				<li class="active"><a
+				<li class=""><a
 					href="<%=request.getContextPath()%>/studentHome"><span
-						class="glyphicon glyphicon-dashboard"></span> <fmt:message
+						class="glyphicon glyphicon-education"></span> <fmt:message
 							key="label.Student.Manage.GradeAndGPA" /></a></li>
 				<li><a href="<%=request.getContextPath()%>/studentEnrollCourseList"><span
-						class="glyphicon glyphicon-plane"></span> <fmt:message
-							key="label.student.view.course.enroll" /></a></li>
+						class="glyphicon glyphicon-list-alt"></span> <fmt:message
+							key="label.Student.Manage.ViewCourses" /></a></li>
 							<li><a href="<%=request.getContextPath()%>/EnrolledCourses"><span
-						class="glyphicon glyphicon-plane"></span> <fmt:message
+						class="glyphicon glyphicon-book"></span> <fmt:message
 							key="label.enrolledCourses" /></a></li>
 			</c:if>
 
 			<!-- Lecturer Navigation -->
 			<c:if test="${sessionScope['user'].role== 'lecturer'}">
-				<li class="active"><a
+				<li class=""><a
 					href="<%=request.getContextPath()%>/lecturerHome"><span
-						class="glyphicon glyphicon-dashboard"></span> <fmt:message
+						class="glyphicon glyphicon-home"></span> <fmt:message
 							key="label.home" /></a></li>
 			</c:if>
 		</ul>
 	</div>
-	<!-- </div> -->
-	<!-- 	</div> -->
 </body>
 </html>

@@ -19,7 +19,7 @@ import edu.iss.team10.caps.service.LecturerManager;
 public class CourseDAOImpl implements CourseDAO {
 
 	private ResultSet rs;
-
+	public static int noOfRecords;
 	@Override
 	public CourseDTO findCourse(String courseId) throws DAOException, MyDataException {
 		CourseDTO courseDTO = null;
@@ -52,12 +52,12 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 	@Override
-	public ArrayList<CourseDTO> findAllCourse() throws DAOException, MyDataException {
+	public ArrayList<CourseDTO> findAllCourse(int offset,int noOfRecords) throws DAOException, MyDataException {
 		ArrayList<CourseDTO> result = new ArrayList<CourseDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 
-		String select = "SELECT * FROM caps.course;";
+		String select = "SELECT SQL_CALC_FOUND_ROWS  * FROM caps.course limit "+ offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -69,6 +69,12 @@ public class CourseDAOImpl implements CourseDAO {
 						rs.getDate("courseStartDate"), rs.getInt("courseSize"), rs.getFloat("courseCredit"),
 						rs.getDate("createdDate"));
 				result.add(courseDTO);
+			}
+			rs.close();
+			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
+			if(rs.next())
+			{
+				this.noOfRecords = rs.getInt(1);
 			}
 			if (result.size() == 0) {
 				throw new MyDataException("There is no Course Info!");

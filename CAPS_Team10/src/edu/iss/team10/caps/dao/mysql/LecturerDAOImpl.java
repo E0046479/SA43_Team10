@@ -20,7 +20,7 @@ import edu.iss.team10.caps.model.StudentDTO;
 public class LecturerDAOImpl implements LecturerDAO {
 
 	private ResultSet rs;
-
+	public static int noOfRecords;
 	@Override
 	public LecturerDTO findLecturer(String lecturerId) throws DAOException, MyDataException {
 		LecturerDTO lecturerDTO = null;
@@ -50,12 +50,12 @@ public class LecturerDAOImpl implements LecturerDAO {
 	}
 
 	@Override
-	public ArrayList<LecturerDTO> findAllLecturer() throws DAOException, MyDataException {
+	public ArrayList<LecturerDTO> findAllLecturer(int offset,int noOfRecords) throws DAOException, MyDataException {
 		ArrayList<LecturerDTO> result = new ArrayList<LecturerDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 
-		String select = "SELECT * FROM caps.lecturer;";
+		String select = "SELECT SQL_CALC_FOUND_ROWS * FROM caps.lecturer limit "+ offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -64,6 +64,12 @@ public class LecturerDAOImpl implements LecturerDAO {
 						rs.getString("lecturerEmail"), rs.getString("lecturerPhoneNumber"),
 						rs.getString("lecturerAddress"), rs.getDate("joiningDate"));
 				result.add(lecturerDTO);
+			}
+			rs.close();
+			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
+			if(rs.next())
+			{
+				this.noOfRecords = rs.getInt(1);
 			}
 			if (result.size() == 0) {
 				throw new MyDataException("There is no lecturer Info!");

@@ -11,11 +11,11 @@ import edu.iss.team10.caps.model.StudentDTO;
 public interface EnrollmentDAO {
 	public ArrayList<EnrollmentDTO> listByStudentId(String userId);
 
-	public ArrayList<EnrollmentDTO> loadAllEnrollment() throws DAOException, MyDataException;
+	public ArrayList<EnrollmentDTO> loadAllEnrollment(int offset,int noOfRecords) throws DAOException, MyDataException;
 
 	public int deleteEnrollment(StudentDTO student, CourseDTO course) throws DAOException, MyDataException;
 
-	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String studentId) throws DAOException, MyDataException;
+	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String studentId,int offset,int noOfRecords) throws DAOException, MyDataException;
 	
 	
 }

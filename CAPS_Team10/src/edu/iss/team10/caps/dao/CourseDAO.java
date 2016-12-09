@@ -11,7 +11,7 @@ public interface CourseDAO{
 
 	public CourseDTO findCourse(String courseId) throws DAOException, MyDataException;
 
-	public ArrayList<CourseDTO> findAllCourse() throws DAOException, MyDataException;
+	public ArrayList<CourseDTO> findAllCourse(int offset, int noOfRecords) throws DAOException, MyDataException;
 
 	public ArrayList<CourseDTO> findCourseByCriteria(CourseSearchDTO courseSearchDTO) throws DAOException, MyDataException;
 	

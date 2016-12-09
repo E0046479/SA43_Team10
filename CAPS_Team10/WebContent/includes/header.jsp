@@ -20,7 +20,7 @@
 		</a>
 			<ul class="dropdown-menu" role="menu">
 				<li class="divider"></li>
-				<li><a href="main">Logout</a></li>
+				<li><a href="main"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
 			</ul></li>
 	</ul>
 </div>

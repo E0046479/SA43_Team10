@@ -21,21 +21,24 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<div>
-				<br />
-				<form action="/CAPS_Team10/searchEnroll" method="POST">
-					<table>
-						<tr>
-							<td><input type="text" name="studentId"
-								value="${param['studentId']}" placeholder="Enter Student ID"></td>
-							<td><input type="submit" value="Search" /></td>
-						</tr>
-					</table>
+					<div class="text-left">
+				<span class="label label-success" style="font-size: 12pt;">
+				<fmt:message key="label.enrollment.total" />
+				<font style="color: red;">${fn:length(enrollmentList)}</font></span>
+			</div><br/>
+			<div class="text-left">
+				<form action="${pageContext.request.contextPath}/searchEnroll" method="post" class="form-search">
+					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search"/>" name="studentId" value="${param['studentId']}">
+						 <span class="input-group-btn">
+							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
+						</span>
+					</div>
+					</div>
 				</form>
-				<br />
-				<fmt:message key="label.enrollment.total" />${fn:length(enrollmentList)}</div>
-			<br />
-			<table class="table table-bordered">
+			</div><br /><br/>
+			<table class="table table-bordered table-striped">
 
 				<tr class="info">
 					<th class="text-center"><fmt:message
@@ -48,8 +51,7 @@
 							key="label.enrollment.courseName" /></th>
 					<th class="text-center"><fmt:message
 							key="label.course.table.title.courseStartDate" /></th>
-					<th class="text-center"><fmt:message
-							key="label.enrollment.delete" /></th>
+					<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
 				</tr>
 
 				<tbody>
@@ -66,19 +68,42 @@
 										value="${enrollment.studentDTO.studentId}" />
 									<c:param name="courseID"
 										value="${enrollment.courseDTO.courseId}" />
-								</c:url> <a href="${delurl}"><button type="button"
-										${enrollment.allowDelete== false? 'style="display:none;"':''}
-										class="btn btn-danger">
-										<span class="glyphicon glyphicon-floppy-remove"></span>
-									</button></a></td>
+								</c:url> <a href="${delurl}" class="btn btn-danger" type="button"
+										${enrollment.allowDelete== false? 'disabled="disabled" title="Course is already passed!"':'title="DELETE"'}>
+										<span class="glyphicon glyphicon-trash"></span>
+									</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			<div class="row text-center">
+<ul class="pagination">
+<!-- Previous link  -->
+    <c:if test="${currentPage != 1}">
+        <li><a href="${pageContext.request.contextPath}/adminEnrollment?page=${currentPage - 1}">Previous</a></li>
+    </c:if>
+<!-- Page numbers. -->
+    <li class="text-center">
+        <tr>
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <td><a style="font-size: 16px;"><strong>${i}</strong></a></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><a href="${pageContext.request.contextPath}/adminEnrollment?page=${i}">${i}</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </tr>
+    </li>
+<!--         Next link -->
+    <c:if test="${currentPage lt noOfPages}">
+        <li><a href="${pageContext.request.contextPath}/adminEnrollment?page=${currentPage + 1}">Next</a></li>
+    </c:if>
+</ul>
+</div>
 		</div>
 	</div>
-
-
-
 </body>
 </html>

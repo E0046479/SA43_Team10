@@ -22,42 +22,45 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<center>
-					<table cellpadding=4 cellspacing=2 border=0>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerId" /></td>
-							<td><input type="text" name="lecturerId" size=15
-								value="${param['lecturerId']}" maxlength=20
-								readonly="readonly"> <input type="hidden" name="ins"
-								value="true" /></td>
-						</tr>
-						<tr>
-							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
-							<td><input type="text" name="lecturerName" size=15 value="${lecturerName}"
-								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
-								value="true" /></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerEmail" /></td>
-							<td><input type="text" name="lecturerEmail" size=15 value="${lecturerEmail}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerPhoneNumber" /></td>
-							<td><input type="text" name="lecturerPhoneNumber" size=15 value="${lecturerPhoneNumber}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerAddress" /></td>
-							<td><input type="text" name="lecturerAddress" size=15 value="${lecturerAddress}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-				</table>
-				</center>
+				<div class="text-center">
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lID"><fmt:message key="label.lecturer.table.title.lecturerId" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lID" size=15 name="lecturerId" type="text" value="${lecturerId}" maxlength=20 readonly="readonly" >
+							    <input type="hidden" name="ins" value="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lName"><fmt:message key="label.lecturer.table.title.lecturerName" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lName" name="lecturerName" type="text" value="${lecturerName}" maxlength=20 readonly="readonly" >
+							    <input type="hidden" name="ins" value="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lEmail"><fmt:message key="label.lecturer.table.title.lecturerEmail" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lEmail" name="lecturerEmail" type="text" value="${lecturerEmail}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lPhonenumber"><fmt:message key="label.lecturer.table.title.lecturerPhoneNumber" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lPhonenumber" name="lecturerPhoneNumber" type="text" value="${lecturerPhoneNumber}" maxlength=20 readonly="readonly" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lAddress"><fmt:message key="label.lecturer.table.title.lecturerAddress" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lAddress" name="lecturerAddress" type="text" value="${lecturerAddress}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</form>

@@ -17,10 +17,10 @@ public class EnrollmentListManager {
 		enrollmentDAO = DAOFactory.loadInstance().getEnrollmentDAO();
 	}
 
-	public ArrayList<EnrollmentDTO> loadAllEnrollment() {
+	public ArrayList<EnrollmentDTO> loadAllEnrollment(int offset,int noOfRecords) {
 		ArrayList<EnrollmentDTO> enrollmentList = new ArrayList<EnrollmentDTO>();
 		try {
-			enrollmentList = enrollmentDAO.loadAllEnrollment();
+			enrollmentList = enrollmentDAO.loadAllEnrollment(offset,noOfRecords);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		} catch (MyDataException e) {
@@ -41,10 +41,10 @@ public class EnrollmentListManager {
 		return delete;
 	}
 
-	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String studentId) {
+	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String studentId,int offset,int noOfRecords) {
 		ArrayList<EnrollmentDTO> studentEnrollmentList = new ArrayList<EnrollmentDTO>();
 		try {
-			studentEnrollmentList = enrollmentDAO.loadStudentEnrollment(studentId);
+			studentEnrollmentList = enrollmentDAO.loadStudentEnrollment(studentId,offset,noOfRecords);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		} catch (MyDataException e) {
@@ -52,5 +52,4 @@ public class EnrollmentListManager {
 		}
 		return studentEnrollmentList;
 	}
-
 }

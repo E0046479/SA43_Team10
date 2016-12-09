@@ -19,7 +19,7 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<center>
+				<%-- <center>
 			 		<table cellpadding=4 cellspacing=2 border=0>
 
 						<tr>
@@ -48,8 +48,58 @@
 						</tr>
 					</table>
 					<input type="submit" value="Submit"> <input type="reset" value="Reset">
-				</center>
-
+				</center> --%>
+				<div class="text-center">
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="studentName"><fmt:message key="label.student.table.title.studentName" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="studentName" name="studentName" type="text"
+						 value="${param['studentName']}"
+						  required pattern="[a-zA-Z\s]+" title="Name cannot be numberic or regular expression!" >
+							    <input type="hidden" name="studentId" value="${param['studentId']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="studentEmail"><fmt:message key="label.student.table.title.studentEmail" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="studentEmail" name="studentEmail" type="text" 
+						value="${param['studentEmail']}" maxlength=20
+						 required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Email formart: (xxx@xxx.xxx)" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="sPhonenumber"><fmt:message key="label.student.table.title.studentPhoneNumber" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="sPhonenumber" name="studentPhoneNumber" type="text" 
+						value="${param['studentPhoneNumber']}" type="tel" maxlength="8" pattern="^\d{8}$" required="true" title="Phone number should be 8 digits" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="sAddress"><fmt:message key="label.student.table.title.studentAddress" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="sAddress" name="studentAddress" type="text" value="${param['studentAddress']}" required="true" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="enrollDate"><fmt:message key="label.student.table.title.enrollmentDate" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="enrollmentDate" name="enrollmentDate" type="text" value="${param['enrollmentDate']}"required="true" >
+					</div>
+				</div>
+				<div class="">
+					  <div class="col-md-4 col-xs-6 col-sm-6 text-right">
+					    <button type="submit" class="btn btn-success">Submit</button>
+					  </div>
+					  <div class="col-md-4 col-xs-6 col-sm-6 text-left">
+					    <button type="reset" class="btn btn-primary">Reset</button>			
+					  </div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</form>

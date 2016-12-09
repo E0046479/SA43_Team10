@@ -17,7 +17,7 @@ import edu.iss.team10.caps.model.StudentSearchDTO;
 public class StudentDAOImpl implements StudentDAO {
 
 	private ResultSet rs;
-
+	public static int noOfRecords;
 	@Override
 	public StudentDTO findStudent(String studentId) throws DAOException, MyDataException {
 		StudentDTO studentDTO = null;
@@ -47,12 +47,12 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public ArrayList<StudentDTO> findAllStudent() throws DAOException, MyDataException {
+	public ArrayList<StudentDTO> findAllStudent(int offset, int noOfRecords) throws DAOException, MyDataException {
 		ArrayList<StudentDTO> result = new ArrayList<StudentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 
-		String select = "SELECT * FROM caps.student;";
+		String select = "SELECT SQL_CALC_FOUND_ROWS * FROM caps.student limit "+ offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -61,6 +61,12 @@ public class StudentDAOImpl implements StudentDAO {
 						rs.getString("studentEmail"), rs.getString("studentPhoneNumber"),
 						rs.getString("studentAddress"), rs.getDate("enrollmentDate"));
 				result.add(studentDTO);
+			}
+			rs.close();
+			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
+			if(rs.next())
+			{
+				this.noOfRecords = rs.getInt(1);
 			}
 			if (result.size() == 0) {
 				throw new MyDataException("There is no Student Info!");

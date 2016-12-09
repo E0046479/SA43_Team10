@@ -19,15 +19,22 @@
 		</div>
 		<div class="panel-body">
 			<a href="views/Student_New.jsp" class="btn btn-success"><fmt:message
-					key="label.student.add" /></a> <br /> <br />
-					<form action="${pageContext.request.contextPath}/studentSearch" method="post">
-<div align="right">
-					<fmt:message key="label.table.search" />
-					<input type="text" name="studentId"></input>
-					<input type="submit" value="Search"></input>
-				</div>
-</form>
-<br />
+					key="label.student.add" /></a>
+		<div class="text-left">
+				<form action="${pageContext.request.contextPath}/studentSearch"
+					method="post" class="form-search">
+					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="<fmt:message key="label.table.search" />"
+							name="studentId"> <span class="input-group-btn">
+							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
+						</span>
+						
+					</div>
+					</div>
+				</form>
+			</div>
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>
@@ -57,7 +64,7 @@
 								<c:param name="studentAddress" value="${student.studentAddress}" />
 								<c:param name="enrollmentDate" value="${student.enrollmentDate}" />
 						</c:url> 
-						<a href="${detailurl}" class="btn btn-info" role="button">
+						<a href="${detailurl}" class="btn btn-info" role="button" title="DETAIL">
 						<span class="glyphicon glyphicon-info-sign">
 						</span>
 						</a>
@@ -70,21 +77,47 @@
 								<c:param name="studentAddress" value="${student.studentAddress}" />
 								<c:param name="enrollmentDate" value="${student.enrollmentDate}" />
 						</c:url> 
-						<a href="${updurl}" class="btn btn-warning" role="button"><span
+						<a href="${updurl}" class="btn btn-warning" role="button" title="EDIT"><span
 								class="glyphicon glyphicon-floppy-open">
 						</span>
-						</a>
-						
+						</a>					
 						<c:url var="delurl" scope="page" value="/studentDelete">
 								<c:param name="studentId" value="${student.studentId}" />
 						</c:url> 
-						<a href="${delurl}" class="btn btn-danger">
-						<span class="glyphicon glyphicon-floppy-remove"></span>
+						<a href="${delurl}" class="btn btn-danger" title="DELETE">
+						<span class="glyphicon glyphicon-trash"></span>
 						</a> 
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
+			<div class="row text-center">
+<ul class="pagination">
+<%-- Previous link  --%>
+    <c:if test="${(currentPage != 1)}">
+        <li><a href="${pageContext.request.contextPath}/adminHome?page=${currentPage - 1}">Previous</a></li>
+    </c:if>
+<%--Page numbers.--%>
+    <li class="text-center">
+        <tr>
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <td><a style="font-size: 16px;"><strong>${i}</strong></a></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><a href="${pageContext.request.contextPath}/adminHome?page=${i}">${i}</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </tr>
+    </li>
+        <%-- Next link --%>
+    <c:if test="${currentPage lt noOfPages}">
+        <li><a href="${pageContext.request.contextPath}/adminHome?page=${currentPage + 1}">Next</a></li>
+    </c:if>
+</ul>
+</div>
 		</div>
 	</div>
 </body>

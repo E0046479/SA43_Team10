@@ -51,10 +51,10 @@ public class StudentManager {
 		return currentStudent;
 	}
 
-	public ArrayList<StudentDTO> findAllStudent() {
+	public ArrayList<StudentDTO> findAllStudent(int offSet, int noOfRec) {
 		ArrayList<StudentDTO> currentList = new ArrayList<StudentDTO>();
 		try {
-			currentList = studentDAO.findAllStudent();
+			currentList = studentDAO.findAllStudent(offSet, noOfRec);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		} catch (MyDataException e) {

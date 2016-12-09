@@ -16,37 +16,49 @@
 					<fmt:message key="label.lecturer.add" />
 				</h3></div>	
 		<div class="panel-body">
-<center>
-					<table cellpadding=4 cellspacing=2 border=0>
-
-						<tr>
-							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
-							<td><input type="text" name="lecturerName" size=15
-								maxlength=20> <input type="hidden" name="ins"
-								value="true" /></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerEmail" /></td>
-							<td><input type="text" name="lecturerEmail" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerPhoneNumber" /></td>
-							<td><input type="text" name="lecturerPhoneNumber" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerAddress" /></td>
-							<td><input type="text" name="lecturerAddress" size=15
-								maxlength=20></td>
-						</tr>
-					</table>
-					<input type="submit" value="Submit"> <input type="reset"
-						value="Reset">
-				</center>
+				<div class="text-center">
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lName"><fmt:message key="label.lecturer.table.title.lecturerName" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lName" name="lecturerName" type="text"
+						required pattern="[a-zA-Z\s]+" title="Name cannot be numberic or regular expression!"/>
+							    <input type="hidden" name="ins" value="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lEmail"><fmt:message key="label.lecturer.table.title.lecturerEmail" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lEmail" name="lecturerEmail" type="email"
+						 value="${param['lecturerEmail']}" required  
+						 pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Email formart: (xxx@xxx.xxx)"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lPhonenumber"><fmt:message key="label.lecturer.table.title.lecturerPhoneNumber" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lPhonenumber" name="lecturerPhoneNumber" type="tel"
+						pattern="^\d{8}$" required="true" title="Phone number should be 8 digits" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lAddress"><fmt:message key="label.lecturer.table.title.lecturerAddress" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lAddress" name="lecturerAddress" type="text" required="true" >
+					</div>
+				</div>
+				<div class="">
+					  <div class="col-md-4 col-xs-6 col-sm-6 text-right">
+					    <button type="submit" class="btn btn-success">Submit</button>
+					  </div>
+					  <div class="col-md-4 col-xs-6 col-sm-6 text-left">
+					    <button type="reset" class="btn btn-primary">Reset</button>			
+					  </div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</form>

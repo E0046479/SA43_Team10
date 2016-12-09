@@ -23,65 +23,73 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<center>
-					<table class="table" style="width:50%">
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseId" /></td>
-							<td><input type="text" name="courseId" size=15 value="${courseId}" 
-							    maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
-								value="true" /></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message key="label.course.table.title.courseName" /></td>
-							<td><input type="text" name="courseName" size=15 value="${courseName}"
-								maxlength=20 readonly="readonly"> <input type="hidden" name="ins"
-								value="true" /></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.lecturerId" /></td>
-							<td><input type="text" name="lecturerId" size=15 value="${lecturerId}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseType" /></td>
-							<td><input type="text" name="courseType" size=15 value="${courseType}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseDuration" /></td>
-							<td><input type="text" name="courseDuration" size=15 value="${courseDuration}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseStartDate" /></td>
-							<td><input type="text" name="courseStartDate" size=15 value="${courseStartDate}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseSize" /></td>
-							<td><input type="text" name="courseSize" size=15 value="${courseSize}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseCredit" /></td>
-							<td><input type="text" name="courseCredit" size=15 value="${courseCredit}"
-								maxlength=20 readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td class="text-right h3"><fmt:message
-									key="label.course.table.title.courseDescription" /></td>
-							<td><textarea class="form-control" row="15" type="text" name="courseDescription" 
-								maxlength=20 readonly="readonly">${courseDescription}</textarea></td>
-						</tr>
-				</table>
-				</center>
+				<div class="text-center">
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cID"><fmt:message key="label.course.table.title.courseId" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cID" size=15 name="courseId" type="text" value="${courseId}" maxlength=20 readonly="readonly" >
+							    <input type="hidden" name="ins" value="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cName"><fmt:message key="label.course.table.title.courseName" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cName" name="courseName" type="text" value="${courseName}" maxlength=20 readonly="readonly" >
+							    <input type="hidden" name="ins" value="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="lID"><fmt:message key="label.course.table.title.lecturerId" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="lID" name="lecturerId" type="text" value="${lecturerId}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cDesc"><fmt:message key="label.course.table.title.courseDescription" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<textarea class="form-control input-md" id="cDesc" name="courseDescription" type="text" rows="6" maxlength=20 readonly="readonly" style="resize: none;">${courseDescription}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cType"><fmt:message key="label.course.table.title.courseType" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cType" name="courseType" type="text" value="${courseType}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cDur"><fmt:message key="label.course.table.title.courseDuration" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cDur" name="courseDuration" type="text" value="${courseDuration} (days)" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cSDate"><fmt:message key="label.course.table.title.courseStartDate" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cSDate" name="courseStartDate" type="text" value="${courseStartDate}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cSize"><fmt:message key="label.course.table.title.courseSize" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cSize" name="courseSize" type="text" value="${courseSize}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
+						for="cCredit"><fmt:message key="label.course.table.title.courseCredit" /></label>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<input class="form-control input-md" id="cCredit" name="courseCredit" type="text" value="${courseCredit}" maxlength=20 readonly="readonly" >
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</form>

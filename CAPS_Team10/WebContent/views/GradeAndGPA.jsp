@@ -10,7 +10,6 @@
 <title><fmt:message key="label.Student.Manage.GradeAndGPA" /></title>
 </head>
 <body>
-<body>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>
@@ -18,7 +17,6 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-		<br /> <br />
 		<table class="table table-bordered">
 				<tr class="info">
 				<th class="text-center"><fmt:message key="label.table.No" /></th>
@@ -40,6 +38,11 @@
 						<td class="nowrap">${enrollment.grade}</td>
 						</c:forEach>
 				</table>
+				<div class="form-group"align="right">
+			    	  	    <label for="studentName"><fmt:message key="label.student.table.title.GPA" /></label>
+			    	  	    &nbsp;&nbsp;&nbsp;
+			    		    <input  name="id" value="${GPAStr}" type="text" readonly>
+			    		</div>
 				</div>
 				</div>
 		

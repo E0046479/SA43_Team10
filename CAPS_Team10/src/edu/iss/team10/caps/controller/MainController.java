@@ -34,6 +34,7 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logOut(request, response);
+		request.setAttribute("logInError", "");
 		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 		try {
 			rd.forward(request, response);
@@ -72,8 +73,8 @@ public class MainController extends HttpServlet {
 				break;
 			}
 		} else {
-			request.setAttribute("logInError", "LogIn Error! Please Log In Again!");
-			path = "views/login.jsp";
+			request.setAttribute("logInError", "Oops! Please Try Again!");
+			path = "/login.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		try {

@@ -12,7 +12,7 @@ public interface StudentDAO {
 
 	public StudentDTO findStudent(String studentId) throws DAOException, MyDataException;
 
-	public ArrayList<StudentDTO> findAllStudent() throws DAOException, MyDataException;
+	public ArrayList<StudentDTO> findAllStudent(int offset, int noOfRecords) throws DAOException, MyDataException;
 
 	public ArrayList<StudentDTO> findStudentByCriteria(StudentSearchDTO studentSearchDTO) throws DAOException, MyDataException;
 	

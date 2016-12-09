@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.iss.team10.caps.dao.mysql.CourseDAOImpl;
+import edu.iss.team10.caps.dao.mysql.EnrollmentDAOImpl;
+import edu.iss.team10.caps.dao.mysql.LecturerDAOImpl;
+import edu.iss.team10.caps.dao.mysql.StudentDAOImpl;
 import edu.iss.team10.caps.model.CourseDTO;
 import edu.iss.team10.caps.model.EnrollmentDTO;
 import edu.iss.team10.caps.model.LecturerDTO;
@@ -29,7 +33,8 @@ import edu.iss.team10.caps.service.StudentManager;
  */
 @WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/lecturerList", "/lecturerInsert",
 		"/lecturerEdit", "/lecturerDelete", "/courseList", "/courseInsert", "/courseEdit", "/courseDelete",
-		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll" ,"/lecturerSearch","/studentSearch","/courseSearch"})
+		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll", "/lecturerSearch", "/studentSearch",
+		"/courseSearch" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -106,7 +111,7 @@ public class AdminHome extends HttpServlet {
 			break;
 		case "/searchEnroll":
 			doSearchEnrollment(request, response);
-			break;	
+			break;
 		default:
 			break;
 		}
@@ -124,8 +129,15 @@ public class AdminHome extends HttpServlet {
 	// Student Method
 
 	private void doGetStudentLsit(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<StudentDTO> studentList = studentManager.findAllStudent();
+		int page = 1;
+		int recordsPerPage = 10;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		ArrayList<StudentDTO> studentList = studentManager.findAllStudent((page - 1) * recordsPerPage, recordsPerPage);
+		int noOfPages = (int) Math.ceil(StudentDAOImpl.noOfRecords * 1.0 / recordsPerPage);
 		request.setAttribute("studentList", studentList);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
 		RequestDispatcher rd = request.getRequestDispatcher("views/Student_List.jsp");
 		try {
 			rd.forward(request, response);
@@ -145,9 +157,9 @@ public class AdminHome extends HttpServlet {
 			String lastStudentId = studentManager.getLastStudent();
 			String lastNoString = lastStudentId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			if(lastNo > 9){
+			if (lastNo > 9) {
 				studentId = "s0" + lastNo;
-			}else{
+			} else {
 				studentId = "s00" + lastNo;
 			}
 		}
@@ -223,30 +235,46 @@ public class AdminHome extends HttpServlet {
 	}
 
 	private void doSearchStudent(HttpServletRequest request, HttpServletResponse response) {
-		String Id=(String) request.getParameter("studentId");
+		String Id = (String) request.getParameter("studentId");
 		System.out.println(Id);
-		StudentDTO student=studentManager.findStudent(Id);	
-		request.setAttribute("studentId", student.getStudentId());
-		request.setAttribute("studentName", student.getStudentName());
-		request.setAttribute("studentEmail", student.getStudentEmail());
-		request.setAttribute("studentAddress",student.getStudentAddress());
-		request.setAttribute("studentPhoneNumber", student.getStudentPhoneNumber());
-		request.setAttribute("enrollmentDate", student.getEnrollmentDate());
-		RequestDispatcher rd=request.getRequestDispatcher("views/Student_Detail.jsp");
-		  try{
-	        	rd.forward(request, response);
-	        }catch(ServletException e){
-	        	e.printStackTrace();
-	        }catch(IOException e){
-	        	e.printStackTrace();
-	        }
-		
+		StudentDTO student = studentManager.findStudent(Id);
+		String path = "";
+		if (student == null) {
+			path = "views/Error_Page.jsp";
+			request.setAttribute("errorMessage", "There is no record for this student ID");
+		} else {
+			request.setAttribute("studentId", student.getStudentId());
+			request.setAttribute("studentName", student.getStudentName());
+			request.setAttribute("studentEmail", student.getStudentEmail());
+			request.setAttribute("studentAddress", student.getStudentAddress());
+			request.setAttribute("studentPhoneNumber", student.getStudentPhoneNumber());
+			request.setAttribute("enrollmentDate", student.getEnrollmentDate());
+			path = "views/Student_Detail.jsp";
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	// Lecturer Methods
 	private void doGetLecturerLsit(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<LecturerDTO> lecturerList = lecturerManager.findAllLecturer();
+		int page = 1;
+		int recordsPerPage = 10;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		ArrayList<LecturerDTO> lecturerList = lecturerManager.findAllLecturer((page - 1) * recordsPerPage,
+				recordsPerPage);
+		int noOfPages = (int) Math.ceil(LecturerDAOImpl.noOfRecords * 1.0 / recordsPerPage);
 		request.setAttribute("lecturerList", lecturerList);
+		request.setAttribute("lecturerList", lecturerList);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
 		RequestDispatcher rd = request.getRequestDispatcher("views/Lecturer_List.jsp");
 		try {
 			rd.forward(request, response);
@@ -293,11 +321,11 @@ public class AdminHome extends HttpServlet {
 			String lastCourseId = lecturerManager.getLastLecturer();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			if(lastNo > 9){
+			if (lastNo > 9) {
 				id = "l0" + lastNo;
-			}else{
+			} else {
 				id = "l00" + lastNo;
-			}			
+			}
 		}
 		String lecturerId = id;
 		String lecturerName = request.getParameter("lecturerName");
@@ -345,29 +373,36 @@ public class AdminHome extends HttpServlet {
 		return del;
 	}
 
-	public void doSearchLecturer(HttpServletRequest request, HttpServletResponse response){
-		String Id=(String) request.getParameter("lecturerId");
+	public void doSearchLecturer(HttpServletRequest request, HttpServletResponse response) {
+		String Id = (String) request.getParameter("lecturerId");
 		System.out.println(Id);
-		LecturerDTO lecturer=lecturerManager.findLecturer(Id);	
+		LecturerDTO lecturer = lecturerManager.findLecturer(Id);
 		request.setAttribute("lecturerId", lecturer.getLecturerId());
 		request.setAttribute("lecturerName", lecturer.getLecturerName());
 		request.setAttribute("lecturerEmail", lecturer.getLecturerEmail());
-		request.setAttribute("lecturerAddress",lecturer.getLecturerAddress());
+		request.setAttribute("lecturerAddress", lecturer.getLecturerAddress());
 		request.setAttribute("lecturerPhoneNumber", lecturer.getLecturerPhoneNumber());
-		RequestDispatcher rd=request.getRequestDispatcher("views/Lecturer_Detail.jsp");
-		  try{
-	        	rd.forward(request, response);
-	        }catch(ServletException e){
-	        	e.printStackTrace();
-	        }catch(IOException e){
-	        	e.printStackTrace();
-	        }
+		RequestDispatcher rd = request.getRequestDispatcher("views/Lecturer_Detail.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	// Course Method
 	private void doGetCourseLsit(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<CourseDTO> courseList = courseManager.findAllCourse();
+		int page = 1;
+		int recordsPerPage = 10;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		ArrayList<CourseDTO> courseList = courseManager.findAllCourse((page - 1) * recordsPerPage, recordsPerPage);
+		int noOfPages = (int) Math.ceil(CourseDAOImpl.noOfRecords * 1.0 / recordsPerPage);
 		request.setAttribute("courseList", courseList);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
 		RequestDispatcher rd = request.getRequestDispatcher("views/Course_List.jsp");
 		try {
 			rd.forward(request, response);
@@ -387,9 +422,9 @@ public class AdminHome extends HttpServlet {
 			String lastCourseId = courseManager.getLastCourse();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			if(lastNo > 9){
+			if (lastNo > 9) {
 				courseId = "c0" + lastNo;
-			}else{
+			} else {
 				courseId = "c00" + lastNo;
 			}
 		}
@@ -487,34 +522,42 @@ public class AdminHome extends HttpServlet {
 	}
 
 	private void doSearchCourse(HttpServletRequest request, HttpServletResponse response) {
-		String Id=(String) request.getParameter("courseId");
+		String Id = (String) request.getParameter("courseId");
 		System.out.println(Id);
-		CourseDTO course=courseManager.findCourse(Id);	
+		CourseDTO course = courseManager.findCourse(Id);
 		request.setAttribute("courseId", course.getCourseId());
 		request.setAttribute("courseName", course.getCourseName());
 		request.setAttribute("courseDescription", course.getCourseDescription());
-		request.setAttribute("courseType",course.getCourseType());
+		request.setAttribute("courseType", course.getCourseType());
 		request.setAttribute("courseDuration", course.getCourseDuration());
 		request.setAttribute("courseStartDate", course.getCourseStartDate());
-		request.setAttribute("courseSize",course.getCourseSize());
+		request.setAttribute("courseSize", course.getCourseSize());
 		request.setAttribute("lecturerId", course.getLecturer().getLecturerId());
-		request.setAttribute("courseCredit",course.getCourseCredit());
-		RequestDispatcher rd=request.getRequestDispatcher("views/Course_Detail.jsp");
-		  try{
-	        	rd.forward(request, response);
-	        }catch(ServletException e){
-	        	e.printStackTrace();
-	        }catch(IOException e){
-	        	e.printStackTrace();
-	        }
-		
+		request.setAttribute("courseCredit", course.getCourseCredit());
+		RequestDispatcher rd = request.getRequestDispatcher("views/Course_Detail.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 	// Enrollment
 
 	private void doGetEnrollmentList(HttpServletRequest request, HttpServletResponse response) {
+		int page = 1;
+		int recordsPerPage = 10;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
 		EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
-		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager.loadAllEnrollment();
+		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager.loadAllEnrollment((page - 1) * recordsPerPage,
+				recordsPerPage);
+		int noOfPages = (int) Math.ceil(EnrollmentDAOImpl.noOfRecords * 1.0 / recordsPerPage);
 		request.setAttribute("enrollmentList", enrollmentList);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
 		RequestDispatcher rd = request.getRequestDispatcher("views/Admin_Enrollment.jsp");
 		try {
 			rd.forward(request, response);
@@ -538,12 +581,19 @@ public class AdminHome extends HttpServlet {
 		}
 
 	}
-	
+
 	private void doSearchEnrollment(HttpServletRequest request, HttpServletResponse response) {
+		int page = 1;
+		int recordsPerPage = 10;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
 		EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
 		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager
-				.loadStudentEnrollment(request.getParameter("studentId"));
+				.loadStudentEnrollment(request.getParameter("studentId"), (page - 1) * recordsPerPage, recordsPerPage);
+		int noOfPages = (int) Math.ceil(CourseDAOImpl.noOfRecords * 1.0 / recordsPerPage);
 		request.setAttribute("enrollmentList", enrollmentList);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
 		RequestDispatcher rd = request.getRequestDispatcher("views/Admin_Enrollment.jsp");
 		try {
 			rd.forward(request, response);
@@ -556,5 +606,3 @@ public class AdminHome extends HttpServlet {
 	}
 
 }
-
-
