@@ -571,7 +571,7 @@ public class AdminHome extends HttpServlet {
 		request.setAttribute("courseDuration", course.getCourseDuration());
 		request.setAttribute("courseStartDate", course.getCourseStartDate());
 		request.setAttribute("courseSize", course.getCourseSize());
-		request.setAttribute("lecturerId", course.getLecturer().getLecturerId());
+		request.setAttribute("lecturerName", course.getLecturer().getLecturerName());
 		request.setAttribute("courseCredit", course.getCourseCredit());
 		path="views/Course_Detail.jsp";
 		}

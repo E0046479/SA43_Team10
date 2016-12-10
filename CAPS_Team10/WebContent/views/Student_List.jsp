@@ -18,12 +18,15 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<a href="views/Student_New.jsp" class="btn btn-success"><fmt:message
+		<div class="row">
+		<div class="col-md-6">
+		<a href="views/Student_New.jsp" class="btn btn-success"><fmt:message
 					key="label.student.add" /></a>
-		<div class="text-left">
+		</div>
+		<div class="col-md-6">
 				<form action="${pageContext.request.contextPath}/studentSearch"
 					method="post" class="form-search">
-					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class="" style="padding-left: 0px;">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="<fmt:message key="label.table.search" />"
@@ -32,11 +35,13 @@
 						</span>						
 					</div>
 					<c:if test="${requestScope['errorMessage'] !=null}">
-			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorMessage") %></div>
+			    	    <div class="alert alert-danger" style="margin-bottom: 0px;"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorMessage") %></div>
 			    	    </c:if>
 					</div>
 				</form>
 			</div>
+		</div>
+		</br>
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>

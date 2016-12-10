@@ -10,7 +10,6 @@
 <title><fmt:message key="label.lecturerlistJsp.title" /></title>
 </head>
 <body>
-
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>
@@ -18,24 +17,34 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<a href="views/Lecturer_New.jsp" class="btn btn-success"><fmt:message
+			<div class="row">
+			<div class="col-md-6">
+						<a href="views/Lecturer_New.jsp" class="btn btn-success"><fmt:message
 						key="label.lecturer.add" /></a>
-				<div class="text-left">
+			</div>
+				<div class="col-md-6">
 				<form action="${pageContext.request.contextPath}/lecturerSearch"
 					method="post" class="form-search">
-					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class="" style="padding-left: 0px;">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search" />"
-							name="lecturerId"> <span class="input-group-btn">
-							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
-						</span>
+							<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search" />"
+							name="lecturerId"> 
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit" title="SEARCH">
+									<i class="glyphicon glyphicon-search" style="font-size: 15pt;">
+									</i>
+								</button>
+							</span>
 					</div>
 					<c:if test="${requestScope['errorLecturer'] !=null}">
-			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorLecturer") %></div>
-			    	    </c:if>
+			    	    <div class="alert alert-danger" style="margin-bottom: 0px;"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorLecturer") %>
+			    	    </div>
+			    	</c:if>
 					</div>
 				</form>
 			</div>
+			</div>
+			<br/>	
 				<form action="/lecturerList" method=post>
 				<table class="table table-striped table-bordered">
 					<tr class="info">

@@ -19,57 +19,6 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<%-- <center>
-					<table cellpadding=4 cellspacing=2 border=0>
-
-						<tr>
-							<td><fmt:message key="label.course.table.title.courseName" /></td>
-							<td><input type="text" name="courseName" size=15
-								maxlength=20> <input type="hidden" name="ins"
-								value="true" /></td>
-						</tr>
-						<tr>
-							<td><fmt:message key="label.course.table.title.lecturerId" /></td>
-							<td><input type="text" name="lecturerId" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.course.table.title.courseDescription" /></td>
-							<td><input type="text" name="courseDescription" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message key="label.course.table.title.courseType" /></td>
-							<td><input type="text" name="courseType" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.course.table.title.courseDuration" /></td>
-							<td><input type="text" name="courseDuration" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.course.table.title.courseStartDate" /></td>
-							<td><input type="text" id="enrollmentDate" name="courseStartDate" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message key="label.course.table.title.courseSize" /></td>
-							<td><input type="text" name="courseSize" size=15
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message key="label.course.table.title.courseCredit" /></td>
-							<td><input type="text" name="courseCredit" size=15
-								maxlength=20></td>
-						</tr>
-					</table>
-					<input type="submit" value="Submit"> <input type="reset"
-						value="Reset">
-				</center> --%>
 				<div class="text-center">
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
@@ -91,14 +40,14 @@
 								<select	name="lecturerId" class="form-control input-md" >
 								<option value="${selected}" selected>${selected}</option>
 								<c:forEach items="${lecturerList}" var="lecturer">
-									<%-- <c:if test="${lecturer.lecturerName != selected}">
-										
+									<%-- <c:if test="${lecturer.lecturerName != selected}">										
 									</c:if> --%>
 									<option value="${lecturer.lecturerId}">${lecturer.lecturerName}</option>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cDesc"><fmt:message
@@ -109,6 +58,7 @@
 								required="true"></textarea>
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cDesc"><fmt:message
@@ -118,6 +68,7 @@
 								type="text" maxlength=20 required="true">
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cDur"><fmt:message
@@ -129,6 +80,7 @@
 								title="Duration must be less or equal to 100 days" />
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="enrollmentDate"><fmt:message
@@ -138,6 +90,7 @@
 								name="courseStartDate" type="text" maxlength=20 required="true">
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cSize"><fmt:message
@@ -149,6 +102,7 @@
 								title="Maximum Student must less or equal to 100">
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cCredit"><fmt:message
@@ -159,12 +113,13 @@
 								required="true" title="Credit range : 4 - 12" />
 						</div>
 					</div>
+					<br>
 					<div class="">
 						<div class="col-md-4 col-xs-6 col-sm-6 text-right">
-							<button type="submit" class="btn btn-success">Submit</button>
+							<button type="submit" class="btn btn-success"><fmt:message key="label.button.submit" /></button>
 						</div>
 						<div class="col-md-4 col-xs-6 col-sm-6 text-left">
-							<button type="reset" class="btn btn-primary">Reset</button>
+							<button type="reset" class="btn btn-primary"><fmt:message key="label.button.reset" /></button>
 						</div>
 					</div>
 				</div>

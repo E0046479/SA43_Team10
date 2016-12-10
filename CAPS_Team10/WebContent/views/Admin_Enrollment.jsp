@@ -12,24 +12,22 @@
 <fmt:setBundle basename="messages" />
 </head>
 <body>
-
-
-	<div class="panel panel-default">
+<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>
 				<fmt:message key="label.enrollment.list" />
 			</h3>
 		</div>
 		<div class="panel-body">
-			<div class="text-left">
-				<span class="label label-success" style="font-size: 12pt;"> <fmt:message
+		<div class="row">
+		<div class="col-md-6">
+				<span class="label label-success" style="font-size: 12pt; line-height: normal;"> <fmt:message
 						key="label.enrollment.total" /> <font style="color: red;">${TOTAL_RECORDS}</font></span>
 			</div>
-			<br />
-			<div class="text-left">
+			<div class="col-md-6">
 				<form action="${pageContext.request.contextPath}/searchEnroll"
 					method="post" class="form-search">
-					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class=" " style="padding-left: 0px;">
 						<div class="input-group">
 							<input type="text" class="form-control"
 								placeholder="<fmt:message key="label.table.search"/>"
@@ -41,14 +39,14 @@
 							</span>
 						</div>
 						<c:if test="${requestScope['enrorEnroll'] !=null}">
-							<div class="alert alert-danger">
+							<div class="alert alert-danger" style="margin-bottom: 0px;">
 								<span class="glyphicon glyphicon-exclamation-sign"></span>
 								<%=request.getAttribute("enrorEnroll")%></div>
 						</c:if>
 					</div>
 				</form>
 			</div>
-			<br /> <br />
+		</div> <br />
 			<table class="table table-bordered table-striped">
 
 				<tr class="info">

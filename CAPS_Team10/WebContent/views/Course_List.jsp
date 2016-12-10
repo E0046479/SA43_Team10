@@ -18,12 +18,14 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<a href="${pageContext.request.contextPath}/prepareForNewCourse" class="btn btn-success"><fmt:message
-					key="label.course.add" /></a><br/>
-					<div class="text-left">
+		<div class="row">
+		<div class="col-md-6">
+		<a href="${pageContext.request.contextPath}/prepareForNewCourse" class="btn btn-success"><fmt:message
+					key="label.course.add" /></a></div>
+					<div class="col-md-6">
 				<form action="${pageContext.request.contextPath}/courseSearch"
 					method="post" class="form-search">
-					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
+					<div class=" " style="padding-left: 0px;">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search" />"
 							name="courseId"> <span class="input-group-btn">
@@ -31,11 +33,13 @@
 						</span>
 					</div>
 					<c:if test="${requestScope['errorCourse'] !=null}">
-			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorCourse") %></div>
+			    	    <div class="alert alert-danger" style="margin-bottom: 0px;"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorCourse") %></div>
 			    	    </c:if>
 					</div>
 				</form>
-			</div><br/>
+			</div>
+		</div>
+		<br/>
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>
