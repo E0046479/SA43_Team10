@@ -71,7 +71,7 @@ LIMIT 0, 1000
 
 -- Date: 2016-12-06 01:14
 */
-INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s001','saTeamTenDemo','sa43teamdemo@yahoo.com','23652363','3217 Versante Drive','2016-01-01 1:10:00');
+INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s001','saTeamTenDemo','sa43team10@gmail.com','23652363','3217 Versante Drive','2016-01-01 1:10:00');
 INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s002','Kassie Ardaly','KassieArdaly@gmail.com','34637457','6287 Renwood Dr','2016-01-02 1:10:00');
 INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s003','Bettie Laper','BettieLaper@gmail.com','25467547','P. O. Box 501','2016-01-03 1:10:00');
 INSERT INTO `student` (`studentId`,`studentName`,`studentEmail`,`studentPhoneNumber`,`studentAddress`,`enrollmentDate`) VALUES ('s004','Nichole Mosty','NicholeMosty@gmail.com','79765845','9109 Dove Ct','2016-01-04 1:10:00');
@@ -116,7 +116,7 @@ INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`
 INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c005','l002','Philosophy','rational investigation of questions about existence and knowledge and ethics',10,'Philosophy','2016-12-15',10,6,'2016-04-01 1:10:00');
 INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c006','l004','Statistics','collection and interpretation of quantitative data and the use of probability theory to estimate population parameters',5,'Math','2016-12-20',10,4,'2016-05-01 1:10:00');
 INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c007','l001',' Architectural Design', 'formulate architectural design ideas and development of aesthetics and 3D spatial awareness and appreciation',3,'Design','2016-12-22',10,4,'2016-06-01 1:10:00');
-INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c008','l001',' Architectural Practice', 'concepts of professionalism and ethics, marketing and branding, time and work management, and contract administration procedures',3,'Design','2016-12-26',3,3,'2016-06-01 1:10:00');
+INSERT INTO `course` (`courseId`,`lecturerId`,`courseName`,`courseDescription`,`courseDuration`,`courseType`,`courseStartDate`,`courseSize`,`courseCredit`,`createdDate`) VALUES ('c008','l001',' Architectural Practice', 'concepts of professionalism and ethics, marketing and branding, time and work management, and contract administration procedures',3,'Design','2016-12-26',3,3,'2016-06-01 1:20:00');
 
 
 /*

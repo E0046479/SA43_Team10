@@ -79,11 +79,11 @@ public class StudentHome extends HttpServlet {
 		StudentDTO student = new StudentManager().findStudent(request.getParameter("studentID"));
 		CourseDTO course = new CourseManager().findCourse(request.getParameter("courseID"));
 		enrollmentListManager.deleteEnrollment(student, course);
-		try {
+		/*try {
 			Email.generateAndSendEmail(student, course, "STUDENT_CANCEL_ENROLLMENT", "student");
 		} catch (MessagingException | IOException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		RequestDispatcher rd = request.getRequestDispatcher("/EnrolledCourses");
 		try {
 			rd.forward(request, response);
@@ -216,11 +216,11 @@ public class StudentHome extends HttpServlet {
 			// courseManager.enrollCourseSave(user.getUserId(),courseId);
 			// request.setAttribute("courseList", courseList);
 			int insert = courseManager.insertEnroll(enrollmentDTO);
-			try {
+			/*try {
 				Email.generateAndSendEmail(newStudent, newCourse, "CONFIRM_COURSE_ENROLLED", "admin");
 			} catch (MessagingException | IOException e) {
 				e.printStackTrace();
-			} 
+			} */
 			if (insert > 0) {
 				System.out.println("Success Insert enrollment");
 			} else {

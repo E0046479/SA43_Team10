@@ -161,10 +161,10 @@ public class AdminHome extends HttpServlet {
 			String lastStudentId = studentManager.getLastStudent();
 			String lastNoString = lastStudentId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			if (lastNo > 9) {
-				studentId = "s0" + lastNo;
-			} else {
+			if (lastNo <= 9) {
 				studentId = "s00" + lastNo;
+			} else {
+				studentId = "s0" + lastNo;
 			}
 		}
 		String studentName = (String) request.getParameter("studentName");
@@ -328,10 +328,10 @@ public class AdminHome extends HttpServlet {
 			String lastCourseId = lecturerManager.getLastLecturer();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			if (lastNo > 9) {
-				lecturerId = "l0" + lastNo;
-			} else {
+			if (lastNo <= 9) {
 				lecturerId = "l00" + lastNo;
+			} else {
+				lecturerId = "l0" + lastNo;
 			}
 		}
 		String lecturerName = request.getParameter("lecturerName");
@@ -437,10 +437,10 @@ public class AdminHome extends HttpServlet {
 			String lastCourseId = courseManager.getLastCourse();
 			String lastNoString = lastCourseId.substring(1);
 			int lastNo = Integer.parseInt(lastNoString) + 1;
-			if (lastNo > 9) {
-				courseId = "c0" + lastNo;
-			} else {
+			if (lastNo <= 9) {
 				courseId = "c00" + lastNo;
+			} else {
+				courseId = "c0" + lastNo;
 			}
 		}
 		String courseName = (String) request.getParameter("courseName");
@@ -597,11 +597,11 @@ public class AdminHome extends HttpServlet {
 		StudentDTO student = new StudentManager().findStudent(request.getParameter("studentID"));
 		CourseDTO course = new CourseManager().findCourse(request.getParameter("courseID"));
 		enrollmentListManager.deleteEnrollment(student, course);
-		try {
+		/*try {
 			Email.generateAndSendEmail(student, course, "ADMIN_CANCEL_ENROLLMENT", "admin");
 		} catch (MessagingException | IOException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		RequestDispatcher rd = request.getRequestDispatcher("/adminEnrollment");
 		try {
 			rd.forward(request, response);

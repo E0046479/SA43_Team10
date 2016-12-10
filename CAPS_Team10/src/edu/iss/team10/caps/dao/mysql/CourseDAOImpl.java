@@ -289,9 +289,11 @@ public class CourseDAOImpl implements CourseDAO {
 				Double courseDuration = rs.getDouble("courseDuration");
 				int courseSize = rs.getInt("AvailableSlot");
 				LecturerDTO lecturerDTO = new LecturerDTO();
+				if (courseSize > 0){
 				CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturerDTO, "", "", courseDuration,
 						courseStartDate, courseSize, 0.0f, new Date());
 				courseList.add(courseDTO);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

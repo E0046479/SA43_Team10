@@ -121,7 +121,7 @@
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cSize"><fmt:message key="label.course.table.title.courseSize" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
-						<input class="form-control input-md" id="cSize" type="number" min="1" max="100" 
+						<input class="form-control input-md" id="courseSize" name="courseSize" type="number" min="1" max="100" 
 						required="true" title="Maximum Student must less or equal to 100">
 					</div>
 				</div>
