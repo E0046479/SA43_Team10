@@ -43,9 +43,9 @@
 				<li><a href="<%=request.getContextPath()%>/studentEnrollCourseList"><span
 						class="glyphicon glyphicon-list-alt"></span> <fmt:message
 							key="label.Student.Manage.ViewCourses" /></a></li>
-							<li><a href="<%=request.getContextPath()%>/EnrolledCourses"><span
+				<li><a href="<%=request.getContextPath()%>/EnrolledCourses"><span
 						class="glyphicon glyphicon-book"></span> <fmt:message
-							key="label.enrolledCourses" /></a></li>
+							key="label.enrolledCourses" /> </a></li>
 			</c:if>
 
 			<!-- Lecturer Navigation -->

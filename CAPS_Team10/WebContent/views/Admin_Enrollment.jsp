@@ -14,33 +14,41 @@
 <body>
 
 
-<div class="panel panel-default">
+	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>
 				<fmt:message key="label.enrollment.list" />
 			</h3>
 		</div>
 		<div class="panel-body">
-					<div class="text-left">
-				<span class="label label-success" style="font-size: 12pt;">
-				<fmt:message key="label.enrollment.total" />
-				<font style="color: red;">${TOTAL_RECORDS}</font></span>
-			</div><br/>
 			<div class="text-left">
-				<form action="${pageContext.request.contextPath}/searchEnroll" method="post" class="form-search">
+				<span class="label label-success" style="font-size: 12pt;"> <fmt:message
+						key="label.enrollment.total" /> <font style="color: red;">${TOTAL_RECORDS}</font></span>
+			</div>
+			<br />
+			<div class="text-left">
+				<form action="${pageContext.request.contextPath}/searchEnroll"
+					method="post" class="form-search">
 					<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left: 0px;">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search"/>" name="studentId" value="${param['studentId']}">
-						 <span class="input-group-btn">
-							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
-						</span>
-					</div>
-					<c:if test="${requestScope['enrorEnroll'] !=null}">
-			    	    <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("enrorEnroll") %></div>
-			    	    </c:if>
+						<div class="input-group">
+							<input type="text" class="form-control"
+								placeholder="<fmt:message key="label.table.search"/>"
+								name="studentId" value="${param['studentId']}"> <span
+								class="input-group-btn">
+								<button class="btn btn-default" type="submit" title="SEARCH">
+									<i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i>
+								</button>
+							</span>
+						</div>
+						<c:if test="${requestScope['enrorEnroll'] !=null}">
+							<div class="alert alert-danger">
+								<span class="glyphicon glyphicon-exclamation-sign"></span>
+								<%=request.getAttribute("enrorEnroll")%></div>
+						</c:if>
 					</div>
 				</form>
-			</div><br /><br/>
+			</div>
+			<br /> <br />
 			<table class="table table-bordered table-striped">
 
 				<tr class="info">
@@ -71,41 +79,54 @@
 										value="${enrollment.studentDTO.studentId}" />
 									<c:param name="courseID"
 										value="${enrollment.courseDTO.courseId}" />
-								</c:url> <a href="${delurl}" class="btn btn-danger" type="button"
-										${enrollment.allowDelete== false? 'disabled="disabled" title="Course is already passed!"':'title="DELETE"'}>
-										<span class="glyphicon glyphicon-trash"></span>
-									</a></td>
+								</c:url> <c:choose>
+									<c:when test="${enrollment.allowDelete==true}">
+										<a href="${delurl}" class="btn btn-danger" type="button"
+											title="Delete"> <span class="glyphicon glyphicon-trash">
+										</span>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<button type="button" disabled="disabled"
+											title="The entry cannot be deleted" class="btn btn-danger">
+											<span class="glyphicon glyphicon-trash"> </span>
+										</button>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<div class="row text-center">
-<ul class="pagination">
-<!-- Previous link  -->
-    <c:if test="${currentPage != 1}">
-        <li><a href="${pageContext.request.contextPath}/adminEnrollment?page=${currentPage - 1}">Previous</a></li>
-    </c:if>
-<!-- Page numbers. -->
-    <li class="text-center">
-        <tr>
-            <c:forEach begin="1" end="${noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <td><a style="font-size: 16px;"><strong>${i}</strong></a></td>
-                    </c:when>
-                    <c:otherwise>
-                        <td><a href="${pageContext.request.contextPath}/adminEnrollment?page=${i}">${i}</a></td>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </tr>
-    </li>
-<!--         Next link -->
-    <c:if test="${currentPage lt noOfPages}">
-        <li><a href="${pageContext.request.contextPath}/adminEnrollment?page=${currentPage + 1}">Next</a></li>
-    </c:if>
-</ul>
-</div>
+				<ul class="pagination">
+					<!-- Previous link  -->
+					<c:if test="${currentPage != 1}">
+						<li><a
+							href="${pageContext.request.contextPath}/adminEnrollment?page=${currentPage - 1}">Previous</a></li>
+					</c:if>
+					<!-- Page numbers. -->
+					<li class="text-center">
+						<tr>
+							<c:forEach begin="1" end="${noOfPages}" var="i">
+								<c:choose>
+									<c:when test="${currentPage eq i}">
+										<td><a style="font-size: 16px;"><strong>${i}</strong></a></td>
+									</c:when>
+									<c:otherwise>
+										<td><a
+											href="${pageContext.request.contextPath}/adminEnrollment?page=${i}">${i}</a></td>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</tr>
+					</li>
+					<!--         Next link -->
+					<c:if test="${currentPage lt noOfPages}">
+						<li><a
+							href="${pageContext.request.contextPath}/adminEnrollment?page=${currentPage + 1}">Next</a></li>
+					</c:if>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>

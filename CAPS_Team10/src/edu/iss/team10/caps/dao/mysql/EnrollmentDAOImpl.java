@@ -22,6 +22,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 	private static final int allowanceForEnrollmentCancellation = 6;
 	private ResultSet rs;
 	public static int noOfRecords;
+
 	public ArrayList<EnrollmentDTO> listByStudentId(String userId) {
 		ArrayList<EnrollmentDTO> enrollmentList = new ArrayList<EnrollmentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
@@ -48,25 +49,27 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
 				enrollmentList.add(enrollment);
-				
+
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return enrollmentList;
 	}
 
 	@Override
-	public ArrayList<EnrollmentDTO> loadAllEnrollment(int offset,int noOfRecords) throws DAOException, MyDataException {
+	public ArrayList<EnrollmentDTO> loadAllEnrollment(int offset, int noOfRecords)
+			throws DAOException, MyDataException {
 		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		Date currentDate = new Date(System.currentTimeMillis());
 
 		String select = "select SQL_CALC_FOUND_ROWS * from caps.course as c, caps.student as s, caps.enrollment as e"
-				+ " where e.studentId=s.studentId  and e.courseId = c.courseId order by c.courseStartDate desc limit "+ offset + "," + noOfRecords;
+				+ " where e.studentId=s.studentId  and e.courseId = c.courseId order by c.courseStartDate desc limit "
+				+ offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -77,32 +80,25 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				Date courseEnrollmentDate = rs.getDate("courseEnrollmentDate");
 				boolean allowDelete = true;
 				Date courseStartDate = rs.getDate("courseStartDate");
-                
+
 				CourseDTO newCourse = new CourseManager().findCourse(courseId);
 				StudentDTO newStudent = new StudentManager().findStudent(studentId);
-				
+
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
-				
-				
+
 				// Do not show delete button for course that has passed or
 				// occurring today
-				if (courseStartDate.before(currentDate)
-						|| courseStartDate.equals(currentDate)) {
+				if (courseStartDate.before(currentDate) || courseStartDate.equals(currentDate)) {
 					enrollment.setAllowDelete(false);
-			
 				}
 
 				result.add(enrollment);
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
-			if(rs.next())
-			{
+			if (rs.next()) {
 				this.noOfRecords = rs.getInt(1);
-			}
-			if (result.size() == 0) {
-				throw new MyDataException("There is no Enrollment Info!");
 			}
 			if (result.size() == 0) {
 				throw new MyDataException("There is no Enrollment Info!");
@@ -142,20 +138,20 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		return result;
 	}
 
-	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String userId,int offset,int noOfRecords) throws DAOException, MyDataException {
+	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String userId, int offset, int noOfRecords)
+			throws DAOException, MyDataException {
 		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, allowanceForEnrollmentCancellation);
 		Date allowedCancelDate = new java.sql.Date(cal.getTimeInMillis());
-		
+
 		System.out.println(allowedCancelDate);
-		
 
 		String select = "select * from caps.course as c, caps.student as s, caps.enrollment as e"
 				+ " where e.studentId=s.studentId and e.courseId = c.courseId and e.studentId = ?"
-				+ " order by c.courseStartDate desc limit "+ offset + "," + noOfRecords;
+				+ " order by c.courseStartDate desc limit " + offset + "," + noOfRecords;
 
 		try {
 			pstatement = connection.prepareStatement(select);
@@ -178,8 +174,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 
 				// Do not show delete button for course that has passed or
 				// occurring today
-				if (courseStartDate.before(allowedCancelDate)
-						|| courseStartDate.equals(allowedCancelDate)) {
+				if (courseStartDate.before(allowedCancelDate) || courseStartDate.equals(allowedCancelDate)) {
 					enrollment.setAllowDelete(false);
 				}
 
@@ -188,8 +183,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
-			if(rs.next())
-			{
+			if (rs.next()) {
 				this.noOfRecords = rs.getInt(1);
 			}
 			if (result.size() == 0) {
@@ -204,20 +198,21 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		return result;
 
 	}
-	public ArrayList<EnrollmentDTO> loadStudentEnrollmentPage(String userId,int offset, int noOfRecords) throws DAOException, MyDataException {
+
+	public ArrayList<EnrollmentDTO> loadStudentEnrollmentPage(String userId, int offset, int noOfRecords)
+			throws DAOException, MyDataException {
 		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, allowanceForEnrollmentCancellation);
 		Date allowedCancelDate = new java.sql.Date(cal.getTimeInMillis());
-		
+
 		System.out.println(allowedCancelDate);
-		
 
 		String select = "select * from caps.course as c, caps.student as s, caps.enrollment as e"
 				+ " where e.studentId=s.studentId and e.courseId = c.courseId and e.studentId = ?"
-				+ " order by c.courseStartDate desc limit "+ offset + "," + noOfRecords;
+				+ " order by c.courseStartDate desc limit " + offset + "," + noOfRecords;
 
 		try {
 			pstatement = connection.prepareStatement(select);
@@ -240,8 +235,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 
 				// Do not show delete button for course that has passed or
 				// occurring today
-				if (courseStartDate.before(allowedCancelDate)
-						|| courseStartDate.equals(allowedCancelDate)) {
+				if (courseStartDate.before(allowedCancelDate) || courseStartDate.equals(allowedCancelDate)) {
 					enrollment.setAllowDelete(false);
 				}
 
@@ -250,8 +244,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
-			if(rs.next())
-			{
+			if (rs.next()) {
 				this.noOfRecords = rs.getInt(1);
 			}
 			if (result.size() == 0) {

@@ -15,27 +15,30 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-		<h3>
-			<fmt:message key="label.enrolledCourses" />
+			<h3>
+				<fmt:message key="label.enrolledCourses" />
 			</h3>
 		</div>
 		<div class="panel-body">
-			<div><span class="label label-success" style="font-size: 12pt;">
-				<fmt:message key="label.enrolledCourses.total" /><font style="color: red;">${fn:length(enrolledCoursesList)}</font></span></div>
+			<div>
+				<span class="label label-success" style="font-size: 12pt;"> <fmt:message
+						key="label.enrolledCourses.total" /><font style="color: red;">${fn:length(enrolledCoursesList)}</font></span>
+			</div>
 			<br />
-<table class="table table-bordered table-striped">
-					<tr class="info">
-					<th class="text-center"><fmt:message key="label.enrolledCourses.Number" /></th>
-						<th class=" text-center"><fmt:message
-								key="label.enrollment.courseId" /></th>
-						<th class="text-center"><fmt:message
-								key="label.enrollment.courseName" /></th>
-						<th class="text-center"><fmt:message
-								key="label.course.table.title.courseStartDate" /></th>
-						<th class="text-center"><fmt:message
-								key="label.enrollment.courseEnrollmentDate" /></th>
-						<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
-					</tr>
+			<table class="table table-bordered table-striped">
+				<tr class="info">
+					<th class="text-center"><fmt:message
+							key="label.enrolledCourses.Number" /></th>
+					<th class=" text-center"><fmt:message
+							key="label.enrollment.courseId" /></th>
+					<th class="text-center"><fmt:message
+							key="label.enrollment.courseName" /></th>
+					<th class="text-center"><fmt:message
+							key="label.course.table.title.courseStartDate" /></th>
+					<th class="text-center"><fmt:message
+							key="label.enrollment.courseEnrollmentDate" /></th>
+					<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
+				</tr>
 				<tbody>
 					<c:forEach var="enrolledCourses" items="${enrolledCoursesList}"
 						varStatus="status">
@@ -51,11 +54,21 @@
 										value="${enrolledCourses.studentDTO.studentId}" />
 									<c:param name="courseID"
 										value="${enrolledCourses.courseDTO.courseId}" />
-								</c:url> <a href="${delurl}"><button type="button"
-										${enrolledCourses.allowDelete== false? 'disabled="disabled" title="Course is already passed!"':'title="DELETE"'}
-										class="btn btn-danger">
-										<span class="glyphicon glyphicon-trash"></span>
-									</button> </a></td>
+								</c:url> <c:choose>
+									<c:when test="${enrolledCourses.allowDelete==true}">
+										<a href="${delurl}" class="btn btn-danger" type="button"
+											title="Delete"> <span class="glyphicon glyphicon-trash">
+										</span>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<button type="button" disabled="disabled"
+											title="The entry cannot be deleted" class="btn btn-danger">
+											<span class="glyphicon glyphicon-trash"> </span>
+										</button>
+									</c:otherwise>
+								</c:choose>
+								</td>
 						</tr>
 					</c:forEach>
 				</tbody>

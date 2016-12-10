@@ -627,6 +627,7 @@ public class AdminHome extends HttpServlet {
 			request.setAttribute("enrollmentList", enrollmentList);
 			request.setAttribute("noOfPages", noOfPages);
 			request.setAttribute("currentPage", page);
+			request.setAttribute("TOTAL_RECORDS", EnrollmentDAOImpl.noOfRecords);
 			path="views/Admin_Enrollment.jsp";
 		}else
 		{
