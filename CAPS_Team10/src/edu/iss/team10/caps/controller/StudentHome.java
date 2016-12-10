@@ -106,7 +106,7 @@ public class StudentHome extends HttpServlet {
 		if (user != null) {
 			EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
 			ArrayList<EnrollmentDTO> enrolledCoursesList = enrollmentListManager
-					.loadStudentEnrollment(user.getUserId(), page,recordsPerPage);
+					.loadStudentEnrollment(user.getUserId(), (page-1),recordsPerPage);
 			request.setAttribute("enrolledCoursesList", enrolledCoursesList);
 			path = "views/EnrolledCourses.jsp";
 		} else {
