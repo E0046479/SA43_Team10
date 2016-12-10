@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,15 +28,14 @@ import edu.iss.team10.caps.service.EnrollmentListManager;
 import edu.iss.team10.caps.service.LecturerManager;
 import edu.iss.team10.caps.service.LoginManager;
 import edu.iss.team10.caps.service.StudentManager;
-import edu.iss.team10.caps.util.Email;
 
 /**
  * Servlet implementation class AdminHome
  */
-@WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/lecturerList", "/lecturerInsert",
-		"/lecturerEdit", "/lecturerDelete", "/courseList", "/courseInsert", "/courseEdit", "/courseDelete",
-		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll", "/lecturerSearch", "/studentSearch",
-		"/courseSearch" })
+@WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/studentSearch",
+		"/lecturerList", "/lecturerInsert",	"/lecturerEdit", "/lecturerDelete", "/lecturerSearch",
+		"/courseList", "/courseInsert", "/courseEdit", "/courseDelete", "/courseSearch", "/prepareForNewCourse",
+		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -91,6 +89,9 @@ public class AdminHome extends HttpServlet {
 			break;
 		case "/lecturerSearch":
 			doSearchLecturer(request, response);
+			break;
+		case "/prepareForNewCourse":
+			doPrepareForNewCourse(request, response);
 			break;
 		case "/courseInsert":
 			doInsertCourse(request, response);
@@ -428,6 +429,23 @@ public class AdminHome extends HttpServlet {
 		}
 	}
 
+	private void doPrepareForNewCourse(HttpServletRequest request, HttpServletResponse response) {
+		
+		ArrayList<LecturerDTO> lecturerList = lecturerManager.findAllLecturer();
+		System.out.println("doPrepareForNewCourse " + lecturerList.size());
+		if(lecturerList.size() > 0){
+			request.setAttribute("lecturerList", lecturerList);
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("views/Course_New.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+		
 	private void doInsertCourse(HttpServletRequest request, HttpServletResponse response) {
 		int totalCourseCount = courseManager.getTotalCourseCount();
 		String courseId = "";

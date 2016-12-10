@@ -18,7 +18,7 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<a href="views/Course_New.jsp" class="btn btn-success"><fmt:message
+			<a href="${pageContext.request.contextPath}/prepareForNewCourse" class="btn btn-success"><fmt:message
 					key="label.course.add" /></a><br/>
 					<div class="text-left">
 				<form action="${pageContext.request.contextPath}/courseSearch"

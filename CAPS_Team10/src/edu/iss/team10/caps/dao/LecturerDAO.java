@@ -13,6 +13,8 @@ public interface LecturerDAO {
 
 	LecturerDTO findLecturer(String lecturerId) throws DAOException, MyDataException;
 
+	ArrayList<LecturerDTO> findAllLecturer() throws DAOException, MyDataException;
+	
 	ArrayList<LecturerDTO> findAllLecturer(int offset,int noOfRecords) throws DAOException, MyDataException;
 
 	ArrayList<LecturerDTO> findLecturerByCriteria(LecturerSearchDTO lecturerSearchDTO)

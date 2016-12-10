@@ -137,9 +137,10 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		java.sql.Date courseStartDate = new java.sql.Date(course.getCourseStartDate().getTime());
+		java.sql.Date courseCreatedDate = new java.sql.Date(course.getCreatedDate().getTime());
 
 		String ins = "INSERT INTO caps.course(courseId, courseName, lecturerId, courseDescription, courseType,"
-				+ "courseDuration, courseStartDate, courseSize, courseCredit) " + "VALUES (?,?,?,?,?,?,?,?,?)";
+				+ "courseDuration, courseStartDate, courseSize, courseCredit, createdDate) " + "VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, course.getCourseId());
@@ -151,7 +152,8 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement.setDate(7, courseStartDate);
 			pstatement.setInt(8, course.getCourseSize());
 			pstatement.setFloat(9, course.getCourseCredit());
-
+			pstatement.setDate(10,courseCreatedDate);
+			
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Insert Specific Course!");
