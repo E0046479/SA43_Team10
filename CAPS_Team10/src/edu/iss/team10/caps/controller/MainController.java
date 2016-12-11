@@ -99,7 +99,6 @@ public class MainController extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**

@@ -27,9 +27,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		LecturerDTO lecturerDTO = null;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "SELECT * FROM caps.lecturer WHERE lecturerId=?";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			pstatement.setString(1, lecturerId);
@@ -83,7 +81,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 		ArrayList<LecturerDTO> result = new ArrayList<LecturerDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "SELECT SQL_CALC_FOUND_ROWS * FROM caps.lecturer limit " + offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
@@ -116,7 +113,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 		ArrayList<LecturerDTO> result = new ArrayList<LecturerDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = null;
 		if (lecturerSearchDTO.getLecturerName().trim().equalsIgnoreCase("")) {
 
@@ -158,7 +154,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		java.sql.Date lecturerJoiningDate = new java.sql.Date(lecturer.getJoiningDate().getTime());
-
 		String ins = "INSERT INTO caps.lecturer(lecturerId, lecturerName, lecturerEmail, lecturerPhoneNumber, lecturerAddress, joiningDate) "
 				+ "VALUES (?,?,?,?,?,?)";
 		try {
@@ -168,8 +163,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 			pstatement.setString(3, lecturer.getLecturerEmail());
 			pstatement.setString(4, lecturer.getLecturerPhoneNumber());
 			pstatement.setString(5, lecturer.getLecturerAddress());
-			pstatement.setDate(6, lecturerJoiningDate);
-			
+			pstatement.setDate(6, lecturerJoiningDate);			
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Insert Specific Lecturer!");
@@ -189,9 +183,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String ins = "UPDATE caps.lecturer SET lecturerName=?, lecturerEmail=?, lecturerPhoneNumber=?, lecturerAddress=? WHERE lecturerId = ?; ";
-
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, lecturer.getLecturerName());
@@ -199,7 +191,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 			pstatement.setString(3, lecturer.getLecturerPhoneNumber());
 			pstatement.setString(4, lecturer.getLecturerAddress());
 			pstatement.setString(5, lecturer.getLecturerId());
-
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Update Specific Lecturer!");
@@ -219,9 +210,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String ins = "DELETE FROM caps.lecturer WHERE lecturerId = ?; ";
-
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, lecturer.getLecturerId());
@@ -318,12 +307,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 				studentDTO = new StudentDTO();
 				enrollmentDTO.setCourseDTO(courseDTO);
 				enrollmentDTO.setStudentDTO(studentDTO);
-				/*
-				 * EnrollmentDTO gradeStudentDTO = new
-				 * EnrollmentDTO(rs.getString("courseName"),
-				 * rs.getFloat("courseCredit"), rs.getString("studentId"),
-				 * rs.getString("studentName"),rs.getFloat("grade"));
-				 */
 				enrollmentDTO.getCourseDTO().setCourseName(rs.getString("courseName"));
 				enrollmentDTO.getCourseDTO().setCourseCredit(rs.getFloat("courseCredit"));
 				enrollmentDTO.getStudentDTO().setStudentId(rs.getString("studentId"));
@@ -338,7 +321,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		} catch (SQLException e) {
 			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
-
 		}
 		return result;
 	}
@@ -366,7 +348,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		} catch (SQLException e) {
 			System.err.println("Error: Unable to retrieve all student info from database.\n" + e.getMessage());
-
 		}
 		return courseId;
 	}
@@ -395,12 +376,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 				studentDTO = new StudentDTO();
 				enrollmentDTO.setCourseDTO(courseDTO);
 				enrollmentDTO.setStudentDTO(studentDTO);
-				/*
-				 * EnrollmentDTO gradeStudentDTO = new
-				 * EnrollmentDTO(rs.getString("courseName"),
-				 * rs.getFloat("courseCredit"), rs.getString("studentId"),
-				 * rs.getString("studentName"),rs.getFloat("grade"));
-				 */
 				enrollmentDTO.getCourseDTO().setCourseName(rs.getString("courseName"));
 				enrollmentDTO.getStudentDTO().setStudentId(rs.getString("studentId"));
 				enrollmentDTO.getStudentDTO().setStudentName(rs.getString("studentName"));
@@ -418,7 +393,6 @@ public class LecturerDAOImpl implements LecturerDAO {
 
 		}
 		return result;
-
 	}
 
 	@Override

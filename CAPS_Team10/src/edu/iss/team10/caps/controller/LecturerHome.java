@@ -58,10 +58,8 @@ public class LecturerHome extends HttpServlet {
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -70,19 +68,15 @@ public class LecturerHome extends HttpServlet {
 		String studentId = (String) request.getParameter("studentId");
 		String studentName = (String) request.getParameter("studentName");
 		String courseName = (String) request.getSession().getAttribute("courseName");
-
 		RequestDispatcher rd = request.getRequestDispatcher("views/GiveAStudent.jsp");
-
 		request.getSession().setAttribute("studentId", studentId);
 		request.getSession().setAttribute("studentName", studentName);
 		request.getSession().setAttribute("courseName", courseName);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -98,10 +92,8 @@ public class LecturerHome extends HttpServlet {
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -151,10 +143,8 @@ public class LecturerHome extends HttpServlet {
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -168,10 +158,8 @@ public class LecturerHome extends HttpServlet {
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -179,19 +167,15 @@ public class LecturerHome extends HttpServlet {
 	private void doPostStudentGrade_Save(HttpServletRequest request, HttpServletResponse response) {
 		String studentId = (String) request.getSession().getAttribute("studentId");
 		String courseName = (String) request.getSession().getAttribute("courseName");
-
 		Float grade = Float.parseFloat(request.getParameter("grade"));
-
 		LecturerManager lecturerCourseManager = new LecturerManager();
 		String courseId = lecturerCourseManager.saveStudentGrade(studentId, courseName, grade);
 		RequestDispatcher rd = request.getRequestDispatcher("/gradeStudent?courseId=" + courseId);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

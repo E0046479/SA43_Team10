@@ -20,6 +20,7 @@ public class CourseDAOImpl implements CourseDAO {
 
 	private ResultSet rs;
 	public static int noOfRecords;
+
 	@Override
 	public CourseDTO findCourse(String courseId) throws DAOException, MyDataException {
 		CourseDTO courseDTO = null;
@@ -52,12 +53,12 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 	@Override
-	public ArrayList<CourseDTO> findAllCourse(int offset,int noOfRecords) throws DAOException, MyDataException {
+	public ArrayList<CourseDTO> findAllCourse(int offset, int noOfRecords) throws DAOException, MyDataException {
 		ArrayList<CourseDTO> result = new ArrayList<CourseDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 
-		String select = "SELECT SQL_CALC_FOUND_ROWS  * FROM caps.course limit "+ offset + "," + noOfRecords;
+		String select = "SELECT SQL_CALC_FOUND_ROWS  * FROM caps.course limit " + offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -72,8 +73,7 @@ public class CourseDAOImpl implements CourseDAO {
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
-			if(rs.next())
-			{
+			if (rs.next()) {
 				this.noOfRecords = rs.getInt(1);
 			}
 			if (result.size() == 0) {
@@ -93,10 +93,8 @@ public class CourseDAOImpl implements CourseDAO {
 		ArrayList<CourseDTO> result = new ArrayList<CourseDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = null;
 		if (courseSearchDTO.getCourseName().trim().equalsIgnoreCase("")) {
-
 			select = "SELECT * FROM caps.course WHERE courseName LIKE '" + courseSearchDTO.getCourseName().trim()
 					+ "%';";
 		} else {
@@ -138,9 +136,9 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement pstatement = null;
 		java.sql.Date courseStartDate = new java.sql.Date(course.getCourseStartDate().getTime());
 		java.sql.Date courseCreatedDate = new java.sql.Date(course.getCreatedDate().getTime());
-
 		String ins = "INSERT INTO caps.course(courseId, courseName, lecturerId, courseDescription, courseType,"
-				+ "courseDuration, courseStartDate, courseSize, courseCredit, createdDate) " + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+				+ "courseDuration, courseStartDate, courseSize, courseCredit, createdDate) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, course.getCourseId());
@@ -152,8 +150,8 @@ public class CourseDAOImpl implements CourseDAO {
 			pstatement.setDate(7, courseStartDate);
 			pstatement.setInt(8, course.getCourseSize());
 			pstatement.setFloat(9, course.getCourseCredit());
-			pstatement.setDate(10,courseCreatedDate);
-			
+			pstatement.setDate(10, courseCreatedDate);
+
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Insert Specific Course!");
@@ -175,7 +173,6 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement pstatement = null;
 		java.sql.Date courseStartDate = new java.sql.Date(course.getCourseStartDate().getTime());
 		String ins = "UPDATE caps.course SET courseName=?, lecturerId=?, courseDescription=?, courseType=?, courseDuration=?, courseStartDate=?, courseSize=?, courseCredit=? WHERE courseId = ?; ";
-
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, course.getCourseName());
@@ -206,9 +203,7 @@ public class CourseDAOImpl implements CourseDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String ins = "DELETE FROM caps.course WHERE courseId = ?; ";
-
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, course.getCourseId());
@@ -232,9 +227,7 @@ public class CourseDAOImpl implements CourseDAO {
 		int courseTotalCount = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "select count(courseId) as courseCount from caps.course;";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -254,9 +247,7 @@ public class CourseDAOImpl implements CourseDAO {
 		String courseId = "";
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "SELECT courseId FROM caps.course order by createdDate DESC limit 1;";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -275,7 +266,6 @@ public class CourseDAOImpl implements CourseDAO {
 		ArrayList<CourseDTO> courseList = new ArrayList<CourseDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "select * from (select c.courseId,c.courseName,c.courseStartDate ,c.courseDuration,c.courseSize - count(e.courseId)As AvailableSlot"
 				+ " from course c left join enrollment e on c.courseId=e.courseId where now() < c.courseStartDate group by c.courseId) s where s.courseid not in"
 				+ " (select c.courseId from caps.course c,caps.enrollment e,caps.student s where c.courseID =e.courseId and e.studentId=s.studentId"
@@ -286,21 +276,20 @@ public class CourseDAOImpl implements CourseDAO {
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
 				String courseId = rs.getString("courseId");
-				String courseName = rs.getString("courseName"); 	
+				String courseName = rs.getString("courseName");
 				Date courseStartDate = rs.getDate("courseStartDate");
 				Double courseDuration = rs.getDouble("courseDuration");
 				int courseSize = rs.getInt("AvailableSlot");
 				LecturerDTO lecturerDTO = new LecturerDTO();
-				if (courseSize > 0){
-				CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturerDTO, "", "", courseDuration,
-						courseStartDate, courseSize, 0.0f, new Date());
-				courseList.add(courseDTO);
+				if (courseSize > 0) {
+					CourseDTO courseDTO = new CourseDTO(courseId, courseName, lecturerDTO, "", "", courseDuration,
+							courseStartDate, courseSize, 0.0f, new Date());
+					courseList.add(courseDTO);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return courseList;
 	}
 }

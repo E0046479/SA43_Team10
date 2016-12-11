@@ -199,12 +199,7 @@ public class AdminHome extends HttpServlet {
 		String studentEmail = (String) request.getParameter("studentEmail");
 		String studentPhoneNumber = (String) request.getParameter("studentPhoneNumber");
 		String studentAddress = (String) request.getParameter("studentAddress");
-		// String enrollmentString = (String)
-		// request.getParameter("enrollmentDate");
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-d",
-		// Locale.ENGLISH);
 		Date enrollmentDate = new Date();
-
 		StudentDTO studentDTO = new StudentDTO(studentId, studentName, studentEmail, studentPhoneNumber, studentAddress,
 				enrollmentDate);
 		int update = studentManager.updateStudent(studentDTO);
@@ -221,7 +216,6 @@ public class AdminHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void doDeleteStudent(HttpServletRequest request, HttpServletResponse response) {
@@ -267,7 +261,6 @@ public class AdminHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	// Lecturer Methods
@@ -291,7 +284,6 @@ public class AdminHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void doEditLecturer(HttpServletRequest request, HttpServletResponse response) {
@@ -317,7 +309,6 @@ public class AdminHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void doInsertLecturer(HttpServletRequest request, HttpServletResponse response) {
@@ -429,8 +420,7 @@ public class AdminHome extends HttpServlet {
 		}
 	}
 
-	private void doPrepareForNewCourse(HttpServletRequest request, HttpServletResponse response) {
-		
+	private void doPrepareForNewCourse(HttpServletRequest request, HttpServletResponse response) {		
 		ArrayList<LecturerDTO> lecturerList = lecturerManager.findAllLecturer();
 		System.out.println("doPrepareForNewCourse " + lecturerList.size());
 		if(lecturerList.size() > 0){
@@ -630,7 +620,6 @@ public class AdminHome extends HttpServlet {
 	}
 
 	private void doSearchEnrollment(HttpServletRequest request, HttpServletResponse response) {
-		String Id= (String) request.getParameter("studentId");
 		String path="";
 		int page = 1;
 		int recordsPerPage = 10;
@@ -650,8 +639,7 @@ public class AdminHome extends HttpServlet {
 		{
 			request.setAttribute("enrorEnroll", "There is no record for this ID");
 			path="/adminEnrollment";
-		}
-		
+		}		
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		try {
 			rd.forward(request, response);

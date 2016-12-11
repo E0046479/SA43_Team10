@@ -15,14 +15,11 @@ public class LoginDAOImpl implements LoginDAO{
 
 	private ResultSet rs;
 	@Override
-	public LoginDTO findUser(String userId, String password) throws DAOException,MyDataException {
-		
+	public LoginDTO findUser(String userId, String password) throws DAOException,MyDataException {		
 		LoginDTO loginDTO = null;
 		Connection connection = ConnectionHandler.openConnection();
-		PreparedStatement pstatement = null;
-		
-		String sl= "SELECT * FROM caps.login WHERE userId = ? AND password = ?";
-		
+		PreparedStatement pstatement = null;		
+		String sl= "SELECT * FROM caps.login WHERE userId = ? AND password = ?";		
 		try {
 			pstatement = connection.prepareStatement(sl);
 			pstatement.setString(1, userId);
@@ -33,7 +30,6 @@ public class LoginDAOImpl implements LoginDAO{
 				loginDTO = new LoginDTO(rs.getString("userId"),rs.getString("password"),rs.getString("role"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Error!occure");;
 		}finally
 		{
@@ -47,15 +43,13 @@ public class LoginDAOImpl implements LoginDAO{
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String ins = "INSERT INTO caps.login(userId, password, role)"
 				+ "VALUES (?,?,?)";
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, userId);
 			pstatement.setString(2, password);
-			pstatement.setString(3, role);
-			
+			pstatement.setString(3, role);			
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Insert Specific Lecturer!");

@@ -121,7 +121,6 @@ public class StudentHome extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void doGetStudentEnrollCourseList(HttpServletRequest request, HttpServletResponse response) {
@@ -131,11 +130,9 @@ public class StudentHome extends HttpServlet {
 		if (session != null) {
 			user = (LoginDTO) session.getAttribute("user");
 		}
-		System.out.println("StudentHome.doGetStudentEnrollCourseList() : " + user.getUserId());
 		if (user == null) {
 			path = "login.jsp";
 		} else {
-
 			ArrayList<CourseDTO> courseList = courseManager.listByCourse(user.getUserId());
 			request.setAttribute("courseList", courseList);
 			path = "views/StudentEnrollCourse.jsp";

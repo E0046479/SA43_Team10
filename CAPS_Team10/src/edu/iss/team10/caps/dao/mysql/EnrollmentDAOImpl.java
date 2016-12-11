@@ -27,35 +27,27 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		ArrayList<EnrollmentDTO> enrollmentList = new ArrayList<EnrollmentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "select * from caps.course c,caps.enrollment e,caps.student s"
 				+ " where c.courseID =e.courseId and e.studentId=s.studentId and e.grade != 0 and s.studentId= ?;";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			pstatement.setString(1, userId);
 			rs = pstatement.executeQuery();
-
 			while (rs.next()) {
 				String courseId = rs.getString("courseId");
 				String studentId = rs.getString("studentId");
 				float grade = rs.getFloat("grade");
-				Date courseStartDate = rs.getDate("courseStartDate");
 				Date courseEnrollmentDate = rs.getDate("courseEnrollmentDate");
 				boolean allowDelete = true;
-
 				StudentDTO newStudent = new StudentManager().findStudent(studentId);
 				CourseDTO newCourse = new CourseManager().findCourse(courseId);
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
 				enrollmentList.add(enrollment);
-
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return enrollmentList;
 	}
 
@@ -66,7 +58,6 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		Date currentDate = new Date(System.currentTimeMillis());
-
 		String select = "select SQL_CALC_FOUND_ROWS * from caps.course as c, caps.student as s, caps.enrollment as e"
 				+ " where e.studentId=s.studentId  and e.courseId = c.courseId order by c.courseStartDate desc limit "
 				+ offset + "," + noOfRecords;
@@ -80,19 +71,15 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				Date courseEnrollmentDate = rs.getDate("courseEnrollmentDate");
 				boolean allowDelete = true;
 				Date courseStartDate = rs.getDate("courseStartDate");
-
 				CourseDTO newCourse = new CourseManager().findCourse(courseId);
 				StudentDTO newStudent = new StudentManager().findStudent(studentId);
-
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
-
 				// Do not show delete button for course that has passed or
 				// occurring today
 				if (courseStartDate.before(currentDate) || courseStartDate.equals(currentDate)) {
 					enrollment.setAllowDelete(false);
 				}
-
 				result.add(enrollment);
 			}
 			rs.close();
@@ -116,14 +103,11 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String del = "DELETE FROM caps.enrollment where studentId = ? and courseId = ?;";
-
 		try {
 			pstatement = connection.prepareStatement(del);
 			pstatement.setString(1, student.getStudentId());
 			pstatement.setString(2, course.getCourseId());
-
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("Unable to delete the enrollment, please check your input.");
@@ -146,17 +130,13 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, allowanceForEnrollmentCancellation);
 		Date allowedCancelDate = new java.sql.Date(cal.getTimeInMillis());
-
 		System.out.println(allowedCancelDate);
-
 		String select = "select * from caps.course as c, caps.student as s, caps.enrollment as e"
 				+ " where e.studentId=s.studentId and e.courseId = c.courseId and e.studentId = ?"
 				+ " order by c.courseStartDate desc limit " + offset + "," + noOfRecords;
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			pstatement.setString(1, userId);
-
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
 				String studentId = rs.getString("studentId");
@@ -165,21 +145,16 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				float grade = rs.getFloat("grade");
 				boolean allowDelete = true;
 				Date courseStartDate = rs.getDate("courseStartDate");
-
 				CourseDTO newCourse = new CourseManager().findCourse(courseId);
 				StudentDTO newStudent = new StudentManager().findStudent(studentId);
-
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
-
 				// Do not show delete button for course that has passed or
 				// occurring today
 				if (courseStartDate.before(allowedCancelDate) || courseStartDate.equals(allowedCancelDate)) {
 					enrollment.setAllowDelete(false);
 				}
-
 				result.add(enrollment);
-
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
@@ -196,7 +171,6 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		}
 		return result;
-
 	}
 
 	public ArrayList<EnrollmentDTO> loadStudentEnrollmentPage(String userId, int offset, int noOfRecords)
@@ -207,17 +181,13 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, allowanceForEnrollmentCancellation);
 		Date allowedCancelDate = new java.sql.Date(cal.getTimeInMillis());
-
 		System.out.println(allowedCancelDate);
-
 		String select = "select * from caps.course as c, caps.student as s, caps.enrollment as e"
 				+ " where e.studentId=s.studentId and e.courseId = c.courseId and e.studentId = ?"
 				+ " order by c.courseStartDate desc limit " + offset + "," + noOfRecords;
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			pstatement.setString(1, userId);
-
 			rs = pstatement.executeQuery();
 			while (rs.next()) {
 				String studentId = rs.getString("studentId");
@@ -226,21 +196,16 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				float grade = rs.getFloat("grade");
 				boolean allowDelete = true;
 				Date courseStartDate = rs.getDate("courseStartDate");
-
 				CourseDTO newCourse = new CourseManager().findCourse(courseId);
 				StudentDTO newStudent = new StudentManager().findStudent(studentId);
-
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
-
 				// Do not show delete button for course that has passed or
 				// occurring today
 				if (courseStartDate.before(allowedCancelDate) || courseStartDate.equals(allowedCancelDate)) {
 					enrollment.setAllowDelete(false);
 				}
-
 				result.add(enrollment);
-
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
@@ -257,7 +222,6 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 			ConnectionHandler.closeConnection(connection, pstatement);
 		}
 		return result;
-
 	}
 
 	public ArrayList<EnrollmentDTO> loadStudentEnrollmentSearch(String userId, int offset, int noOfRecords)
@@ -266,11 +230,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		Date currentDate = new Date(System.currentTimeMillis());
-
 		String select = "select * from caps.course as c, caps.student as s, caps.enrollment as e"
 				+ " where e.studentId=s.studentId and e.courseId = c.courseId and e.studentId = ?"
 				+ " order by c.courseStartDate desc limit " + offset + "," + noOfRecords;
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			pstatement.setString(1, userId);
@@ -283,10 +245,8 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				float grade = rs.getFloat("grade");
 				boolean allowDelete = true;
 				Date courseStartDate = rs.getDate("courseStartDate");
-
 				CourseDTO newCourse = new CourseManager().findCourse(courseId);
 				StudentDTO newStudent = new StudentManager().findStudent(studentId);
-
 				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
 						allowDelete);
 
@@ -295,9 +255,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 				if (courseStartDate.before(currentDate) || courseStartDate.equals(currentDate)) {
 					enrollment.setAllowDelete(false);
 				}
-
 				result.add(enrollment);
-
 			}
 			rs.close();
 			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");

@@ -23,9 +23,7 @@ public class StudentDAOImpl implements StudentDAO {
 		StudentDTO studentDTO = null;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "SELECT * FROM caps.student WHERE studentId=?";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			pstatement.setString(1, studentId);
@@ -51,7 +49,6 @@ public class StudentDAOImpl implements StudentDAO {
 		ArrayList<StudentDTO> result = new ArrayList<StudentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "SELECT SQL_CALC_FOUND_ROWS * FROM caps.student limit "+ offset + "," + noOfRecords;
 		try {
 			pstatement = connection.prepareStatement(select);
@@ -85,7 +82,6 @@ public class StudentDAOImpl implements StudentDAO {
 		ArrayList<StudentDTO> result = new ArrayList<StudentDTO>();
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = null;
 		if (studentSearchDTO.getStudentName().trim().equalsIgnoreCase("")) {
 
@@ -158,9 +154,7 @@ public class StudentDAOImpl implements StudentDAO {
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
 		java.sql.Date enrollmentDate = new java.sql.Date(student.getEnrollmentDate().getTime());
-
 		String ins = "UPDATE caps.student SET studentName=?, studentEmail=?, studentPhoneNumber=?, studentAddress=? WHERE studentId = ?; ";
-
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, student.getStudentName());
@@ -168,7 +162,6 @@ public class StudentDAOImpl implements StudentDAO {
 			pstatement.setString(3, student.getStudentPhoneNumber());
 			pstatement.setString(4, student.getStudentAddress());
 			pstatement.setString(5, student.getStudentId());
-
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Update Specific Student!");
@@ -188,13 +181,10 @@ public class StudentDAOImpl implements StudentDAO {
 		int result = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String ins = "DELETE FROM caps.student WHERE studentId = ?; ";
-
 		try {
 			pstatement = connection.prepareStatement(ins);
 			pstatement.setString(1, student.getStudentId());
-
 			result = pstatement.executeUpdate();
 			if (result <= 0) {
 				throw new MyDataException("FAIL! Delete Specific Student!");
@@ -214,9 +204,7 @@ public class StudentDAOImpl implements StudentDAO {
 		int studentTotalCount = 0;
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "select count(studentId) as studCount from caps.student;";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -236,9 +224,7 @@ public class StudentDAOImpl implements StudentDAO {
 		String studentId = "";
 		Connection connection = ConnectionHandler.openConnection();
 		PreparedStatement pstatement = null;
-
 		String select = "SELECT studentId FROM caps.student order by enrollmentDate DESC limit 1;";
-
 		try {
 			pstatement = connection.prepareStatement(select);
 			rs = pstatement.executeQuery();
@@ -260,7 +246,6 @@ public class StudentDAOImpl implements StudentDAO {
 		PreparedStatement pstatement = null;
 		java.sql.Date enrollmentDate = new java.sql.Date(enrollmentDTO.getCourseEnrollmentDate().getTime());
 		java.sql.Date corseStartDate = new java.sql.Date(enrollmentDTO.getCourseDTO().getCourseStartDate().getTime());
-
 		String ins = "INSERT INTO caps.enrollment(studentId, courseId, courseStartDate, courseEnrollmentDate, grade) "
 				+ "VALUES (?,?,?,?,?)";
 		try {
