@@ -258,7 +258,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		int year = now.getYear();
 		try {
 			pstatement = connection.prepareStatement(
-					"SELECT Distinct(c.courseId),c.courseName,c.courseSize FROM caps.course c,caps.enrollment e WHERE c.courseId = e.courseId AND c.lecturerId = ? AND YEAR(e.courseEnrollmentDate) = ?");
+					"SELECT Distinct(c.courseId),c.courseName,c.courseStartDate,c.courseDuration,c.courseSize FROM caps.course c,caps.enrollment e WHERE c.courseId = e.courseId AND c.lecturerId = ? AND YEAR(e.courseEnrollmentDate) = ?");
 			pstatement.setString(1, lecturerId);
 			pstatement.setInt(2, year);
 			rs = pstatement.executeQuery();
@@ -267,6 +267,8 @@ public class LecturerDAOImpl implements LecturerDAO {
 				courseDTO.setCourseId(rs.getString("courseId"));
 				courseDTO.setCourseName(rs.getString("courseName"));
 				courseDTO.setCourseSize(rs.getInt("courseSize"));
+				courseDTO.setCourseStartDate(rs.getDate("courseStartDate"));
+				courseDTO.setCourseDuration(rs.getDouble("courseDuration"));
 				result.add(courseDTO);
 			}
 			if (result.size() == 0) {

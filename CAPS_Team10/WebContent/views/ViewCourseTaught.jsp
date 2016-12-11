@@ -28,6 +28,8 @@ table th {
 					<th class="text-center"><fmt:message key="label.course.table.title.courseId" /></th>
 					<th class="text-center"><fmt:message key="label.course.table.title.courseName" /></th>
 					<th class="text-center"><fmt:message key="label.course.table.title.courseSize" /></th>
+					<th class="text-center"><fmt:message key="label.course.table.title.courseStartDate" /></th>
+					<th class="text-center"><fmt:message key="label.course.table.title.courseDuration" /></th>
 					<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
 				</tr>
 				<c:forEach var="course" items="${lecturerCourseList}"
@@ -37,6 +39,8 @@ table th {
 						<td class="nowrap">${course.courseId}</td>
 						<td class="nowrap">${course.courseName}</td>
 						<td class="nowrap">${course.courseSize}</td>
+						<td class="nowrap">${course.courseStartDate}</td>
+						<td class="nowrap">${course.courseDuration}</td>
 						<td class="nowrap"><c:url var="updurl" scope="page"
 								value="/gradeStudent">
 								<c:param name="courseId" value="${course.courseId}" />
