@@ -63,4 +63,27 @@ public class LoginDAOImpl implements LoginDAO{
 		}
 		return result;		
 	}
+	
+	@Override
+	public int deleteUser(String userId) throws DAOException, MyDataException {
+		int result = 0;
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+		String ins = "DELETE FROM caps.login WHERE userId = ?; ";
+		try {
+			pstatement = connection.prepareStatement(ins);
+			pstatement.setString(1, userId);
+			result = pstatement.executeUpdate();
+			if (result <= 0) {
+				throw new MyDataException("FAIL! Delete Specific User!");
+			} else {
+				System.out.println("Success ! Delete User!");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to Delete User info from database.\n" + e.getMessage());
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return result;
+	}
 }

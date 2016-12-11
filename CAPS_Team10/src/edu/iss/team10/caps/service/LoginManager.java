@@ -41,4 +41,16 @@ public class LoginManager {
 		}
 		return insert;
 	}
+	
+	public int deleteUser(String userId){
+		int delete = 0;
+		try {
+			delete = loginDAO.deleteUser(userId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		} catch (MyDataException e) {
+			e.printStackTrace();
+		}
+		return delete;
+	}	
 }

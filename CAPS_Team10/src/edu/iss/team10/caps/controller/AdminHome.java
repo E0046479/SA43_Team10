@@ -35,7 +35,7 @@ import edu.iss.team10.caps.service.StudentManager;
 @WebServlet({ "/adminHome", "/studentInsert", "/studentEdit", "/studentDelete", "/studentSearch",
 		"/lecturerList", "/lecturerInsert",	"/lecturerEdit", "/lecturerDelete", "/lecturerSearch",
 		"/courseList", "/courseInsert", "/courseEdit", "/courseDelete", "/courseSearch", "/prepareForNewCourse",
-		"/adminEnrollment", "/deleteEnrollment", "/searchEnroll" })
+		"/prepareForEditCourse", "/adminEnrollment", "/deleteEnrollment", "/searchEnroll" })
 public class AdminHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentManager studentManager = new StudentManager();
@@ -107,6 +107,9 @@ public class AdminHome extends HttpServlet {
 			break;
 		case "/courseSearch":
 			doSearchCourse(request, response);
+			break;
+		case "/prepareForEditCourse":
+			doPrepareForEditCourse(request, response);
 			break;
 		case "/adminEnrollment":
 			doGetEnrollmentList(request, response);
@@ -222,8 +225,9 @@ public class AdminHome extends HttpServlet {
 		String studentId = request.getParameter("studentId");
 		StudentDTO student = new StudentDTO();
 		student.setStudentId(studentId);
-		int delete = studentManager.deletestudent(student);
-		if (delete > 0) {
+		int deleteStudent  = studentManager.deletestudent(student);
+		int deleteUser = loginManager.deleteUser(studentId);
+		if (deleteStudent > 0 & deleteUser > 0) {
 			System.out.println("Delete Success");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/adminHome");
@@ -356,9 +360,10 @@ public class AdminHome extends HttpServlet {
 		LecturerDTO lecturer = new LecturerDTO();
 		lecturer.setLecturerId(lecturerId);
 		del = lecturerManager.deletelecturer(lecturer);
-		if (del > 0) {
-			System.out.println("Delete successfully!");
-		} else {
+		int deleteUser = loginManager.deleteUser(lecturerId);
+		if (del > 0 & deleteUser > 0) {
+			System.out.println("Delete Success");
+		}else {
 			System.out.println("Fail Delete Lecturer");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/lecturerList");
@@ -435,7 +440,42 @@ public class AdminHome extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-		
+	
+	private void doPrepareForEditCourse(HttpServletRequest request, HttpServletResponse response) {
+		String Id = (String) request.getParameter("courseId");
+		System.out.println(Id);
+		CourseDTO course = courseManager.findCourse(Id);
+		String path="";
+		if(course.getCourseId()==null && course.getCourseId() !=Id)
+		{
+			path="courseList";
+			request.setAttribute("errorCourse", "There is no record for this CourseId");
+		}else{
+		request.setAttribute("courseId", course.getCourseId());
+		request.setAttribute("courseName", course.getCourseName());
+		request.setAttribute("courseDescription", course.getCourseDescription());
+		request.setAttribute("courseType", course.getCourseType());
+		request.setAttribute("courseDuration", course.getCourseDuration());
+		request.setAttribute("courseStartDate", course.getCourseStartDate());
+		request.setAttribute("courseSize", course.getCourseSize());
+		ArrayList<LecturerDTO> lecturerList = lecturerManager.findAllLecturer();
+		System.out.println("doPrepareForUpdateCourse " + lecturerList.size());
+		if(lecturerList.size() > 0){
+			request.setAttribute("lecturerList", lecturerList);
+		}
+		request.setAttribute("courseCredit", course.getCourseCredit());
+		path="views/Course_Edit.jsp";
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void doInsertCourse(HttpServletRequest request, HttpServletResponse response) {
 		int totalCourseCount = courseManager.getTotalCourseCount();
 		String courseId = "";

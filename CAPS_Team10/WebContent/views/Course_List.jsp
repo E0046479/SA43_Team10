@@ -54,7 +54,7 @@
 				</tr>
 				<c:forEach var="course" items="${courseList}" varStatus="status">
 					<tr class="${status.index%2==0?'even':'odd'} text-center">
-						<td class="nowrap">${status.index + 1}</td>
+						<td class="nowrap">${status.index + currentPage*10-9}</td>
 						<td class="nowrap">${course.courseId}</td>
 						<td class="nowrap">${course.courseName}</td>
 						<td class="nowrap">${course.courseDuration} (days)</td>
@@ -62,26 +62,26 @@
 						<td class="nowrap">
 						<c:url var="detailurl" scope="page" value="/courseSearch">
 								<c:param name="courseId" value="${course.courseId}" />
-								<c:param name="courseName" value="${course.courseName}" />
+								<%-- <c:param name="courseName" value="${course.courseName}" />
 								<c:param name="lecturerId" value="${course.lecturer.lecturerId}" />
 								<c:param name="courseDescription" value="${course.courseDescription}" />
 								<c:param name="courseType" value="${course.courseType}" />
 								<c:param name="courseDuration" value="${course.courseDuration}" />
 								<c:param name="courseStartDate"	value="${course.courseStartDate}" />
 								<c:param name="courseSize" value="${course.courseSize}" />
-								<c:param name="courseCredit" value="${course.courseCredit}" />
+								<c:param name="courseCredit" value="${course.courseCredit}" /> --%>
 							</c:url> 
 							<a href="${detailurl}" class="btn btn-info" role="button" title="DETAIL"><span class="glyphicon glyphicon-info-sign"></span></a>
-						<c:url var="updurl" scope="page" value="views/Course_Edit.jsp">
+						<c:url var="updurl" scope="page" value="/prepareForEditCourse">
 								<c:param name="courseId" value="${course.courseId}" />
-								<c:param name="courseName" value="${course.courseName}" />
+								<%-- <c:param name="courseName" value="${course.courseName}" />
 								<c:param name="lecturerId" value="${course.lecturer.lecturerId}" />
 								<c:param name="courseDescription" value="${course.courseDescription}" />
 								<c:param name="courseType" value="${course.courseType}" />
 								<c:param name="courseDuration" value="${course.courseDuration}" />
 								<c:param name="courseStartDate"	value="${course.courseStartDate}" />
 								<c:param name="courseSize" value="${course.courseSize}" />
-								<c:param name="courseCredit" value="${course.courseCredit}" />
+								<c:param name="courseCredit" value="${course.courseCredit}" /> --%>
 							</c:url> 
 							<a href="${updurl}" class="btn btn-warning" role="button" title="EDIT"><span class="glyphicon glyphicon-floppy-open"></span></a> 
 							<c:url var="delurl" scope="page" value="/courseDelete">

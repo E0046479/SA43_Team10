@@ -44,7 +44,8 @@
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lID"><fmt:message key="label.course.table.title.lecturerName" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
-						<input class="form-control input-md" id="lID" name="lecturerId" type="text" value="${lecturerName}" maxlength=20 readonly="readonly" >
+						<input class="form-control input-md" id="lID" name="lecturerName" type="text" value="${lecturerName}" maxlength=20 readonly="readonly" >
+					
 					</div>
 				</div><br/>
 				<div class="form-group" style="padding-bottom: 115px;">
