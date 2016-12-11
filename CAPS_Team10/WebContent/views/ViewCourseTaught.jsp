@@ -24,7 +24,7 @@ table th {
 		<div class="panel-body">
 			<table class="table table-striped table-bordered">
 				<tr class="info text-center">
-					<th class="text-center">No.</th>
+					<th class="text-center"><fmt:message key="label.table.No" /></th>
 					<th class="text-center"><fmt:message key="label.course.table.title.courseId" /></th>
 					<th class="text-center"><fmt:message key="label.course.table.title.courseName" /></th>
 					<th class="text-center"><fmt:message key="label.course.table.title.courseSize" /></th>
@@ -43,12 +43,12 @@ table th {
 								<c:param name="courseId" value="${course.courseId}" />
 							</c:url> <a href="${updurl}" class="btn btn-primary" title="<fmt:message
 									key="label.viewCourseTaught.table.title.grade"/>"><span class="glyphicon glyphicon-pencil"></span></a>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <c:url var="updurl" scope="page"
+							<c:url var="updurl" scope="page"
 								value="/studentPerformance">
 								<c:param name="courseId" value="${course.courseId}" />
 								<c:param name="courseName" value="${course.courseName}" />
 							</c:url> <a href="${updurl}" class="btn btn-warning" title="<fmt:message key="label.viewCourseTaught.table.title.Performance"></fmt:message>"><span class="glyphicon glyphicon-star-empty"></span></a>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <c:url var="updurl" scope="page"
+							<c:url var="updurl" scope="page"
 								value="/viewEnrolledStudents">
 								<c:param name="courseId" value="${course.courseId}" />
 							</c:url> <a href="${updurl}" class="btn btn-success" title="<fmt:message

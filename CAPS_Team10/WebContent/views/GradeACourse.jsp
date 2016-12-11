@@ -20,14 +20,16 @@
 		<div class="panel-body">
 			<div>
 				<label for="courseName"><font style="font-size: 14pt"><fmt:message
-						key="label.course.table.title.coursename" />&nbsp;:&nbsp;</font><font style="color: red; font-size: 13pt">${C_Name}</font></label>
-				&nbsp;&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;&nbsp; <label
+						key="label.course.table.title.coursename" />
+						</font><font style="color: red; font-size: 13pt">${C_Name}</font></label>
+				<label
 					for="courseCredit"><font style="font-size: 14pt"><fmt:message
-						key="label.course.tabel.title.coursecredit" /></font>&nbsp;:&nbsp;<font style="color: red; font-size: 13pt">${C_Credit}</font></label>
+						key="label.course.tabel.title.coursecredit" /></font>
+						<font style="color: red; font-size: 13pt">${C_Credit}</font></label>
 			</div>
 			<table class="table table-striped table-bordered">
 				<tr class="info text-center">
-					<th class="text-center">No.</th>
+					<th class="text-center"><fmt:message key="label.table.No" /></th>
 					<th class="text-center"><fmt:message key="label.student.table.title.studentId" /></th>
 					<th class="text-center"><fmt:message key="label.student.table.title.studentName" /></th>
 					<th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>

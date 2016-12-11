@@ -56,10 +56,10 @@
 				</div>
 				<div class="">
 					  <div class="col-md-4 col-xs-6 col-sm-6 text-right">
-					    <button type="submit" class="btn btn-success">Submit</button>
+					    <button type="submit" class="btn btn-success"><fmt:message key="label.button.submit" /></button>
 					  </div>
 					  <div class="col-md-4 col-xs-6 col-sm-6 text-left">
-					    <button type="reset" class="btn btn-primary">Reset</button>			
+					    <button type="reset" class="btn btn-primary"><fmt:message key="label.button.reset" /></button>			
 					  </div>
 				</div>
 				</div>

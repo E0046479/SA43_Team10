@@ -40,7 +40,7 @@
 				</table>
 				<div class="form-group text-left">
 			    	  	    <label for="studentName" style="font-size: 14pt;"><fmt:message key="label.student.table.title.GPA" /></label>
-			    	  	    &nbsp;&nbsp;&nbsp;
+			    	  	   
 			    		    <label  name="id" type="text" class="label label-danger" style="font-size: 14pt;">${GPAStr}</label>
 			    </div>
 				</div>

@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <fmt:setBundle basename="messages"/> 
 <title><fmt:message key="label.courseDetailJsp.title" /></title>
-<title>AddCourse</title>
+<title><fmt:message key="label.button.submit" /></title>
 </head>
 <body>
 		<form action="${pageContext.request.contextPath}/courseDetail" method=post>

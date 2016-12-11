@@ -22,38 +22,6 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<%-- <center>
-				
-					<table cellpadding=4 cellspacing=2 border=0>
-
-						<tr>
-							<td><fmt:message key="label.lecturer.table.title.lecturerName" /></td>
-							<td><input type="text" name="lecturerName" size=15 value="${param['lecturerName']}"
-								maxlength=20> <input type="hidden" name="lecturerId"
-								value="${param['lecturerId']}" /></td>
-								
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerEmail" /></td>
-							<td><input type="text" name="lecturerEmail" size=15 value="${param['lecturerEmail']}"
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerPhoneNumber" /></td>
-							<td><input type="text" name="lecturerPhoneNumber" size=15 value="${param['lecturerPhoneNumber']}"
-								maxlength=20></td>
-						</tr>
-						<tr>
-							<td><fmt:message
-									key="label.lecturer.table.title.lecturerAddress" /></td>
-							<td><input type="text" name="lecturerAddress" size=15 value="${param['lecturerAddress']}"
-								maxlength=20></td>
-						</tr>
-					</table>
-					<input type="submit" value="Submit"> <input type="reset" value="Reset">
-				</center> --%>
 				<div class="text-center">
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
@@ -90,10 +58,10 @@
 				</div>
 				<div class="">
 					  <div class="col-md-4 col-xs-6 col-sm-6 text-right">
-					    <button type="submit" class="btn btn-success">Submit</button>
+					    <button type="submit" class="btn btn-success"><fmt:message key="label.button.submit" /></button>
 					  </div>
 					  <div class="col-md-4 col-xs-6 col-sm-6 text-left">
-					    <button type="reset" class="btn btn-primary">Reset</button>			
+					    <button type="reset" class="btn btn-primary"><fmt:message key="label.button.reset" /></button>			
 					  </div>
 				</div>
 				</div>

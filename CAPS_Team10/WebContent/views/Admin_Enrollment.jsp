@@ -12,8 +12,6 @@
 <fmt:setBundle basename="messages" />
 </head>
 <body>
-
-
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>
