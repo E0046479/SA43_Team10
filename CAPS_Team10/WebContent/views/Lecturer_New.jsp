@@ -30,7 +30,7 @@
 								title="Name cannot be numberic or regular expression!" /> <input
 								type="hidden" name="ins" value="true" />
 						</div>
-					</div>
+					</div><br/>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="lEmail"><fmt:message

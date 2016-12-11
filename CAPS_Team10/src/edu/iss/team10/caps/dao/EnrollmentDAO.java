@@ -17,5 +17,5 @@ public interface EnrollmentDAO {
 
 	public ArrayList<EnrollmentDTO> loadStudentEnrollment(String studentId,int offset,int noOfRecords) throws DAOException, MyDataException;
 	
-	
+	public ArrayList<EnrollmentDTO> loadStudentEnrollmentSearch(String userId, int offset, int noOfRecords) throws DAOException, MyDataException;
 }

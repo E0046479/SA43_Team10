@@ -637,8 +637,7 @@ public class AdminHome extends HttpServlet {
 		if (request.getParameter("page") != null)
 			page = Integer.parseInt(request.getParameter("page"));
 		EnrollmentListManager enrollmentListManager = new EnrollmentListManager();
-		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager
-				.loadStudentEnrollment(request.getParameter("studentId"), (page - 1) * recordsPerPage, recordsPerPage);		
+		ArrayList<EnrollmentDTO> enrollmentList = enrollmentListManager.loadStudentEnrollmentSearch(request.getParameter("studentId"), (page - 1) * recordsPerPage, recordsPerPage);		
 		if(enrollmentList.size() >0)
 		{
 			int noOfPages = (int) Math.ceil(CourseDAOImpl.noOfRecords * 1.0 / recordsPerPage);

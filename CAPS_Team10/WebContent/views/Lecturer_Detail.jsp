@@ -30,7 +30,7 @@
 						<input class="form-control input-md" id="lID" size=15 name="lecturerId" type="text" value="${lecturerId}" maxlength=20 readonly="readonly" >
 							    <input type="hidden" name="ins" value="true" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lName"><fmt:message key="label.lecturer.table.title.lecturerName" /></label>
@@ -38,28 +38,28 @@
 						<input class="form-control input-md" id="lName" name="lecturerName" type="text" value="${lecturerName}" maxlength=20 readonly="readonly" >
 							    <input type="hidden" name="ins" value="true" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lEmail"><fmt:message key="label.lecturer.table.title.lecturerEmail" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="lEmail" name="lecturerEmail" type="text" value="${lecturerEmail}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lPhonenumber"><fmt:message key="label.lecturer.table.title.lecturerPhoneNumber" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="lPhonenumber" name="lecturerPhoneNumber" type="text" value="${lecturerPhoneNumber}" maxlength=20 readonly="readonly" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lAddress"><fmt:message key="label.lecturer.table.title.lecturerAddress" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="lAddress" name="lecturerAddress" type="text" value="${lecturerAddress}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				</div>
 			</div>
 		</div>

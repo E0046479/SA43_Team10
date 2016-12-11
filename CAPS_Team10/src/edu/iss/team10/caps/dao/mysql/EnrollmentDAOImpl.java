@@ -19,7 +19,7 @@ import edu.iss.team10.caps.service.CourseManager;
 import edu.iss.team10.caps.service.StudentManager;
 
 public class EnrollmentDAOImpl implements EnrollmentDAO {
-	private static final int allowanceForEnrollmentCancellation = 6;
+	private static final int allowanceForEnrollmentCancellation = 7;
 	private ResultSet rs;
 	public static int noOfRecords;
 
@@ -258,6 +258,62 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 		}
 		return result;
 
+	}
+
+	public ArrayList<EnrollmentDTO> loadStudentEnrollmentSearch(String userId, int offset, int noOfRecords)
+			throws DAOException, MyDataException {
+		ArrayList<EnrollmentDTO> result = new ArrayList<EnrollmentDTO>();
+		Connection connection = ConnectionHandler.openConnection();
+		PreparedStatement pstatement = null;
+		Date currentDate = new Date(System.currentTimeMillis());
+
+		String select = "select * from caps.course as c, caps.student as s, caps.enrollment as e"
+				+ " where e.studentId=s.studentId and e.courseId = c.courseId and e.studentId = ?"
+				+ " order by c.courseStartDate desc limit " + offset + "," + noOfRecords;
+
+		try {
+			pstatement = connection.prepareStatement(select);
+			pstatement.setString(1, userId);
+
+			rs = pstatement.executeQuery();
+			while (rs.next()) {
+				String studentId = rs.getString("studentId");
+				String courseId = rs.getString("courseId");
+				Date courseEnrollmentDate = rs.getDate("courseEnrollmentDate");
+				float grade = rs.getFloat("grade");
+				boolean allowDelete = true;
+				Date courseStartDate = rs.getDate("courseStartDate");
+
+				CourseDTO newCourse = new CourseManager().findCourse(courseId);
+				StudentDTO newStudent = new StudentManager().findStudent(studentId);
+
+				EnrollmentDTO enrollment = new EnrollmentDTO(newCourse, newStudent, courseEnrollmentDate, grade,
+						allowDelete);
+
+				// Do not show delete button for course that has passed or
+				// occurring today
+				if (courseStartDate.before(currentDate) || courseStartDate.equals(currentDate)) {
+					enrollment.setAllowDelete(false);
+				}
+
+				result.add(enrollment);
+
+			}
+			rs.close();
+			rs = pstatement.executeQuery("SELECT FOUND_ROWS()");
+			if (rs.next()) {
+				this.noOfRecords = rs.getInt(1);
+			}
+			if (result.size() == 0) {
+				throw new MyDataException("There is no Course Enrollment Info available!");
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: Unable to retrieve Enrollment info from database.\n");
+			e.printStackTrace();
+		} finally {
+			ConnectionHandler.closeConnection(connection, pstatement);
+		}
+		return result;
 	}
 
 }

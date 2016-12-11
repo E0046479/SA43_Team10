@@ -27,24 +27,18 @@
 					method="post" class="form-search">
 					<div class="" style="padding-left: 0px;">
 					<div class="input-group">
-							<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search" />"
-							name="lecturerId"> 
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit" title="SEARCH">
-									<i class="glyphicon glyphicon-search" style="font-size: 15pt;">
-									</i>
-								</button>
-							</span>
+						<input type="text" class="form-control" placeholder="<fmt:message key="label.table.search" />"
+							name="lecturerId"> <span class="input-group-btn">
+							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
+						</span>
 					</div>
 					<c:if test="${requestScope['errorLecturer'] !=null}">
-			    	    <div class="alert alert-danger" style="margin-bottom: 0px;"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorLecturer") %>
-			    	    </div>
-			    	</c:if>
+			    	    <div class="alert alert-danger" style="margin-bottom: 0px;"><span class="glyphicon glyphicon-exclamation-sign"></span> <%= request.getAttribute("errorLecturer") %></div>
+			    	    </c:if>
 					</div>
 				</form>
 			</div>
-			</div>
-			<br/>	
+			</div><br/>		
 				<form action="/lecturerList" method=post>
 				<table class="table table-striped table-bordered">
 					<tr class="info">
@@ -60,7 +54,7 @@
 					<c:forEach var="lecturer" items="${lecturerList}"
 						varStatus="status">
 						<tr class="${status.index%2==0?'even':'odd'} text-center">
-							<td class="nowrap">${status.index + 1}</td>
+							<td class="nowrap">${status.index + currentPage*10-9}</td>
 							<td class="nowrap">${lecturer.lecturerId}</td>
 							<td class="nowrap">${lecturer.lecturerName}</td>
 							<td class="nowrap">${lecturer.lecturerEmail}</td>

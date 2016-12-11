@@ -31,7 +31,7 @@
 						<input class="form-control input-md" id="cID" size=15 name="courseId" type="text" value="${courseId}" maxlength=20 readonly="readonly" >
 							    <input type="hidden" name="ins" value="true" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cName"><fmt:message key="label.course.table.title.courseName" /></label>
@@ -39,56 +39,56 @@
 						<input class="form-control input-md" id="cName" name="courseName" type="text" value="${courseName}" maxlength=20 readonly="readonly" >
 							    <input type="hidden" name="ins" value="true" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lID"><fmt:message key="label.course.table.title.lecturerName" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="lID" name="lecturerId" type="text" value="${lecturerName}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
-				<div class="form-group">
+				</div><br/>
+				<div class="form-group" style="padding-bottom: 115px;">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cDesc"><fmt:message key="label.course.table.title.courseDescription" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<textarea class="form-control input-md" id="cDesc" name="courseDescription" type="text" rows="6" maxlength=20 readonly="readonly" style="resize: none;">${courseDescription}</textarea>
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cType"><fmt:message key="label.course.table.title.courseType" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="cType" name="courseType" type="text" value="${courseType}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cDur"><fmt:message key="label.course.table.title.courseDuration" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="cDur" name="courseDuration" type="text" value="${courseDuration} (days)" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cSDate"><fmt:message key="label.course.table.title.courseStartDate" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="cSDate" name="courseStartDate" type="text" value="${courseStartDate}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cSize"><fmt:message key="label.course.table.title.courseSize" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="cSize" name="courseSize" type="text" value="${courseSize}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="cCredit"><fmt:message key="label.course.table.title.courseCredit" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="cCredit" name="courseCredit" type="text" value="${courseCredit}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				</div>
 			</div>
 		</div>

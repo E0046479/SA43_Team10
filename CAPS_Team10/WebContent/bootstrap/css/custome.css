@@ -3,7 +3,9 @@ body {
     margin-top: 100px;
     /* background-color: #222; */
 }
-
+.form-group {
+    padding-bottom: 15px;
+}
 @media(min-width:768px) {
     body {
         margin-top: 50px;

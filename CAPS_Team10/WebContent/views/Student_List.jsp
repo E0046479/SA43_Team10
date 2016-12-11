@@ -40,8 +40,7 @@
 					</div>
 				</form>
 			</div>
-		</div>
-		</br>
+		</div>	<br/>
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>
@@ -57,7 +56,7 @@
 				</tr>
 				<c:forEach var="student" items="${studentList}" varStatus="status">
 					<tr class="${status.index%2==0?'even':'odd'} text-center">
-						<td class="nowrap">${status.index + 1}</td>
+						<td class="nowrap">${status.index + currentPage*10-9}</td>
 						<td class="nowrap">${student.studentId}</td>
 						<td class="nowrap">${student.studentName}</td>
 						<td class="nowrap">${student.studentEmail}</td>

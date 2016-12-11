@@ -10,13 +10,17 @@
 		<a class="navbar-brand" href="#">Management</a>
 	</div>
 	<ul class="nav navbar-nav navbar-right">
-		<li class="dropdown "><a href="#" class="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-expanded="false"> 
+		<li class="dropdown ">
+		
+		<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-expanded="false"> 			
 			<c:if test="${sessionScope['user'].userId!=null}">
-								<span class="glyphicon glyphicon-user"></span>
-                              <%LoginDTO user =(LoginDTO) session.getAttribute("user"); %>
-                              <%=user.getUserId() %>
-                              </c:if> <span class="caret"></span>
+					<span class="glyphicon glyphicon-user"></span>
+					<%
+						LoginDTO user = (LoginDTO) session.getAttribute("user");
+					%>
+					<%-- <%=user.getUserId()%> --%>
+					<%=(String) session.getAttribute("userName")%>
+				</c:if> <span class="caret"></span>
 		</a>
 			<ul class="dropdown-menu" role="menu">
 				<li class="divider"></li>

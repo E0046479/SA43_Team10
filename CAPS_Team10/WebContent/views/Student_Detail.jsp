@@ -30,7 +30,7 @@
 						<input class="form-control input-md" id="sID" size=15 name="studentId" type="text" value="${studentId}" maxlength=20 readonly="readonly" >
 							    <input type="hidden" name="ins" value="true" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="sName"><fmt:message key="label.student.table.title.studentName" /></label>
@@ -38,35 +38,35 @@
 						<input class="form-control input-md" id="sName" name="studentName" type="text" value="${studentName}" maxlength=20 readonly="readonly" >
 							    <input type="hidden" name="ins" value="true" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="sEmail"><fmt:message key="label.student.table.title.studentEmail" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="sEmail" name="studentEmail" type="text" value="${studentEmail}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="sPhonenumber"><fmt:message key="label.student.table.title.studentPhoneNumber" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="sPhonenumber" name="studentPhoneNumber" type="text" value="${studentPhoneNumber}" maxlength=20 readonly="readonly" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="sAddress"><fmt:message key="label.student.table.title.studentAddress" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="sAddress" name="studentAddress" type="text" value="${studentAddress}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="enrollDate"><fmt:message key="label.student.table.title.enrollmentDate" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="enrollDate" name="enrollmentDate" type="text" value="${enrollmentDate}" maxlength=20 readonly="readonly" >
 					</div>
-				</div>
+				</div><br/>
 				</div>
 			</div>
 		</div>

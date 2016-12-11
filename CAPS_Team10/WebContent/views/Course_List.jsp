@@ -39,7 +39,7 @@
 				</form>
 			</div>
 		</div>
-		<br/>
+			<br/>
 			<table class="table table-striped table-bordered">
 				<tr class="info">
 					<th class="text-center"><fmt:message key="label.table.No" /></th>

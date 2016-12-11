@@ -52,4 +52,17 @@ public class EnrollmentListManager {
 		}
 		return studentEnrollmentList;
 	}
+	
+	public ArrayList<EnrollmentDTO> loadStudentEnrollmentSearch(String studentId,int offset,int noOfRecords) {
+		ArrayList<EnrollmentDTO> studentEnrollmentList = new ArrayList<EnrollmentDTO>();
+		try {
+			studentEnrollmentList = enrollmentDAO.loadStudentEnrollmentSearch(studentId,offset,noOfRecords);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		} catch (MyDataException e) {
+			e.printStackTrace();
+		}
+		return studentEnrollmentList;
+	} 
+
 }

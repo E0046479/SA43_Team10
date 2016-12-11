@@ -29,16 +29,15 @@
 								name="courseName" type="text" maxlength=20 required="true" /> <input
 								type="hidden" name="courseId" value="true" />
 						</div>
-					</div>
-					<div class="form-group">
+					</div><br/>
+					<div class="form-group" >
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="lID"><fmt:message
-								key="label.course.table.title.lecturerId" /></label>
+								key="label.course.table.title.lecturerName" /></label>
 						<div class="col-md-5 col-sm-5 col-xs-5">
 							<!-- <input class="form-control input-md" id="lID" name="lecturerId"
 								type="text" maxlength=20 required="true"> -->
-								<select	name="lecturerId" class="form-control input-md" >
-								<option value="${selected}" selected>${selected}</option>
+								<select	name="lecturerId" class="form-control input-md">
 								<c:forEach items="${lecturerList}" var="lecturer">
 									<%-- <c:if test="${lecturer.lecturerName != selected}">										
 									</c:if> --%>
@@ -47,8 +46,8 @@
 							</select>
 						</div>
 					</div>
-					<br>
-					<div class="form-group">
+					<br/>
+					<div class="form-group" style="padding-bottom: 115px;">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cDesc"><fmt:message
 								key="label.course.table.title.courseDescription" /></label>
@@ -58,7 +57,7 @@
 								required="true"></textarea>
 						</div>
 					</div>
-					<br>
+					<br/>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cDesc"><fmt:message
@@ -68,7 +67,7 @@
 								type="text" maxlength=20 required="true">
 						</div>
 					</div>
-					<br>
+					<br/>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cDur"><fmt:message
@@ -80,7 +79,7 @@
 								title="Duration must be less or equal to 100 days" />
 						</div>
 					</div>
-					<br>
+					<br/>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="enrollmentDate"><fmt:message
@@ -90,7 +89,7 @@
 								name="courseStartDate" type="text" maxlength=20 required="true">
 						</div>
 					</div>
-					<br>
+					<br/>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cSize"><fmt:message
@@ -102,7 +101,7 @@
 								title="Maximum Student must less or equal to 100">
 						</div>
 					</div>
-					<br>
+					<br/>
 					<div class="form-group">
 						<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 							for="cCredit"><fmt:message

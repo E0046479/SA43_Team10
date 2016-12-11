@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.iss.team10.caps.model.LecturerDTO;
 import edu.iss.team10.caps.model.LoginDTO;
+import edu.iss.team10.caps.model.StudentDTO;
+import edu.iss.team10.caps.service.LecturerManager;
 import edu.iss.team10.caps.service.LoginManager;
+import edu.iss.team10.caps.service.StudentManager;
 
 /**
  * Servlet implementation class MainController
@@ -19,7 +23,9 @@ import edu.iss.team10.caps.service.LoginManager;
 @WebServlet("/main")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private StudentManager studentManager = new StudentManager();
+	private LecturerManager lecturerManager = new LecturerManager();
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -59,6 +65,15 @@ public class MainController extends HttpServlet {
 			user = loginManager.findUser(userId, password);
 		}
 		if (user != null) {
+			if(user.getRole().equals("student")){
+				StudentDTO student = studentManager.findStudent(user.getUserId());
+				session.setAttribute("userName", student.getStudentName());
+			}else if(user.getRole().equals("lecturer")){
+				LecturerDTO lecturer = lecturerManager.findLecturer(user.getUserId());
+				session.setAttribute("userName", lecturer.getLecturerName());
+			}else {
+				session.setAttribute("userName", "Admin");
+			}
 			session.setAttribute("user", user);
 			switch (user.getRole()) {
 			case "admin":
