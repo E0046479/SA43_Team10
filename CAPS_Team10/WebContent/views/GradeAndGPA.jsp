@@ -39,7 +39,7 @@
 						<td class="nowrap">${enrollment.grade}</td>
 						</c:forEach>
 				</table>
-				<c:if test="${fn:length(courseList) gt 0} ">
+				<c:if test="${not empty courseList}">
 				
 				<div class="form-group text-left">
 			    	  	    <label for="studentName" style="font-size: 14pt;"><fmt:message key="label.student.table.title.GPA" /></label>
