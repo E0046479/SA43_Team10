@@ -31,7 +31,7 @@
 						value="${param['lecturerName']}" required pattern="[a-zA-Z\s]+" title="Name cannot be numberic or regular expression!">
 							    <input type="hidden" name="lecturerId" value="${param['lecturerId']}" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lEmail"><fmt:message key="label.lecturer.table.title.lecturerEmail" /></label>
@@ -39,7 +39,7 @@
 						<input class="form-control input-md" id="lEmail" name="lecturerEmail" type="email" 
 						value="${param['lecturerEmail']}" required  pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Email formart: (xxx@xxx.xxx)">
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lPhonenumber"><fmt:message key="label.lecturer.table.title.lecturerPhoneNumber" /></label>
@@ -48,14 +48,14 @@
 						value="${param['lecturerPhoneNumber']}" type="tel" maxlength="8" 
 						pattern="^\d{8}$" required="true" title="Phone number should be 8 digits" />
 					</div>
-				</div>
+				</div><br/>
 				<div class="form-group">
 					<label class="col-md-4 col-sm-4 col-xs-4 control-label text-right"
 						for="lAddress"><fmt:message key="label.lecturer.table.title.lecturerAddress" /></label>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<input class="form-control input-md" id="lAddress" name="lecturerAddress" type="text" value="${param['lecturerAddress']}"required="true">
 					</div>
-				</div>
+				</div><br/>
 				<div class="">
 					  <div class="col-md-4 col-xs-6 col-sm-6 text-right">
 					    <button type="submit" class="btn btn-success"><fmt:message key="label.button.submit" /></button>
