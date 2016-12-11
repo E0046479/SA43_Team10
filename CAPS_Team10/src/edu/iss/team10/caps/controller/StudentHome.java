@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +20,6 @@ import edu.iss.team10.caps.model.StudentDTO;
 import edu.iss.team10.caps.service.CourseManager;
 import edu.iss.team10.caps.service.EnrollmentListManager;
 import edu.iss.team10.caps.service.StudentManager;
-import edu.iss.team10.caps.util.Email;
 
 /**
  * Servlet implementation class StudentHome
@@ -246,7 +244,7 @@ public class StudentHome extends HttpServlet {
 		request.setAttribute("courseDuration", course.getCourseDuration());
 		request.setAttribute("courseStartDate", course.getCourseStartDate());
 		request.setAttribute("courseSize",course.getCourseSize());
-		request.setAttribute("lecturerId", course.getLecturer().getLecturerId());
+		request.setAttribute("lecturerName", course.getLecturer().getLecturerName());
 		request.setAttribute("courseCredit",course.getCourseCredit());
 		RequestDispatcher rd=request.getRequestDispatcher("views/Course_Detail.jsp");
 		  try{
