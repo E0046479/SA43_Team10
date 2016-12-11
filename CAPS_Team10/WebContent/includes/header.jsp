@@ -7,7 +7,7 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="#">Management</a>
+		<a class="navbar-brand" href="#"></a>
 	</div>
 	<ul class="nav navbar-nav navbar-right">
 		<li class="dropdown ">

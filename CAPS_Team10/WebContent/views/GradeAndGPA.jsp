@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,11 +39,14 @@
 						<td class="nowrap">${enrollment.grade}</td>
 						</c:forEach>
 				</table>
+				<c:if test="${fn:length(courseList) gt 0} ">
+				
 				<div class="form-group text-left">
 			    	  	    <label for="studentName" style="font-size: 14pt;"><fmt:message key="label.student.table.title.GPA" /></label>
 			    	  	   
 			    		    <label  name="id" type="text" class="label label-danger" style="font-size: 14pt;">${GPAStr}</label>
 			    </div>
+				</c:if>
 				</div>
 				</div>
 		
