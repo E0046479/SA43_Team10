@@ -30,7 +30,7 @@
 					<div class=" " style="padding-left: 0px;">
 						<div class="input-group">
 							<input type="text" class="form-control"
-								placeholder="<fmt:message key="label.table.search"/>"
+								placeholder="<fmt:message key="label.table.search.studentid"/>"
 								name="studentId" value="${param['studentId']}"> <span
 								class="input-group-btn">
 								<button class="btn btn-default" type="submit" title="SEARCH">

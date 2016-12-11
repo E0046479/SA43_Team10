@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,7 @@ import edu.iss.team10.caps.service.EnrollmentListManager;
 import edu.iss.team10.caps.service.LecturerManager;
 import edu.iss.team10.caps.service.LoginManager;
 import edu.iss.team10.caps.service.StudentManager;
+import edu.iss.team10.caps.util.Email;
 
 /**
  * Servlet implementation class AdminHome
@@ -645,11 +647,11 @@ public class AdminHome extends HttpServlet {
 		StudentDTO student = new StudentManager().findStudent(request.getParameter("studentID"));
 		CourseDTO course = new CourseManager().findCourse(request.getParameter("courseID"));
 		enrollmentListManager.deleteEnrollment(student, course);
-		/*try {
+		try {
 			Email.generateAndSendEmail(student, course, "ADMIN_CANCEL_ENROLLMENT", "admin");
 		} catch (MessagingException | IOException e1) {
 			e1.printStackTrace();
-		}*/
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/adminEnrollment");
 		try {
 			rd.forward(request, response);

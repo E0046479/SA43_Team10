@@ -29,7 +29,7 @@
 					<div class="" style="padding-left: 0px;">
 					<div class="input-group">
 						<input type="text" class="form-control"
-							placeholder="<fmt:message key="label.table.search" />"
+							placeholder="<fmt:message key="label.table.search.studentid" />"
 							name="studentId"> <span class="input-group-btn">
 							<button class="btn btn-default" type="submit" title="SEARCH"><i class="glyphicon glyphicon-search" style="font-size: 15pt;"></i></button>
 						</span>						
