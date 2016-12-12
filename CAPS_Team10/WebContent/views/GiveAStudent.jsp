@@ -34,7 +34,7 @@
 									<label for="Grade"><fmt:message
 											key="label.enrollment.table.title.grade" /></label> <input
 										class="form-control" placeholder="Grade" name="grade"
-										type="number" min="0" max="5" step="0.1" value="">
+										type="number" min="0" max="5" step="0.1" value="" required="true">
 								</div>
 								<input class="btn btn-lg btn-success btn-block" type="submit"
 									value="Save">

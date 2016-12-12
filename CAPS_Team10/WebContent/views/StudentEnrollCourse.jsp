@@ -17,7 +17,7 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<table class="table table-bordered">
+			<table class="table table-bordered table-striped">
 				<tr class="info">
 					<th class="text-center">No.</th>
 					<th class="text-center"><fmt:message

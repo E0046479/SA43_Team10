@@ -159,8 +159,8 @@ LIMIT 0, 1000
 -- Date: 2016-12-05 17:06
 */
 INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c001','2016-03-01','2016-07-13',3.0);
-INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c002','2016-04-01','2016-07-13',0.0);
-INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c004','2016-11-11','2016-07-13',0.0);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c002','2016-04-01','2016-07-13',2.5);
+INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c004','2016-11-11','2016-07-13',2.0);
 INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c005','2016-12-12','2016-07-13',0.0);
 INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c006','2016-12-14','2016-07-13',0.0);
 INSERT INTO `enrollment` (`studentId`,`courseId`,`courseStartDate`,`courseenrollmentDate`,`grade`) VALUES ('s001','c007','2016-12-20','2016-07-13',0.0);
